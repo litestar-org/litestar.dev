@@ -1,0 +1,36 @@
+default_language_version:
+  python: "3.11"
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.257"
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.4
+    hooks:
+      - id: codespell
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+        args: [--config=./pyproject.toml]
+  - repo: local
+    hooks:
+      - id: sphinx-lint
+        name: sphinx-lint
+        language: python
+        entry: sphinx-lint
+        additional_dependencies: [sphinx-lint]
+        types: [rst]

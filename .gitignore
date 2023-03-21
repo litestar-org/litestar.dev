@@ -1,0 +1,28 @@
+# folders
+*.egg-info/
+.hypothesis/
+.idea/
+.mypy_cache/
+.pytest_cache/
+.scannerwork/
+.venv/
+.vscode/
+__pycache__/
+build/
+dist/
+node_modules/
+results/
+site/
+target/
+
+# files
+**/*.so
+**/*.sqlite
+**/*.sqlite*
+*.iml
+.DS_Store
+.coverage
+.python-version
+.ruff_cache
+/page/_build/
+coverage.*
