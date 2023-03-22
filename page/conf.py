@@ -9,6 +9,7 @@ html_show_sourcelink = False
 html_sidebars = {"**": []}
 html_additional_pages = {"index": "landing-page.html"}
 nitpicky = True
+html_favicon = "favicon.ico"
 
 
 html_theme_options = {
