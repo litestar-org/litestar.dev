@@ -1,38 +1,42 @@
 function initDropdowns() {
-    const dropdowns = document.querySelectorAll(".st-dropdown-menu")
     const dropdownToggles = document.querySelectorAll(".st-dropdown-toggle")
 
-    const closeAll = () => {
-        for (const dropdown of dropdowns) {
-            dropdown.classList.toggle("hidden", true)
+    const dropdowns = [...dropdownToggles].map(toggleEl => ({
+        toggleEl,
+        contentEL: toggleEl.parentElement.querySelector(".st-dropdown-menu")
+    }))
+
+    const close = (dropdown) => {
+        const {toggleEl, contentEL} = dropdown
+        toggleEl.setAttribute("aria-expanded", "false")
+        contentEL.classList.toggle("hidden", true)
+    }
+
+    const open = (dropdown) => {
+        dropdown.toggleEl.setAttribute("aria-expanded", "true")
+        dropdown.contentEL.classList.toggle("hidden", false)
+        const boundaries = [dropdown.contentEL, ...dropdownToggles]
+        const clickOutsideListener = (event) => {
+            const target = event.target
+            if (!target) return
+
+            if (!boundaries.some(b => b.contains(target))) {
+                closeAll()
+                document.removeEventListener("click", clickOutsideListener)
+            }
+
         }
+        document.addEventListener("click", clickOutsideListener)
     }
 
-    for (const toggle of dropdownToggles) {
-        toggle.addEventListener("click", event => {
-            const menu = event?.target?.parentElement.querySelector(".st-dropdown-menu")
-            if (!menu) {
-                return
-            }
+    const closeAll = () => dropdowns.forEach(close)
 
+    dropdowns.forEach(dropdown => {
+        dropdown.toggleEl.addEventListener("click", () => {
             closeAll()
-
-            menu.classList.toggle("hidden", false)
-
-            const closeOnClickOutside = (event) => {
-                const eventTarget = event?.target
-                const boundaryElement = menu?.parentElement
-                if (!(eventTarget && boundaryElement)) {
-                    return
-                }
-                if (!boundaryElement.contains(eventTarget)) {
-                    closeAll()
-                    document.removeEventListener("click", closeOnClickOutside)
-                }
-            }
-            document.addEventListener("click", closeOnClickOutside)
+            open(dropdown)
         })
-    }
+    })
 }
 
 window.addEventListener("DOMContentLoaded", () => {
