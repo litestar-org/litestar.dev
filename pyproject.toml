@@ -13,6 +13,9 @@ pre-commit = "^3.2.0"
 starlite-sphinx-theme = {git = "https://github.com/starlite-api/starlite-sphinx-theme.git"}
 
 
+[tool.poetry.group.dev.dependencies]
+sphinx-autobuild = "^2021.3.14"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

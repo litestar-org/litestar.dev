@@ -11,7 +11,6 @@ html_additional_pages = {"index": "landing-page.html"}
 nitpicky = True
 html_favicon = "favicon.ico"
 
-
 html_theme_options = {
     "use_page_nav": False,
     "show_prev_next": False,
@@ -35,4 +34,39 @@ html_theme_options = {
             "1.x Changelog": "https://docs.starliteproject.dev/1/release-notes/changelog.html",
         },
     },
+}
+
+html_context = {
+    "navbar_menu": {
+        "Docs": "/docs",
+        "About": [
+            {
+                "title": "Starlite Organization",
+                "description": "Details about the Starlite organization",
+                "link": "/organization",
+                "logo": "org.svg",
+            },
+            {
+                "title": "Releases",
+                "description": "View the release history for Starlite",
+                "link": "/releases",
+                "logo": "releases.svg",
+            },
+        ],
+        "Community": [
+            {
+                "title": "Contributing",
+                "description": "Learn how to contribute to the Starlite project",
+                "link": "/contributing",
+                "logo": "contributing.svg",
+            },
+            {
+                "title": "Code of Conduct",
+                "description": "Review the etiquette for interacting with the Starlite community",
+                "link": "/coc",
+                "logo": "coc.svg",
+            },
+        ],
+        "Help": "https://github.com/orgs/starlite-api/discussions",
+    }
 }
