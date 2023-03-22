@@ -186,14 +186,16 @@
     </div>
 </div>
 
+
+{% if announcement %}
 <div class="pointer-events-none fixed inset-x-0 bottom-0 sm:px-6 sm:pb-5 lg:px-8">
     <div class="pointer-events-auto flex items-center justify-between gap-x-6 bg-[#202235] py-2.5 px-6 sm:rounded-xl sm:py-3 sm:pr-3.5 sm:pl-4">
         <p class="text-sm leading-6 text-white">
-            <a href="#"><strong class="font-semibold">Polyfactory 2.0.0 is live!</strong>
+            <a href="{{ announcement.link }}"><strong class="font-semibold">{{ announcement.title }}</strong>
                 <svg viewBox="0 0 2 2" class="mx-2 inline h-0.5 w-0.5 fill-current" aria-hidden="true">
                     <circle cx="1" cy="1" r="1"/>
                 </svg>
-                Check out the latest changes here <span aria-hidden="true">&rarr;</span></a>
+                {{ announcement.description }} <span aria-hidden="true">&rarr;</span></a>
         </p>
         <button type="button" class="-m-3 flex-none p-3 focus-visible:outline-offset-[-4px]">
             <span class="sr-only">Dismiss</span>
@@ -203,6 +205,7 @@
         </button>
     </div>
 </div>
+{% endif %}
 
 <footer class="bg-white">
     <div class="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">

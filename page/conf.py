@@ -68,5 +68,10 @@ html_context = {
             },
         ],
         "Help": "https://github.com/orgs/starlite-api/discussions",
-    }
+    },
+    "announcement": {
+        "title": "Starlite 2.0.0alpha1 is available",
+        "description": "Check out the latest release here",
+        "link": "https://github.com/starlite-api/starlite/releases/tag/v2.0.0alpha1",
+    },
 }
