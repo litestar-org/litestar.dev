@@ -47,6 +47,7 @@ jobs:
       - name: Build page
         run: poetry run make
       - name: Deploy
+        if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: page/_build/html
