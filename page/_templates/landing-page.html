@@ -257,27 +257,5 @@
 </footer>
 </body>
 
-<script>
-    function initDropdowns() {
-        const dropdowns = document.querySelectorAll(".st-dropdown-menu")
-        const dropdownToggles = document.querySelectorAll(".st-dropdown-toggle")
-
-        for (const toggle of dropdownToggles) {
-            toggle.addEventListener("click", event => {
-                const target = event.target
-                const menu = target.parentElement.querySelector(".st-dropdown-menu")
-
-                for (const otherMenu of dropdowns) {
-                    otherMenu.classList.toggle("hidden", true)
-                }
-
-                menu.classList.toggle("hidden", false)
-            })
-        }
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-        initDropdowns()
-    })
-</script>
+<script src="_static/index.js"></script>
 </html>
