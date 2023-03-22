@@ -50,3 +50,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: page/_build/html
+          clean-exclude: |
+            1
+            lib
