@@ -21,7 +21,7 @@ html_theme_options = {
     "extra_navbar_items": {
         "Documentation": "https://docs.starliteproject.dev",
         "Community": {
-            "Contribution Guide": "https://staliteproject.dev/community/contribution-guide",
+            "Contribution Guide": "https://docs.starliteproject.dev/latest/contribution-guide",
             "Code of Conduct": "https://github.com/starlite-api/.github/blob/main/CODE_OF_CONDUCT.md",
         },
         "About": {
@@ -30,7 +30,7 @@ html_theme_options = {
         },
         "Release notes": {
             "2.0 migration guide": "https://docs.starliteproject.dev/2/migration_guide_2.html",
-            "2.x Changelog": "https://docs.starliteproject.dev/2/changelog.html",
+            "2.x Changelog": "https://docs.starliteproject.dev/2/release-notes/changelog.html",
             "1.x Changelog": "https://docs.starliteproject.dev/1/changelog.html",
         },
     },
