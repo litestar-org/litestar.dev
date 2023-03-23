@@ -72,4 +72,7 @@ html_context = {
         "description": "Check out the latest release here",
         "link": "https://github.com/starlite-api/starlite/releases/tag/v2.0.0alpha1",
     },
+    "project_name": "Starlite",
+    "project_tagline": "Effortlessly create performant APIs",
+    "project_description_short": "A powerful, lightweight and flexible ASGI framework",
 }
