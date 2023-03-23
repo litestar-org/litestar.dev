@@ -13,9 +13,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="_static/index.css" rel="stylesheet">
 </head>
-<body>
-<header class="bg-white">
-    <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+<body style="background: url('_static/milky.jpg')  no-repeat center center fixed">
+<header class="bg-white lg:sticky lg:top-0 lg:z-50">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
                 <span class="sr-only">Starlite</span>
@@ -102,33 +102,15 @@
 
 
 {% block hero %}
-    <div class="bg-[#202235]">
+    <div class="bg-[#202235]/70">
         <div class="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
             <div class="mx-auto max-w-7xl lg:pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-10 lg:px-8">
-                <div class="px-6 lg:px-0 lg:pt-4">
+                <div class="px-6 lg:px-0">
                     <div class="mx-auto max-w-2xl">
                         <div class="max-w-lg">
-                            <div class="sm:mt-32 lg:mt-16">
-                                <a href="{{ github_repo_link }}/releases/latest" class="inline-flex space-x-6">
-                                <span class="rounded-md bg-[#202235]/10 px-3 py-1 text-sm font-semibold leading-6 text-slate-600">
-                                    Latest release
-                                </span>
-                                    <span class="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-600 hover:text-[#EDB641]"
-                                          id="announcementBanner">
-                                    <span>Just shipped in Polyfactory v2.0.0</span>
-                                    <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                                         aria-hidden="true"
-                                         onclick="document.getElementById('announcementBanner').style.display = 'none';">
-                                        <path fill-rule="evenodd"
-                                              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                                </a>
-                            </div>
-                            <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{{ project_tagline }}</h1>
+                            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{{ project_tagline }}</h1>
                             <p class="mt-6 text-xl leading-8 text-gray-600">with {{ project_name }}</p>
-                            {{ project_description_short }}
+                            <span class="text-gray-600">{{ project_description_short }}</span>
                         </div>
                     </div>
                 </div>
@@ -165,13 +147,46 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32"></div>
+            <div class="absolute inset-x-0 bottom-0 -z-10 !h-[200px] bg-gradient-to-t from-white sm:h-32"></div>
         </div>
     </div>
 {% endblock hero %}
 
-{% block main %}
-{% endblock main %}
+
+<section class="flex flex-wrap p-14 xl:gap-14 justify-center bg-black/90">
+    {% for info_card in info_cards[:3] %}
+        <div class="max-w-sm text-center flex flex-col">
+            {% if info_card.icon %}
+                <img src="_static/{{ info_card.icon }}" class="h-20">
+            {% endif %}
+            <h2 class="text-[#edb641] text-xl p-6 uppercase">{{ info_card.title }}</h2>
+            <p class="mb-6">{{ info_card.content }}</p>
+        </div>
+    {% endfor %}
+</section>
+
+
+<section class="bg-white w-full p-6">
+    <div class="flex flex-wrap p-6 justify-center  gap-8 m-auto lg:w-3/5 cursor-default">
+        {% for feature_card in feature_cards %}
+            <article
+                    class="lg:max-w-xs text-center flex flex-col text-slate-800 border border-slate-200 rounded-md p-2 hover:shadow-lg  bg-white">
+                <h2 class="text-lg font-semibold">{{ feature_card.title }}</h2>
+                <p>
+                    {{ feature_card.content }}
+                </p>
+                <a
+                        href="{{ feature_card.link }}"
+                        target="_blank"
+                        class="rounded-md px-4 py-1 text-sm font-semibold leading-6 text-blue-400 mt-auto mx-auto hover:text-[#EDB641]"
+                >Learn more
+                    <span class="sm:inline">→</span>
+                </a>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
 
 
 {% if announcement %}
