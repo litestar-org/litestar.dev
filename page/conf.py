@@ -39,6 +39,7 @@ html_theme_options = {
 }
 
 html_context = {
+    "code_sample": True,
     "navbar_menu": {
         "Docs": "/docs",
         "About": {
