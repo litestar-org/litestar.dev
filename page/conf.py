@@ -139,9 +139,12 @@ html_context = {
             "link": "https://docs.starliteproject.dev/2/usage/openapi.html",
         },
         {
-            "title": "Caching",
-            "content": "Response caching with minimal configuration and overhead to speed up applications",
-            "link": "https://docs.starliteproject.dev/2/usage/caching.html",
+            "title": "Middlewares",
+            "content": (
+                "Rate-limiting, CORS, CSRF, client- and server-side sessions, compression, logging and many more "
+                "features are all readily available via built in middlewares"
+            ),
+            "link": "https://docs.starliteproject.dev/2/usage/middleware/builtin-middleware.html",
         },
         {
             "title": "Data stores",
@@ -151,14 +154,6 @@ html_context = {
                 "hierarchical structures"
             ),
             "link": "https://docs.starliteproject.dev/2/usage/stores.html",
-        },
-        {
-            "title": "Middlewares",
-            "content": (
-                "Rate-limiting, CORS, CSRF, client- and server-side sessions, compression, logging and many more "
-                "features are all readily available via built in middlewares"
-            ),
-            "link": "https://docs.starliteproject.dev/2/usage/middleware/builtin-middleware.html",
         },
         {
             "title": "ORM integration",
@@ -175,6 +170,11 @@ html_context = {
                 "repetition"
             ),
             "link": "https://docs.starliteproject.dev/2/usage/dependency-injection.html",
+        },
+        {
+            "title": "Caching",
+            "content": "Response caching with minimal configuration and overhead to speed up applications",
+            "link": "https://docs.starliteproject.dev/2/usage/caching.html",
         },
     ],
     "announcement": {

@@ -13,7 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="_static/index.css" rel="stylesheet">
 </head>
-<body style="background: url('_static/milky.jpg')  no-repeat center center fixed">
+<body style="background: url('_static/nebula.jpg')  no-repeat center center fixed">
 <header class="bg-white lg:sticky lg:top-0 lg:z-50">
     <nav class="mx-auto flex max-w-7xl items-center justify-between lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
@@ -102,7 +102,7 @@
 
 
 {% block hero %}
-    <div class="bg-[#202235]/70">
+    <div class="bg-[#202235]/80">
         <div class="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
             <div class="mx-auto max-w-7xl lg:pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-10 lg:px-8">
                 <div class="px-6 lg:px-0">
@@ -153,7 +153,7 @@
 {% endblock hero %}
 
 
-<section class="flex flex-wrap p-14 xl:gap-14 justify-center bg-black/90">
+<section class="flex flex-wrap p-14 xl:gap-14 justify-center bg-black/75">
     {% for info_card in info_cards[:3] %}
         <div class="max-w-sm text-center flex flex-col">
             {% if info_card.icon %}
