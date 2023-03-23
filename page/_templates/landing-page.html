@@ -153,21 +153,23 @@
 {% endblock hero %}
 
 
-<section class="flex flex-wrap p-14 xl:gap-14 justify-center bg-black/75">
-    {% for info_card in info_cards[:3] %}
-        <div class="max-w-sm text-center flex flex-col">
-            {% if info_card.icon %}
-                <img src="_static/{{ info_card.icon }}" class="h-20">
-            {% endif %}
-            <h2 class="text-[#edb641] text-xl p-6 uppercase">{{ info_card.title }}</h2>
-            <p class="mb-6">{{ info_card.content }}</p>
-        </div>
-    {% endfor %}
+<section class="bg-black/75">
+    <div class="flex flex-wrap p-14 justify-center xl:grid grid-cols-3 gap-4 xl:w-max m-auto">
+        {% for info_card in info_cards[:3] %}
+            <div class="max-w-sm text-center flex flex-col">
+                {% if info_card.icon %}
+                    <img src="_static/{{ info_card.icon }}" class="h-20">
+                {% endif %}
+                <h2 class="text-[#edb641] text-xl p-6 uppercase">{{ info_card.title }}</h2>
+                <p class="mb-6">{{ info_card.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
 </section>
 
 
 <section class="bg-white w-full p-6">
-    <div class="flex flex-wrap p-6 justify-center  gap-8 m-auto lg:w-3/5 cursor-default">
+    <div class="md:w-3/4 flex flex-col lg:grid grid-cols-3 lg:w-max gap-8 m-auto cursor-default">
         {% for feature_card in feature_cards %}
             <article
                     class="lg:max-w-xs text-center flex flex-col text-slate-800 border border-slate-200 rounded-md p-2 hover:shadow-lg  bg-white">
@@ -178,7 +180,7 @@
                 <a
                         href="{{ feature_card.link }}"
                         target="_blank"
-                        class="rounded-md px-4 py-1 text-sm font-semibold leading-6 text-blue-400 mt-auto mx-auto hover:text-[#EDB641]"
+                        class="rounded-md px-4 py-1 text-sm font-semibold leading-6 mt-auto mx-auto hover:text-[#EDB641]"
                 >Learn more
                     <span class="sm:inline">→</span>
                 </a>
