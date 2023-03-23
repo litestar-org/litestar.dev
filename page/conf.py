@@ -41,34 +41,30 @@ html_theme_options = {
 html_context = {
     "navbar_menu": {
         "Docs": "/docs",
-        "About": [
-            {
-                "title": "Starlite Organization",
+        "About": {
+            "Starlite Organization": {
                 "description": "Details about the Starlite organization",
                 "link": "/organization",
                 "logo": "org.svg",
             },
-            {
-                "title": "Releases",
+            "Releases": {
                 "description": "View the release history for Starlite",
                 "link": "/releases",
                 "logo": "releases.svg",
             },
-        ],
-        "Community": [
-            {
-                "title": "Contributing",
+        },
+        "Community": {
+            "Contributing": {
                 "description": "Learn how to contribute to the Starlite project",
                 "link": "/contributing",
                 "logo": "contributing.svg",
             },
-            {
-                "title": "Code of Conduct",
+            "Code of Conduct": {
                 "description": "Review the etiquette for interacting with the Starlite community",
                 "link": "/coc",
                 "logo": "coc.svg",
             },
-        ],
+        },
         "Help": "https://github.com/orgs/starlite-api/discussions",
     },
     "announcement": {

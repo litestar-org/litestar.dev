@@ -23,8 +23,7 @@
     </div>
 {% endmacro %}
 
-
-{% macro dropdown_menu(title, menu_items, extra=None) %}
+{% macro dropdown_menu(title, menu_item) %}
     <div class="relative">
         <button type="button"
                 class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 hover:text-[#EDB641] st-dropdown-toggle dropdown-closed"
@@ -38,13 +37,10 @@
 
         <div class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 hidden st-dropdown-menu">
             <div class="p-4">
-                {% for item in menu_items %}
-                    {{ dropdown_menu_item(title=item.title, description=item.description, link=item.link, logo=item.logo) }}
+                {% for sub_title, sub_item in menu_item | items %}
+                    {{ dropdown_menu_item(title=sub_title, description=sub_item.description, link=sub_item.link, logo=sub_item.logo) }}
                 {% endfor %}
             </div>
-            {% if extra %}
-                {% include extra %}
-            {% endif %}
         </div>
     </div>
 {% endmacro %}
