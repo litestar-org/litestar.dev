@@ -4,5 +4,5 @@ module.exports = {
         'page/_templates/**/*.html',
         'page/_static/**/*.js',
     ],
-    darkMode: 'class',
+    darkMode: ['class', '[data-mode="dark"]'],
 }

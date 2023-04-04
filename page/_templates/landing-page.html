@@ -2,7 +2,7 @@
 
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-mode="dark">
 <head>
     <title>Starlite | Effortlessly Build Performant APIs</title>
     <meta name="description" content="Starlite | Effortlessly Build Performant APIs">
@@ -12,7 +12,7 @@
     <link href="_static/index.css" rel="stylesheet">
 </head>
 <body>
-<header class="bg-white lg:sticky lg:top-0 lg:z-50">
+<header class="bg-white dark:bg-zinc-900 lg:sticky lg:top-0 lg:z-50">
     <nav class="mx-auto flex max-w-7xl items-center justify-between lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
@@ -35,7 +35,7 @@
             {% for title, menu_item in navbar_menu | items %}
                 {% if menu_item is string %}
                     <a href="{{ menu_item }}"
-                       class="text-sm font-semibold leading-6 text-gray-900 hover:text-[#EDB641]">{{ title }}</a>
+                       class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100 hover:!text-[#EDB641]">{{ title }}</a>
                 {% else %}
                     {{ dropdown_menu(title=title, menu_item=menu_item) }}
                 {% endif %}
@@ -106,14 +106,15 @@
                 <div class="px-6 lg:px-0">
                     <div class="mx-auto max-w-2xl">
                         <div class="max-w-lg">
-                            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{{ project_tagline }}</h1>
-                            <p class="mt-6 text-xl leading-8 text-gray-600">with {{ project_name }}</p>
-                            <span class="text-gray-600">{{ project_description_short }}</span>
+                            <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-300 sm:text-6xl">{{ project_tagline }}</h1>
+                            <p class="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-200">
+                                with {{ project_name }}</p>
+                            <span class="text-gray-600 dark:text-gray-200">{{ project_description_short }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen">
-                    <div class="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36"
+                    <div class="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-white dark:bg-zinc-900 shadow-xl shadow-indigo-600/10 light:ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36"
                          aria-hidden="true"></div>
                     <div class="shadow-lg md:rounded-3xl">
                         <div class="bg-[#EDB641] dark:bg-[#EDB641] [clip-path:inset(0)] md:[clip-path:inset(0_round_theme(borderRadius.3xl))]">
@@ -150,8 +151,8 @@
 {% endblock hero %}
 
 
-<section class="bg-black/75">
-    <div class="flex flex-wrap p-14 justify-center xl:grid grid-cols-3 gap-4 xl:w-max m-auto">
+<section class="p-14 bg-black/75 dark:bg-zinc-800">
+    <div class="flex flex-wrap justify-center xl:grid grid-cols-3 gap-4 xl:w-max m-auto">
         {% for info_card in info_cards[:3] %}
             <div class="max-w-sm text-center flex flex-col">
                 {% if info_card.icon %}
@@ -165,11 +166,16 @@
 </section>
 
 
-<section class="bg-white w-full p-6">
+<section class="bg-white w-full p-14 dark:bg-zinc-900">
     <div class="md:w-3/4 flex flex-col lg:grid grid-cols-3 lg:w-max gap-8 m-auto cursor-default">
         {% for feature_card in feature_cards %}
             <article
-                    class="lg:max-w-xs text-center flex flex-col text-slate-800 border border-slate-200 rounded-md p-2 hover:shadow-lg bg-white last:col-start-2">
+                    class="
+                    lg:max-w-xs r flex flex-col p-2 last:col-start-2
+                    text-center text-slate-800 dark:text-gray-200
+                    bg-white dark:bg-zinc-800
+                    border rounded-md border-slate-200 dark:border-zinc-600
+                    hover:shadow-lg dark:shadow-zinc-950">
                 <h2 class="text-lg font-semibold">{{ feature_card.title }}</h2>
                 <p>
                     {{ feature_card.content }}
@@ -189,8 +195,8 @@
 
 
 {% if announcement %}
-    <div class="pointer-events-none fixed inset-x-0 bottom-0 sm:px-6 sm:pb-5 lg:px-8" id="announcement">
-        <div class="pointer-events-auto flex items-center justify-between gap-x-6 bg-[#202235] py-2.5 px-6 sm:rounded-xl sm:py-3 sm:pr-3.5 sm:pl-4">
+    <div id="announcement" class="pointer-events-none fixed inset-x-0 bottom-0 sm:px-6 sm:pb-5 lg:px-8">
+        <div class="pointer-events-auto flex items-center justify-between gap-x-6 bg-[#202235] dark:bg-zinc-700 py-2.5 px-6 sm:rounded-xl sm:py-3 sm:pr-3.5 sm:pl-4">
             <p class="text-sm leading-6 text-white">
                 <a href="{{ announcement.link }}"><strong class="font-semibold">{{ announcement.title }}</strong>
                     <svg viewBox="0 0 2 2" class="mx-2 inline h-0.5 w-0.5 fill-current" aria-hidden="true">
@@ -212,25 +218,25 @@
     </div>
 {% endif %}
 
-<footer class="bg-white">
+<footer class="bg-white dark:bg-zinc-800">
     {% block footer %}
-        <div class="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8">
+        <div class="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8 text-gray-600 dark:text-gray-300">
             <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
                 <div class="pb-6">
-                    <a href="#" class="text-sm leading-6 text-gray-600 hover:text-[#EDB641]">About</a>
+                    <a href="#" class="text-sm leading-6 hover:text-[#EDB641]">About</a>
                 </div>
 
                 <div class="pb-6">
                     <a href="https://medium.com/starlite-api"
-                       class="text-sm leading-6 text-gray-600 hover:text-[#EDB641]">Blog</a>
+                       class="text-sm leading-6 hover:text-[#EDB641]">Blog</a>
                 </div>
 
                 <div class="pb-6">
-                    <a href="#" class="text-sm leading-6 text-gray-600 hover:text-[#EDB641]">Contribute</a>
+                    <a href="#" class="text-sm leading-6 hover:text-[#EDB641]">Contribute</a>
                 </div>
 
                 <div class="pb-6">
-                    <a href="/reference" class="text-sm leading-6 text-gray-600 hover:text-[#EDB641]">Docs</a>
+                    <a href="/reference" class="text-sm leading-6 hover:text-[#EDB641]">Docs</a>
                 </div>
 
             </nav>

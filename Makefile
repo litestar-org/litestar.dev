@@ -14,4 +14,4 @@ page: clean build-assets
 	sphinx-build -M html page page/_build/ -a -j auto -W --keep-going
 
 serve:
-	sphinx-autobuild page page/_build/ -j auto --pre-build="make clean build-assets" --watch=tailwind.config.js
+	sphinx-autobuild page page/_build/ -j auto --pre-build="make clean build-assets" --watch=tailwind.config.js --ignore=page/_static/index.css
