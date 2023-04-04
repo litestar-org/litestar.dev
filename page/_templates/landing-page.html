@@ -8,12 +8,13 @@
     <title>Starlite | Effortlessly Build Performant APIs</title>
     <meta name="description" content="Starlite | Effortlessly Build Performant APIs">
     <meta name="keywords" content="">
+    <link href="_static/favicon.png" rel="icon">
     <meta charset="utf-8">
     <!--    TODO: Replace with built twCSS in prod-->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="_static/index.css" rel="stylesheet">
 </head>
-<body style="background: url('_static/nebula.jpg')  no-repeat center center fixed">
+<body>
 <header class="bg-white lg:sticky lg:top-0 lg:z-50">
     <nav class="mx-auto flex max-w-7xl items-center justify-between lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
@@ -36,7 +37,7 @@
         <div class="hidden lg:flex lg:gap-x-12">
             {% for title, menu_item in navbar_menu | items %}
                 {% if menu_item is string %}
-                    <a href="/{{ menu_item }}"
+                    <a href="{{ menu_item }}"
                        class="text-sm font-semibold leading-6 text-gray-900 hover:text-[#EDB641]">{{ title }}</a>
                 {% else %}
                     {{ dropdown_menu(title=title, menu_item=menu_item) }}
@@ -147,7 +148,6 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute inset-x-0 bottom-0 -z-10 !h-[200px] bg-gradient-to-t from-white sm:h-32"></div>
         </div>
     </div>
 {% endblock hero %}
@@ -172,7 +172,7 @@
     <div class="md:w-3/4 flex flex-col lg:grid grid-cols-3 lg:w-max gap-8 m-auto cursor-default">
         {% for feature_card in feature_cards %}
             <article
-                    class="lg:max-w-xs text-center flex flex-col text-slate-800 border border-slate-200 rounded-md p-2 hover:shadow-lg  bg-white">
+                    class="lg:max-w-xs text-center flex flex-col text-slate-800 border border-slate-200 rounded-md p-2 hover:shadow-lg bg-white last:col-start-2">
                 <h2 class="text-lg font-semibold">{{ feature_card.title }}</h2>
                 <p>
                     {{ feature_card.content }}

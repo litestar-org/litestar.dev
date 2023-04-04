@@ -11,7 +11,6 @@ html_show_sourcelink = False
 html_sidebars = {"**": []}
 html_additional_pages = {"index": "landing-page.html"}
 nitpicky = True
-html_favicon = "favicon.ico"
 
 html_theme_options = {
     "use_page_nav": False,
@@ -184,5 +183,5 @@ html_context = {
     },
     "project_name": "Starlite",
     "project_tagline": "Effortlessly create performant APIs",
-    "project_description_short": "A powerful, lightweight and flexible ASGI framework",
+    "project_description_short": "The powerful, lightweight and flexible ASGI framework",
 }
