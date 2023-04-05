@@ -40,7 +40,7 @@ html_theme_options = {
 html_context = {
     "code_sample": True,
     "navbar_menu": {
-        "Docs": "/docs",
+        "Docs": "https://docs.starliteproject.dev",
         "About": {
             "Starlite Organization": {
                 "description": "Details about the Starlite organization",
