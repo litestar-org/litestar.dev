@@ -45,24 +45,24 @@ html_context = {
             "Starlite Organization": {
                 "description": "Details about the Starlite organization",
                 "link": "/organization",
-                "logo": "org.svg",
+                "icon": "org",
             },
             "Releases": {
                 "description": "View the release history for Starlite",
                 "link": "/releases",
-                "logo": "releases.svg",
+                "icon": "releases",
             },
         },
         "Community": {
             "Contributing": {
                 "description": "Learn how to contribute to the Starlite project",
                 "link": "/contributing",
-                "logo": "contributing.svg",
+                "icon": "contributing",
             },
             "Code of Conduct": {
                 "description": "Review the etiquette for interacting with the Starlite community",
                 "link": "/coc",
-                "logo": "coc.svg",
+                "icon": "coc",
             },
         },
         "Help": "https://github.com/orgs/starlite-api/discussions",

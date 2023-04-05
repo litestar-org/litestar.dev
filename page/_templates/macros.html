@@ -1,17 +1,12 @@
-{% macro chevron_down() %}
-    <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-         aria-hidden="true">
-        <path fill-rule="evenodd"
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-              clip-rule="evenodd"/>
-    </svg>
+{% macro icon(icon_name) %}
+    {% include "icons/" + icon_name + ".svg" %}
 {% endmacro %}
 
 
-{% macro dropdown_menu_item(title, description, link, logo) %}
+{% macro dropdown_menu_item(title, description, link, icon_name) %}
     <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
         <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-            {% include logo %}
+            {{ icon(icon_name) }}
         </div>
         <div class="flex-auto">
             <a href="{{ link }}" class="block font-semibold text-gray-900 hover:text-[#EDB641]">
@@ -31,14 +26,14 @@
                 aria-expanded="false">
             {{ title }}
             <div class="menu-state-indicator">
-                {{ chevron_down() }}
+                {{ icon("chevron-down") }}
             </div>
         </button>
 
         <div class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 hidden st-dropdown-menu">
             <div class="p-4">
                 {% for sub_title, sub_item in menu_item | items %}
-                    {{ dropdown_menu_item(title=sub_title, description=sub_item.description, link=sub_item.link, logo=sub_item.logo) }}
+                    {{ dropdown_menu_item(title=sub_title, description=sub_item.description, link=sub_item.link, icon_name=sub_item.icon) }}
                 {% endfor %}
             </div>
         </div>
