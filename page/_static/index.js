@@ -12,7 +12,10 @@ function initDropdowns() {
         contentEL.classList.toggle("hidden", true)
     }
 
+    const closeAll = () => dropdowns.forEach(close)
+
     const open = (dropdown) => {
+        closeAll()
         dropdown.toggleEl.setAttribute("aria-expanded", "true")
         dropdown.contentEL.classList.toggle("hidden", false)
         const boundaries = [dropdown.contentEL, ...dropdownToggles]
@@ -29,12 +32,14 @@ function initDropdowns() {
         document.addEventListener("click", clickOutsideListener)
     }
 
-    const closeAll = () => dropdowns.forEach(close)
 
     dropdowns.forEach(dropdown => {
         dropdown.toggleEl.addEventListener("click", () => {
-            closeAll()
-            open(dropdown)
+            if (dropdown.toggleEl.getAttribute("aria-expanded") === "true") {
+                close(dropdown)
+            } else {
+                open(dropdown)
+            }
         })
     })
 }
