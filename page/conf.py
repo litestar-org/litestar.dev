@@ -26,7 +26,7 @@ html_theme_options = {
             },
             "Code of Conduct": {
                 "description": "Review the etiquette for interacting with the Starlite community",
-                "link": "/coc",
+                "link": "/code-of-conduct",
                 "icon": "coc",
             },
         },
@@ -50,7 +50,7 @@ html_context = {
     "code_sample": True,
     "info_cards": [
         {
-            "title": "Fully featured",
+            "title": "Fully-featured",
             "content": (
                 "Everything that's needed to build modern APIs, from data serialization and validation to websockets, "
                 "ORM integration, session management, authentication and more"
@@ -196,6 +196,8 @@ html_context = {
         "link": "https://github.com/starlite-api/starlite/releases/tag/v2.0.0alpha1",
     },
     "project_name": "Litestar",
-    "project_tagline": "Effortlessly create performant APIs",
+    "project_url": "https://starliteproject.dev",
+    "project_github_url": "https://github.com/starlite-api/starlite",
+    "project_tagline": "Effortlessly build performant APIs",
     "project_description_short": "The powerful, lightweight and flexible ASGI framework",
 }

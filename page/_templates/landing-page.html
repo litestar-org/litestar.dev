@@ -1,5 +1,11 @@
 {% from "macros.html" import icon %}
 
+{# TODO: #}
+{#   - Theme switcher #}
+{#   - Fix Discord icon color and hover #}
+{#   - Fix section bareness #}
+{#   - For both light and dark themes, utilize brand colors instead of grays #}
+
 {% macro mobile_menu(title, item) %}
     {% if item is string %}
         <a href="{{ menu_item }}"
@@ -38,7 +44,8 @@
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                      aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5">
+                    </path>
                 </svg>
             </button>
         </div>
@@ -49,9 +56,9 @@
                 <span class="sr-only">Discord</span>
                 {{ icon("discord") }}
             </a>
-            <a href="https://github.com/starlite-api/starlite" class="text-gray-400 hover:text-starlite-gold">
+            <a href="{{ project_github_url }}" class="text-gray-400 hover:text-[#EDB641]">
                 <span class="sr-only">GitHub</span>
-                    {{ icon("github") }}
+                {{ icon("github") }}
             </a>
         </div>
     </nav>
@@ -107,6 +114,16 @@
                                 with {{ project_name }}</p>
                             <span class="text-gray-600 dark:text-gray-200">{{ project_description_short }}</span>
                         </div>
+                        {# TODO: Hero section felt bare. not just the top button but this one removed as well? #}
+                        <div class="mt-10 flex items-center gap-x-6">
+                            <a href="/docs"
+                               class="rounded-md bg-[#EDB641] px-3.5 py-2.5 text-sm font-semibold
+                               text-white shadow-sm hover:bg-[#EDB641]/20 focus-visible:outline focus-visible:outline-2
+                               focus-visible:outline-offset-2 focus-visible:outline-[#EDB641]">Documentation</a>
+                            <a href="{{ project_github_url }}" class="text-sm font-semibold leading-6 dark:text-white">
+                                View on GitHub <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen">
@@ -144,6 +161,46 @@
     </div>
 {% endblock hero %}
 
+{# TODO: Would like icons here. Feels bare. #}
+{# TODO: Prefer color here, for both light and dark themes. Not sure of the 2 sections which yet. need to see light and dark together#}
+<section class="bg-white py-20 sm:py-24 lg:py-12 bg-[#EDB641] dark:bg-[#202235]">
+    <div class="mx-auto max-w-xl px-6 lg:max-w-7xl lg:px-8">
+        <dl class="grid grid-cols-1 gap-16 lg:grid lg:grid-cols-3">
+            {% for info_card in info_cards[:3] %}
+                <div>
+                    <dt>
+                        {% if info_card.icon %}
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#202235] text-white">
+                                <img src="_static/{{ info_card.icon }}.p" alt="icon" class="h-6 w-6">
+                            </div>
+                        {% endif %}
+                        <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-white dark:text-white uppercase">{{ info_card.title }}</p>
+                    </dt>
+                    <dd class="mt-2 text-base leading-7 text-white dark:text-white">{{ info_card.content }}</dd>
+                </div>
+            {% endfor %}
+        </dl>
+    </div>
+</section>
+
+{# TODO: Too much spacing here #}
+<section class="p-14 bg-[#202235] dark:bg-[#EDB641]">
+    <div class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
+        <dl class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:grid-cols-3 lg:gap-x-10">
+            {% for info_card in info_cards[:3] %}
+                <div class="max-w-sm text-center flex flex-col">
+                    {% if info_card.icon %}
+                        <img src="_static/{{ info_card.icon }}" class="h-20" alt="{{ info_card.title }}">
+                    {% endif %}
+                    <dt class="text-base font-semibold leading-7 text-white dark:text-white text-xl p-6 uppercase">
+                        {{ info_card.title }}
+                    </dt>
+                    <dd class="mt-2 text-base leading-7 text-gray-900">{{ info_card.content }}</dd>
+                </div>
+            {% endfor %}
+        </dl>
+    </div>
+</section>
 
 <section class="p-14 bg-black/75 dark:bg-zinc-800">
     <div class="flex flex-wrap justify-center xl:grid grid-cols-3 gap-4 xl:w-max m-auto">
@@ -159,7 +216,8 @@
     </div>
 </section>
 
-
+{# TODO: These seems a little in depth for a landing page. Docs can explain this level of detail. Even number (3 or 6) would be nicer #}
+{# TODO: No icons feel bare here too. #}
 <section class="bg-white w-full p-14 dark:bg-zinc-900">
     <div class="md:w-3/4 flex flex-col lg:grid grid-cols-3 lg:w-max gap-8 m-auto cursor-default">
         {% for feature_card in feature_cards %}
@@ -188,7 +246,7 @@
 </section>
 
 
-
+{# TODO: Add color #}
 {% if announcement %}
     <div id="announcement" class="pointer-events-none fixed inset-x-0 bottom-0 sm:px-6 sm:pb-5 lg:px-8">
         <div class="pointer-events-auto flex items-center justify-between gap-x-6 bg-[#202235] dark:bg-zinc-700 py-2.5 px-6 sm:rounded-xl sm:py-3 sm:pr-3.5 sm:pl-4">
@@ -231,19 +289,19 @@
                 </div>
 
                 <div class="pb-6">
-                    <a href="/reference" class="text-sm leading-6 hover:text-starlite-gold">Docs</a>
+                    <a href="/docs" class="text-sm leading-6 hover:text-[#EDB641]">Docs</a>
                 </div>
 
             </nav>
             <div class="mt-10 flex justify-center space-x-10">
-                <a href="{{ discord_link }}" class="text-gray-400 hover:text-starlite-gold">
-                    <span class="sr-only">Discord</span>
-                    {{ icon("discord") }}
-                </a>
-
-                <a href="{{ twitter_link }}" class="text-gray-400 hover:text-starlite-gold">
+                <a href="{{ twitter_link }}" class="text-gray-400 hover:text-[#EDB641]">
                     <span class="sr-only">Twitter</span>
                     {{ icon("twitter") }}
+                </a>
+
+                <a href="{{ discord_link }}" class="text-gray-400 hover:text-[#EDB641]">
+                    <span class="sr-only">Discord</span>
+                    {{ icon("discord") }}
                 </a>
 
                 <a href="{{ github_repo_link }}" class="text-gray-400 hover:text-starlite-gold">
