@@ -16,43 +16,8 @@ html_theme_options = {
     "use_page_nav": False,
     "show_prev_next": False,
     "github_repo_name": "starlite",
-    "navbar_persistent": ["theme-switcher"],
-    "footer_start": [],
-    "footer_end": [],
     "extra_navbar_items": {
-        "Documentation": "https://docs.starliteproject.dev",
-        "Community": {
-            "Contribution Guide": "https://docs.starliteproject.dev/latest/contribution-guide",
-            "Code of Conduct": "https://github.com/starlite-api/.github/blob/main/CODE_OF_CONDUCT.md",
-        },
-        "About": {
-            "Organization": "about/organization",
-            "Releases": "about/starlite-releases",
-        },
-        "Release notes": {
-            "2.0 migration guide": "https://docs.starliteproject.dev/2/release-notes/migration_guide_2.html",
-            "2.x Changelog": "https://docs.starliteproject.dev/2/release-notes/changelog.html",
-            "1.x Changelog": "https://docs.starliteproject.dev/1/release-notes/changelog.html",
-        },
-    },
-}
-
-html_context = {
-    "code_sample": True,
-    "navbar_menu": {
         "Docs": "https://docs.starliteproject.dev",
-        "About": {
-            "Starlite Organization": {
-                "description": "Details about the Starlite organization",
-                "link": "/organization",
-                "icon": "org",
-            },
-            "Releases": {
-                "description": "View the release history for Starlite",
-                "link": "/releases",
-                "icon": "releases",
-            },
-        },
         "Community": {
             "Contributing": {
                 "description": "Learn how to contribute to the Starlite project",
@@ -65,8 +30,24 @@ html_context = {
                 "icon": "coc",
             },
         },
+        "About": {
+            "Starlite Organization": {
+                "description": "Details about the Starlite organization",
+                "link": "about/organization",
+                "icon": "org",
+            },
+            "Releases": {
+                "description": "View the release history for Starlite",
+                "link": "about/starlite-releases",
+                "icon": "releases",
+            },
+        },
         "Help": "https://github.com/orgs/starlite-api/discussions",
     },
+}
+
+html_context = {
+    "code_sample": True,
     "info_cards": [
         {
             "title": "Fully featured",
@@ -122,7 +103,7 @@ html_context = {
     ],
     "feature_cards": [
         {
-            "title": "Data validation and serialization",
+            "title": "Data Validation And Serialization",
             "content": (
                 "Validation of incoming and serialization of outgoing data, configured with"
                 "type hints with support for libraries such as Pydantic or attrs"
@@ -146,7 +127,7 @@ html_context = {
             "link": "https://docs.starliteproject.dev/2/usage/middleware/builtin-middleware.html",
         },
         {
-            "title": "Data stores",
+            "title": "Data Stores",
             "content": (
                 "Interfaces for various key/value stores that seamlessly integrate with "
                 "features such as server-side sessions or response caching, easily managed and organized into "
@@ -155,7 +136,7 @@ html_context = {
             "link": "https://docs.starliteproject.dev/2/usage/stores.html",
         },
         {
-            "title": "ORM integration",
+            "title": "ORM Integration",
             "content": (
                 "First-class SQLAlchemy support via DTO backends and plugins that seamlessly integrates with data"
                 "validation and parsing: Models can be returned straight away or used to validate incoming data"
@@ -163,7 +144,7 @@ html_context = {
             "link": "https://docs.starliteproject.dev/2/usage/plugins/sqlalchemy.html",
         },
         {
-            "title": "Dependency injection",
+            "title": "Dependency Injection",
             "content": (
                 "Powerful dependency injection on all application layers, aides in code decoupling and reduces "
                 "repetition"

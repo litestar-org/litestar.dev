@@ -1,13 +1,25 @@
-{% from "macros.html" import dropdown_menu, mobile_menu, icon %}
+{% from "macros.html" import icon %}
+
+{% macro mobile_menu(title, item) %}
+    {% if item is string %}
+        <a href="{{ menu_item }}"
+           class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 dark:text-gray-100 hover:bg-gray-50">{{ title }}</a>
+    {% else %}
+        {% for foo, bar in item | items %}
+            {{ mobile_menu(foo, bar) }}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
 
 <!doctype html>
-<html lang="en" data-mode="dark">
+<html lang="en" data-theme="dark">
 <head>
     <title>Starlite | Effortlessly Build Performant APIs</title>
     <meta name="description" content="Starlite | Effortlessly Build Performant APIs">
     <meta name="keywords" content="">
     <meta charset="utf-8">
     <link href="_static/favicon.png" rel="icon">
+    <link href="_static/starlite-sphinx-theme.css" rel="stylesheet">
     <link href="_static/index.css" rel="stylesheet">
 </head>
 <body>
@@ -31,14 +43,7 @@
             </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-            {% for title, menu_item in navbar_menu | items %}
-                {% if menu_item is string %}
-                    <a href="{{ menu_item }}"
-                       class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100 hover:!text-[#EDB641]">{{ title }}</a>
-                {% else %}
-                    {{ dropdown_menu(title=title, menu_item=menu_item) }}
-                {% endif %}
-            {% endfor %}
+            {% include "main_nav.html" %}
 
             <a href="{{ discord_link }}" class="text-gray-400 hover:text-[#EDB641]">
                 <span class="sr-only">Discord</span>
@@ -47,7 +52,6 @@
             <a href="https://github.com/starlite-api/starlite" class="text-gray-400 hover:text-[#EDB641]">
                 <span class="sr-only">GitHub</span>
                     {{ icon("github") }}
-
             </a>
         </div>
     </nav>
