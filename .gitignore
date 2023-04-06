@@ -26,3 +26,4 @@ target/
 .ruff_cache
 /page/_build/
 coverage.*
+/page/_static/index.css

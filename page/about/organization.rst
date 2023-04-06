@@ -3,10 +3,10 @@
 Organization
 ============
 
-Starlite is developed by a group of volunteers and outside contributors, and lead by a
+Litestar is developed by a group of volunteers and outside contributors, and lead by a
 team of `Maintainers`_.
 
-From its inception, Starlite was envisaged as a community driven project. We encourage
+From its inception, Litestar was envisaged as a community driven project. We encourage
 users to become involved with the project - feel free to open issues, chime in on
 discussions, review pull requests and of course - contribute code.
 
@@ -19,11 +19,11 @@ Structure
 
 The organizational structure is very much flat, with only two distinctive roles:
 
-- `Members <https://github.com/orgs/starlite-api/people>`_: People who have contributed
-  significantly and have been granted limited administrative permissions to the Starlite
+- `Members <https://github.com/orgs/litestar-org/people>`_: People who have contributed
+  significantly and have been granted limited administrative permissions to the Litestar
   organization
 - `Maintainers`_: Long term members of the organization who have demonstrated a vested
-  interest in developing and maintaining Starlite and its related projects, contributing
+  interest in developing and maintaining Litestar and its related projects, contributing
   significantly in administrative and development tasks
 
 
@@ -36,7 +36,6 @@ Current maintainers of the project are:
 - Peter Schutt (`@peterschutt <https://github.com/peterschutt>`_)
 - Cody Fincher (`@cofin <https://github.com/cofin>`_)
 - Janek Nouvertné (`@provinzkraut <https://github.com/provinzkraut>`_)
-- Konstantin Mikhailov (`@jtraub <https://github.com/jtraub>`_)
 
-New maintainers may be nominated by any member of the Starlite organization and have to
+New maintainers may be nominated by any member of the Litestar organization and have to
 be approved unanimously by the current maintainers.

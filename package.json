@@ -1,0 +1,11 @@
+{
+  "name": "litestar.dev",
+  "version": "1.0.0",
+  "description": "This is the source code for https://litestar.dev",
+  "main": "index.js",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.3.1"
+  }
+}
