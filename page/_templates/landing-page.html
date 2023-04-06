@@ -45,11 +45,11 @@
         <div class="hidden lg:flex lg:gap-x-12">
             {% include "main_nav.html" %}
 
-            <a href="{{ discord_link }}" class="text-gray-400 hover:text-[#EDB641]">
+            <a href="{{ discord_link }}" class="text-gray-400 hover:text-starlite-gold">
                 <span class="sr-only">Discord</span>
                 {{ icon("discord") }}
             </a>
-            <a href="https://github.com/starlite-api/starlite" class="text-gray-400 hover:text-[#EDB641]">
+            <a href="https://github.com/starlite-api/starlite" class="text-gray-400 hover:text-starlite-gold">
                 <span class="sr-only">GitHub</span>
                     {{ icon("github") }}
             </a>
@@ -113,7 +113,7 @@
                     <div class="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-white dark:bg-zinc-900 shadow-xl shadow-indigo-600/10 light:ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36"
                          aria-hidden="true"></div>
                     <div class="shadow-lg md:rounded-3xl">
-                        <div class="bg-[#EDB641] dark:bg-[#EDB641] [clip-path:inset(0)] md:[clip-path:inset(0_round_theme(borderRadius.3xl))]">
+                        <div class="bg-starlite-gold dark:bg-starlite-gold [clip-path:inset(0)] md:[clip-path:inset(0_round_theme(borderRadius.3xl))]">
                             <div class="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36"
                                  aria-hidden="true"></div>
                             {% if code_sample %}
@@ -152,7 +152,7 @@
                 {% if info_card.icon %}
                     <img src="_static/{{ info_card.icon }}" class="h-20">
                 {% endif %}
-                <h2 class="text-[#edb641] text-xl p-6 uppercase">{{ info_card.title }}</h2>
+                <h2 class="text-starlite-gold text-xl p-6 uppercase">{{ info_card.title }}</h2>
                 <p class="mb-6">{{ info_card.content }}</p>
             </div>
         {% endfor %}
@@ -177,7 +177,7 @@
                 <a
                         href="{{ feature_card.link }}"
                         target="_blank"
-                        class="rounded-md px-4 py-1 text-sm font-semibold leading-6 mt-auto mx-auto hover:text-[#EDB641]"
+                        class="rounded-md px-4 py-1 text-sm font-semibold leading-6 mt-auto mx-auto hover:text-starlite-gold"
                 >Learn more
                     <span class="sm:inline">→</span>
                 </a>
@@ -217,35 +217,35 @@
         <div class="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8 text-gray-600 dark:text-gray-300">
             <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
                 <div class="pb-6">
-                    <a href="#" class="text-sm leading-6 hover:text-[#EDB641]">About</a>
+                    <a href="#" class="text-sm leading-6 hover:text-starlite-gold">About</a>
                 </div>
 
                 <div class="pb-6">
                     <a href="https://medium.com/starlite-api"
-                       class="text-sm leading-6 hover:text-[#EDB641]">Blog</a>
+                       class="text-sm leading-6 hover:text-starlite-gold">Blog</a>
                 </div>
 
                 <div class="pb-6">
-                    <a href="#" class="text-sm leading-6 hover:text-[#EDB641]">Contribute</a>
+                    <a href="#" class="text-sm leading-6 hover:text-starlite-gold">Contribute</a>
                 </div>
 
                 <div class="pb-6">
-                    <a href="/reference" class="text-sm leading-6 hover:text-[#EDB641]">Docs</a>
+                    <a href="/reference" class="text-sm leading-6 hover:text-starlite-gold">Docs</a>
                 </div>
 
             </nav>
             <div class="mt-10 flex justify-center space-x-10">
-                <a href="{{ discord_link }}" class="text-gray-400 hover:text-[#EDB641]">
+                <a href="{{ discord_link }}" class="text-gray-400 hover:text-starlite-gold">
                     <span class="sr-only">Discord</span>
                     {{ icon("discord") }}
                 </a>
 
-                <a href="{{ twitter_link }}" class="text-gray-400 hover:text-[#EDB641]">
+                <a href="{{ twitter_link }}" class="text-gray-400 hover:text-starlite-gold">
                     <span class="sr-only">Twitter</span>
                     {{ icon("twitter") }}
                 </a>
 
-                <a href="{{ github_repo_link }}" class="text-gray-400 hover:text-[#EDB641]">
+                <a href="{{ github_repo_link }}" class="text-gray-400 hover:text-starlite-gold">
                     <span class="sr-only">GitHub</span>
                     {{ icon("github") }}
                 </a>

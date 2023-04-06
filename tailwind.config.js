@@ -5,4 +5,11 @@ module.exports = {
         'page/_static/**/*.js',
     ],
     darkMode: ['class', '[data-theme="dark"]'],
+    theme: {
+        extend: {
+            colors: {
+                "starlite-gold": "#EDB641"
+            }
+        }
+    }
 }
