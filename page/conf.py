@@ -15,34 +15,34 @@ nitpicky = True
 html_theme_options = {
     "use_page_nav": False,
     "show_prev_next": False,
-    "github_repo_name": "starlite",
+    "github_repo_name": "litestar",
     "extra_navbar_items": {
-        "Docs": "https://docs.starliteproject.dev",
+        "Docs": "https://docs.litestar.dev",
         "Community": {
             "Contributing": {
-                "description": "Learn how to contribute to the Starlite project",
+                "description": "Learn how to contribute to the Litestar project",
                 "link": "/contributing",
                 "icon": "contributing",
             },
             "Code of Conduct": {
-                "description": "Review the etiquette for interacting with the Starlite community",
+                "description": "Review the etiquette for interacting with the Litestar community",
                 "link": "/code-of-conduct",
                 "icon": "coc",
             },
         },
         "About": {
-            "Starlite Organization": {
-                "description": "Details about the Starlite organization",
+            "Litestar Organization": {
+                "description": "Details about the Litestar organization",
                 "link": "about/organization",
                 "icon": "org",
             },
             "Releases": {
-                "description": "View the release history for Starlite",
-                "link": "about/starlite-releases",
+                "description": "View the release history for Litestar",
+                "link": "about/litestar-releases",
                 "icon": "releases",
             },
         },
-        "Help": "https://github.com/orgs/starlite-api/discussions",
+        "Help": "https://github.com/orgs/litestar-org/discussions",
     },
 }
 
@@ -65,7 +65,7 @@ html_context = {
                 "ASGI frameworks and developing with it is just as fast"
             ),
             "icon": None,
-            "link": "https://docs.starliteproject.dev/latest/benchmarks",
+            "link": "https://docs.litestar.dev/latest/benchmarks",
         },
         {
             "title": "(a)synchronous",
@@ -83,7 +83,7 @@ html_context = {
                 "community project at heart"
             ),
             "icon": None,
-            "link": "https://starliteproject.dev/about/organization.html",
+            "link": "https://litestar.dev/about/organization.html",
         },
         {
             "title": "Opinionated yet flexible",
@@ -105,7 +105,7 @@ html_context = {
         {
             "title": "Data Validation And Parsing",
             "content": "Leverage power of type hints to define how data should be validated, parsed and serialized",
-            "link": "https://docs.starliteproject.dev/2/usage/dto.html",
+            "link": "https://docs.litestar.dev/2/usage/dto.html",
         },
         {
             "title": "Open Ecosystem",
@@ -120,7 +120,7 @@ html_context = {
                 "Automatically generated OpenAPI schemas help to document APIs and integrate with the frontend via "
                 "TypeScript schema generation"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/openapi.html",
+            "link": "https://docs.litestar.dev/2/usage/openapi.html",
         },
         {
             "title": "Interactive API documentation",
@@ -134,7 +134,7 @@ html_context = {
                 "Handle rate-limiting, CORS, CSRF, compression, logging and many more common tasks with Litestar's "
                 "built-in middlewares"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/middleware/builtin-middleware.html",
+            "link": "https://docs.litestar.dev/2/usage/middleware/builtin-middleware.html",
         },
         {
             "title": "Data Stores",
@@ -142,7 +142,7 @@ html_context = {
                 "Interfaces for various key/value stores that seamlessly integrate with "
                 "your application and third party extensions"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/stores.html",
+            "link": "https://docs.litestar.dev/2/usage/stores.html",
         },
         {
             "title": "ORM Integration",
@@ -150,7 +150,7 @@ html_context = {
                 "First-class SQLAlchemy support let's you use your models for validation and serialization directly,"
                 " reducing code duplication"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/plugins/sqlalchemy.html",
+            "link": "https://docs.litestar.dev/2/usage/plugins/sqlalchemy.html",
         },
         {
             "title": "Dependency Injection",
@@ -158,12 +158,12 @@ html_context = {
                 "Powerful dependency injection on all application layers, aides in code decoupling and reduces "
                 "repetition"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/dependency-injection.html",
+            "link": "https://docs.litestar.dev/2/usage/dependency-injection.html",
         },
         {
             "title": "Caching",
             "content": "Response caching with minimal configuration and overhead to speed up response times",
-            "link": "https://docs.starliteproject.dev/2/usage/caching.html",
+            "link": "https://docs.litestar.dev/2/usage/caching.html",
         },
         {
             "title": "WebSockets",
@@ -171,7 +171,7 @@ html_context = {
                 "Easy to used WebSockets integration, featuring high and low-level APIs and support for automatic data "
                 "validation and serialization"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/websockets.html",
+            "link": "https://docs.litestar.dev/2/usage/websockets.html",
         },
         {
             "title": "Runtime safety through strict validation",
@@ -179,7 +179,7 @@ html_context = {
                 "Litestar is strictly typed, and user supplied functions are meticulously validated to minimize "
                 "runtime errors"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/route-handlers.html",
+            "link": "https://docs.litestar.dev/2/usage/route-handlers.html",
         },
         {
             "title": "Authentication And Authorization",
@@ -187,7 +187,7 @@ html_context = {
                 "Session and JWT based authentication and utilities at your disposal to start building your "
                 "authentication layer"
             ),
-            "link": "https://docs.starliteproject.dev/2/usage/security.html",
+            "link": "https://docs.litestar.dev/2/usage/security.html",
         },
     ],
     "announcement": {
@@ -196,8 +196,8 @@ html_context = {
         "link": "https://github.com/starlite-api/starlite/releases/tag/v2.0.0alpha1",
     },
     "project_name": "Litestar",
-    "project_url": "https://starliteproject.dev",
-    "project_github_url": "https://github.com/starlite-api/starlite",
+    "project_url": "https://litestar.dev",
+    "project_github_url": "https://github.com/litestar-org/litestar",
     "project_tagline": "Effortlessly build performant APIs",
     "project_description_short": "The powerful, lightweight and flexible ASGI framework",
 }

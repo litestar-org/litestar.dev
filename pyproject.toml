@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "starliteproject-dev"
+name = "litestar.dev"
 version = "0.1.0"
-description = "Source code for starliteproject.dev"
+description = "Source code for litestar.dev"
 authors = ["Janek Nouvertné"]
 license = "MIT"
 readme = "README.md"

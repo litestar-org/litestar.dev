@@ -1,21 +1,10 @@
 {
-  "name": "starliteproject.dev",
+  "name": "litestar.dev",
   "version": "1.0.0",
-  "description": "This is the source code for https://starliteproject.dev",
+  "description": "This is the source code for https://litestar.dev",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/starlite-api/starliteproject.dev.git"
-  },
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/starlite-api/starliteproject.dev/issues"
-  },
-  "homepage": "https://github.com/starlite-api/starliteproject.dev#readme",
   "devDependencies": {
     "tailwindcss": "^3.3.1"
   }

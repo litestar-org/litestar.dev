@@ -8,7 +8,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                "starlite-gold": "#EDB641"
+                "litestar-gold": "#EDB641"
             }
         }
     }
