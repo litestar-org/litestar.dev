@@ -103,26 +103,36 @@ html_context = {
     ],
     "feature_cards": [
         {
-            "title": "Data Validation And Serialization",
-            "content": (
-                "Validation of incoming and serialization of outgoing data, configured with"
-                "type hints with support for libraries such as Pydantic or attrs"
-            ),
+            "title": "Data Validation And Parsing",
+            "content": "Leverage power of type hints to define how data should be validated, parsed and serialized",
             "link": "https://docs.starliteproject.dev/2/usage/dto.html",
+        },
+        {
+            "title": "Open Ecosystem",
+            "content": (
+                "Define schemas and models for validation with standard types such as dataclasses, libraries like "
+                "Pydantic, or integrate your own"
+            ),
         },
         {
             "title": "OpenAPI",
             "content": (
-                "Automatic OpenAPI schemas created based on from route handlers and type annotations, "
-                "and options to export them as TypeScript "
+                "Automatically generated OpenAPI schemas help to document APIs and integrate with the frontend via "
+                "TypeScript schema generation"
             ),
             "link": "https://docs.starliteproject.dev/2/usage/openapi.html",
         },
         {
+            "title": "Interactive API documentation",
+            "content": (
+                "Interactively explore your APIs through Swagger, Redoc or Stoplight Elements, powered by OpenAPI"
+            ),
+        },
+        {
             "title": "Middlewares",
             "content": (
-                "Rate-limiting, CORS, CSRF, client- and server-side sessions, compression, logging and many more "
-                "features are all readily available via built in middlewares"
+                "Handle rate-limiting, CORS, CSRF, compression, logging and many more common tasks with Litestar's "
+                "built-in middlewares"
             ),
             "link": "https://docs.starliteproject.dev/2/usage/middleware/builtin-middleware.html",
         },
@@ -130,16 +140,15 @@ html_context = {
             "title": "Data Stores",
             "content": (
                 "Interfaces for various key/value stores that seamlessly integrate with "
-                "features such as server-side sessions or response caching, easily managed and organized into "
-                "hierarchical structures"
+                "your application and third party extensions"
             ),
             "link": "https://docs.starliteproject.dev/2/usage/stores.html",
         },
         {
             "title": "ORM Integration",
             "content": (
-                "First-class SQLAlchemy support via DTO backends and plugins that seamlessly integrates with data"
-                "validation and parsing: Models can be returned straight away or used to validate incoming data"
+                "First-class SQLAlchemy support let's you use your models for validation and serialization directly,"
+                " reducing code duplication"
             ),
             "link": "https://docs.starliteproject.dev/2/usage/plugins/sqlalchemy.html",
         },
@@ -153,16 +162,40 @@ html_context = {
         },
         {
             "title": "Caching",
-            "content": "Response caching with minimal configuration and overhead to speed up applications",
+            "content": "Response caching with minimal configuration and overhead to speed up response times",
             "link": "https://docs.starliteproject.dev/2/usage/caching.html",
+        },
+        {
+            "title": "WebSockets",
+            "content": (
+                "Easy to used WebSockets integration, featuring high and low-level APIs and support for automatic data "
+                "validation and serialization"
+            ),
+            "link": "https://docs.starliteproject.dev/2/usage/websockets.html",
+        },
+        {
+            "title": "Runtime safety through strict validation",
+            "content": (
+                "Litestar is strictly typed, and user supplied functions are meticulously validated to minimize "
+                "runtime errors"
+            ),
+            "link": "https://docs.starliteproject.dev/2/usage/route-handlers.html",
+        },
+        {
+            "title": "Authentication And Authorization",
+            "content": (
+                "Session and JWT based authentication and utilities at your disposal to start building your "
+                "authentication layer"
+            ),
+            "link": "https://docs.starliteproject.dev/2/usage/security.html",
         },
     ],
     "announcement": {
-        "title": "Starlite 2.0.0alpha1 is available",
+        "title": "Litestar 2.0.0alpha3 is available",
         "description": "Check out the latest release here",
         "link": "https://github.com/starlite-api/starlite/releases/tag/v2.0.0alpha1",
     },
-    "project_name": "Starlite",
+    "project_name": "Litestar",
     "project_tagline": "Effortlessly create performant APIs",
     "project_description_short": "The powerful, lightweight and flexible ASGI framework",
 }
