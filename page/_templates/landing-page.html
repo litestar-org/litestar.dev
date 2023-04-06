@@ -2,7 +2,6 @@
 
 {# TODO: #}
 {#   - Theme switcher #}
-{#   - Fix Discord icon color and hover #}
 {#   - Fix section bareness #}
 {#   - For both light and dark themes, utilize brand colors instead of grays #}
 
@@ -52,11 +51,11 @@
         <div class="hidden lg:flex lg:gap-x-12">
             {% include "main_nav.html" %}
 
-            <a href="{{ discord_link }}" class="text-gray-400 hover:text-litestar-gold">
+            <a href="{{ discord_link }}" class="fill-gray-400 hover:fill-litestar-gold">
                 <span class="sr-only">Discord</span>
                 {{ icon("discord") }}
             </a>
-            <a href="{{ project_github_url }}" class="text-gray-400 hover:text-[#EDB641]">
+            <a href="{{ project_github_url }}" class="text-gray-400 hover:text-litestar-gold">
                 <span class="sr-only">GitHub</span>
                 {{ icon("github") }}
             </a>
