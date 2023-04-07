@@ -61,7 +61,7 @@ html_context = {
         {
             "title": "Fast",
             "content": (
-                "Starlite puts great emphasis on developer experience and performance: It's one of the fastest "
+                "Litestar puts great emphasis on developer experience and performance: It's one of the fastest "
                 "ASGI frameworks and developing with it is just as fast"
             ),
             "icon": None,
