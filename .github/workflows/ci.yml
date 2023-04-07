@@ -45,7 +45,7 @@ jobs:
       - name: Install App Dependencies
         run: poetry install
       - name: Build page
-        run: poetry run make
+        run: poetry run make page
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
