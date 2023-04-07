@@ -1,6 +1,6 @@
-copyright = "2023 - Starlite API"  # noqa: A001
+copyright = "2023 - The Litestar Organization"  # noqa: A001
 
-html_theme = "starlite_sphinx_theme"
+html_theme = "litestar_sphinx_theme"
 
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
