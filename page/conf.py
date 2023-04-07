@@ -80,7 +80,7 @@ html_context = {
     "feature_cards": [
         {
             "title": "Data Validation And Parsing",
-            "content": "Leverage power of type hints to define how data should be validated, parsed and serialized",
+            "content": "Leverage the power of type hints to define how data should be validated, parsed and serialized",
             "link": "https://docs.litestar.dev/2/usage/dto.html",
         },
         {
@@ -99,7 +99,7 @@ html_context = {
             "link": "https://docs.litestar.dev/2/usage/openapi.html",
         },
         {
-            "title": "Interactive API documentation",
+            "title": "Interactive API Documentation",
             "content": (
                 "Interactively explore your APIs through Swagger, Redoc or Stoplight Elements, powered by OpenAPI"
             ),
@@ -144,15 +144,15 @@ html_context = {
         {
             "title": "WebSockets",
             "content": (
-                "Easy to used WebSockets integration, featuring high and low-level APIs and support for automatic data "
+                "Easy to use WebSockets integration, featuring high- and low-level APIs and support for automatic data "
                 "validation and serialization"
             ),
             "link": "https://docs.litestar.dev/2/usage/websockets.html",
         },
         {
-            "title": "Runtime safety through strict validation",
+            "title": "Runtime Safety Through Strict Validation",
             "content": (
-                "Litestar is strictly typed, and user supplied functions are meticulously validated to minimize "
+                "Litestar is strictly typed and user supplied functions are meticulously validated to minimize "
                 "runtime errors"
             ),
             "link": "https://docs.litestar.dev/2/usage/route-handlers.html",
@@ -161,7 +161,7 @@ html_context = {
             "title": "Authentication And Authorization",
             "content": (
                 "Session and JWT based authentication and utilities at your disposal to start building your "
-                "authentication layer"
+                "authentication layer with ease"
             ),
             "link": "https://docs.litestar.dev/2/usage/security.html",
         },
