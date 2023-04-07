@@ -46,7 +46,7 @@
 <header class="bg-white dark:bg-zinc-900 lg:sticky lg:top-0 lg:z-50">
     <nav class="mx-auto flex max-w-7xl items-center justify-between lg:px-8 h-16" aria-label="Global">
         <div class="flex lg:flex-1">
-            <a href="#" class="-m-1.5 p-1.5">
+            <a href="/" class="-m-1.5 p-1.5">
                 <span class="sr-only">Litestar</span>
                 <img src="_static/logo.svg" alt="Litestar Logo" class="h-20 w-auto">
             </a>
@@ -86,7 +86,7 @@
         <div class="fixed inset-0 z-10"></div>
         <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div class="flex items-center justify-between">
-                <a href="#" class="-m-1.5 p-1.5">
+                <a href="/" class="-m-1.5 p-1.5">
                     <span class="sr-only">Litestar</span>
                     <img class="h-16 w-auto" src="_static/logo.svg" alt="logo">
                 </a>
@@ -134,7 +134,7 @@
                         </div>
                         {# TODO: Hero section felt bare. not just the top button but this one removed as well? #}
                         <div class="mt-10 flex items-center gap-x-6">
-                            <a href="/docs"
+                            <a href="https://docs.litestar.dev/2"
                                class="
                                px-3.5 py-2.5 rounded-md
                                bg-litestar-gold text-sm font-semibold
@@ -183,62 +183,25 @@
     </div>
 {% endblock hero %}
 
-{# TODO: Would like icons here. Feels bare. #}
-{# TODO: Prefer color here, for both light and dark themes. Not sure of the 2 sections which yet. need to see light and dark together#}
-<section class="bg-white py-20 sm:py-24 lg:py-12 bg-[#EDB641] dark:bg-[#202235]">
-    <div class="mx-auto max-w-xl px-6 lg:max-w-7xl lg:px-8">
-        <dl class="grid grid-cols-1 gap-16 lg:grid lg:grid-cols-3">
-            {% for info_card in info_cards[:3] %}
-                <div>
-                    <dt>
-                        {% if info_card.icon %}
-                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#202235] text-white">
-                                <img src="_static/{{ info_card.icon }}.p" alt="icon" class="h-6 w-6">
-                            </div>
-                        {% endif %}
-                        <p class="mt-6 text-lg font-semibold leading-8 tracking-tight text-white dark:text-white uppercase">{{ info_card.title }}</p>
-                    </dt>
-                    <dd class="mt-2 text-base leading-7 text-white dark:text-white">{{ info_card.content }}</dd>
-                </div>
-            {% endfor %}
-        </dl>
-    </div>
-</section>
 
-{# TODO: Too much spacing here #}
-<section class="p-14 bg-[#202235] dark:bg-[#EDB641]">
-    <div class="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
+<section class="p-24 bg-zinc-800">
+    <div class="mx-auto max-w-7xl">
         <dl class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:grid-cols-3 lg:gap-x-10">
             {% for info_card in info_cards[:3] %}
                 <div class="max-w-sm text-center flex flex-col">
                     {% if info_card.icon %}
                         <img src="_static/{{ info_card.icon }}" class="h-20" alt="{{ info_card.title }}">
                     {% endif %}
-                    <dt class="text-base font-semibold leading-7 text-white dark:text-white text-xl p-6 uppercase">
+                    <dt class="text-litestar-gold text-xl uppercase pb-6">
                         {{ info_card.title }}
                     </dt>
-                    <dd class="mt-2 text-base leading-7 text-gray-900">{{ info_card.content }}</dd>
+                    <dd>{{ info_card.content }}</dd>
                 </div>
             {% endfor %}
         </dl>
     </div>
 </section>
 
-<section class="p-14 bg-black/75 dark:bg-zinc-800">
-    <div class="flex flex-wrap justify-center xl:grid grid-cols-3 gap-4 xl:w-max m-auto">
-        {% for info_card in info_cards[:3] %}
-            <div class="max-w-sm text-center flex flex-col">
-                {% if info_card.icon %}
-                    <img src="_static/{{ info_card.icon }}" class="h-20">
-                {% endif %}
-                <h2 class="text-litestar-gold text-xl p-6 uppercase">{{ info_card.title }}</h2>
-                <p class="mb-6">{{ info_card.content }}</p>
-            </div>
-        {% endfor %}
-    </div>
-</section>
-
-{# TODO: These seems a little in depth for a landing page. Docs can explain this level of detail. Even number (3 or 6) would be nicer #}
 {# TODO: No icons feel bare here too. #}
 <section class="bg-white w-full p-14 dark:bg-zinc-900">
     <div class="md:w-3/4 flex flex-col lg:grid grid-cols-3 lg:w-max gap-8 m-auto cursor-default">
@@ -298,7 +261,7 @@
         <div class="mx-auto max-w-7xl overflow-hidden py-20 px-6 sm:py-24 lg:px-8 text-gray-600 dark:text-gray-300">
             <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
                 <div class="pb-6">
-                    <a href="#" class="text-sm leading-6 hover:text-litestar-gold">About</a>
+                    <a href="/about/organization.html" class="text-sm leading-6 hover:text-litestar-gold">About</a>
                 </div>
 
                 <div class="pb-6">
@@ -307,21 +270,21 @@
                 </div>
 
                 <div class="pb-6">
-                    <a href="#" class="text-sm leading-6 hover:text-litestar-gold">Contribute</a>
+                    <a href="{{ github_repo_link }}" class="text-sm leading-6 hover:text-litestar-gold">Contribute</a>
                 </div>
 
                 <div class="pb-6">
-                    <a href="/docs" class="text-sm leading-6 hover:text-[#EDB641]">Docs</a>
+                    <a href="https://docs.litestar.dev/2" class="text-sm leading-6 hover:text-litestar-gold">Docs</a>
                 </div>
 
             </nav>
             <div class="mt-10 flex justify-center space-x-10">
-                <a href="{{ twitter_link }}" class="text-gray-400 hover:text-[#EDB641]">
+                <a href="{{ twitter_link }}" class="text-gray-400 hover:text-litestar-gold">
                     <span class="sr-only">Twitter</span>
                     {{ icon("twitter") }}
                 </a>
 
-                <a href="{{ discord_link }}" class="text-gray-400 hover:text-[#EDB641]">
+                <a href="{{ discord_link }}" class="fill-gray-400 hover:fill-litestar-gold">
                     <span class="sr-only">Discord</span>
                     {{ icon("discord") }}
                 </a>

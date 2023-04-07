@@ -76,30 +76,6 @@ html_context = {
             "icon": None,
             "link": None,
         },
-        {
-            "title": "Community driven",
-            "content": (
-                "Developed by a community of volunteers, and led by a team of maintainers, Starlite is a "
-                "community project at heart"
-            ),
-            "icon": None,
-            "link": "https://litestar.dev/about/organization.html",
-        },
-        {
-            "title": "Opinionated yet flexible",
-            "content": "Developed to encourage best practices, but flexible enough to stay out of your way",
-            "icon": None,
-            "link": None,
-        },
-        {
-            "title": "Scalable",
-            "content": (
-                "Bottom-up architecture makes it easy to develop modular and decoupled code, allowing "
-                "applications to scale easily, both in development and deployment"
-            ),
-            "icon": None,
-            "link": None,
-        },
     ],
     "feature_cards": [
         {
@@ -193,7 +169,7 @@ html_context = {
     "announcement": {
         "title": "Litestar 2.0.0alpha3 is available",
         "description": "Check out the latest release here",
-        "link": "https://github.com/starlite-api/starlite/releases/tag/v2.0.0alpha1",
+        "link": "https://github.com/litestar-org/litestar/releases/tag/v2.0.0alpha3",
     },
     "project_name": "Litestar",
     "project_url": "https://litestar.dev",
