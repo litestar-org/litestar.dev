@@ -10,3 +10,14 @@
 .menu-state-indicator {
     transition: transform .2s ease;
 }
+
+.theme-switch {
+    display: none;
+}
+
+html[data-theme="light"] .theme-switch[data-theme="light"] {
+  display: flex;
+}
+html[data-theme="dark"] .theme-switch[data-theme="dark"] {
+  display: flex;
+}

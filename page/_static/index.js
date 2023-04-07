@@ -44,6 +44,21 @@ function initDropdowns() {
     })
 }
 
+const initThemeSwitcher = () => {
+    const themeSwitcher = document.getElementById("theme-switcher")
+    if (!themeSwitcher) {
+        return
+    }
+
+
+    themeSwitcher.addEventListener("click", () => {
+        const modeToSet = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"
+        localStorage.theme = modeToSet
+        document.documentElement.setAttribute("data-theme", modeToSet)
+    })
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     initDropdowns()
+    initThemeSwitcher()
 })

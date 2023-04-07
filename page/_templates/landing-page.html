@@ -1,7 +1,6 @@
 {% from "macros.html" import icon %}
 
 {# TODO: #}
-{#   - Theme switcher #}
 {#   - Fix section bareness #}
 {#   - For both light and dark themes, utilize brand colors instead of grays #}
 
@@ -17,7 +16,7 @@
 {% endmacro %}
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-mode="auto">
 <head>
     <title>Litestar | Effortlessly Build Performant APIs</title>
     <meta name="description" content="Litestar | Effortlessly Build Performant APIs">
@@ -26,6 +25,22 @@
     <link href="_static/favicon.png" rel="icon">
     <link href="_static/litestar-sphinx-theme.css" rel="stylesheet">
     <link href="_static/index.css" rel="stylesheet">
+    <script>
+        if (!("theme" in localStorage)) {
+            document.documentElement.setAttribute("data-mode", "auto")
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute("data-theme", "dark")
+            }
+        } else {
+            if (localStorage.theme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark")
+                document.documentElement.setAttribute("data-mode", "dark")
+            } else {
+                document.documentElement.setAttribute("data-theme", "light")
+                document.documentElement.setAttribute("data-mode", "light")
+            }
+        }
+    </script>
 </head>
 <body>
 <header class="bg-white dark:bg-zinc-900 lg:sticky lg:top-0 lg:z-50">
@@ -59,6 +74,10 @@
                 <span class="sr-only">GitHub</span>
                 {{ icon("github") }}
             </a>
+            <button id="theme-switcher" class="text-gray-400 hover:text-litestar-gold">
+                <span class="theme-switch" data-theme="light">{{ icon("sun") }}</span>
+                <span class="theme-switch" data-theme="dark">{{ icon("moon") }}</span>
+            </button>
         </div>
     </nav>
     <!-- Mobile menu, show/hide based on menu open state. -->
