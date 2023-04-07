@@ -1,0 +1,24 @@
+<div class="mx-auto max-w-2xl">
+    <div class="max-w-lg">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-300 sm:text-6xl">{{ project_tagline
+            }}</h1>
+        <p class="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-200">
+            with {{ project_name }}</p>
+        <span class="text-gray-600 dark:text-gray-200">{{ project_description_short }}</span>
+    </div>
+    {# TODO: Hero section felt bare. not just the top button but this one removed as well? #}
+    <div class="mt-10 flex items-center gap-x-6">
+        <a href="https://docs.litestar.dev/2"
+           class="
+                               px-3.5 py-2.5 rounded-md
+                               bg-litestar-gold text-sm font-semibold
+                               text-white shadow-sm focus-visible:outline focus-visible:outline-2
+                               focus-visible:outline-offset-2 focus-visible:outline-litestar-gold
+                               hover:shadow-xl"
+        >Documentation</a>
+        <a href="{{ project_github_url }}"
+           class="text-sm font-semibold leading-6 text-gray-500 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 hidden md:block">
+            View on GitHub <span aria-hidden="true">→</span>
+        </a>
+    </div>
+</div>

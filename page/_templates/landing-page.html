@@ -4,16 +4,15 @@
 {#   - Fix section bareness #}
 {#   - For both light and dark themes, utilize brand colors instead of grays #}
 
-{% macro mobile_menu(title, item) %}
-    {% if item is string %}
-        <a href="{{ menu_item }}"
-           class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 dark:text-gray-100 hover:bg-gray-50">{{ title }}</a>
-    {% else %}
-        {% for foo, bar in item | items %}
-            {{ mobile_menu(foo, bar) }}
-        {% endfor %}
-    {% endif %}
+{% macro mobile_menu_item(link, title) %}
+    <a href="{{ link }}"
+       class="
+        -mx-3 block rounded-lg py-2 px-3
+        text-base font-semibold leading-7 text-gray-900
+        hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-900"
+    >{{ title }}</a>
 {% endmacro %}
+
 
 <!doctype html>
 <html lang="en" data-mode="auto">
@@ -52,7 +51,8 @@
             </a>
         </div>
         <div class="flex lg:hidden">
-            <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            <button type="button"
+                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-800 dark:text-gray-200"
                     onclick="document.getElementById('mobile-menu').classList.remove('hidden')">
                 <span class="sr-only">Open main menu</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -81,19 +81,20 @@
         </div>
     </nav>
     <!-- Mobile menu, show/hide based on menu open state. -->
-    <div class="lg:hidden hidden" role="dialog" aria-modal="true" id="mobile-menu">
+    <div class="lg:hidden hidden overflow-hidden" role="dialog" aria-modal="true" id="mobile-menu">
         <!-- Background backdrop, show/hide based on slide-over state. -->
         <div class="fixed inset-0 z-10"></div>
-        <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-zinc-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div class="flex items-center justify-between">
                 <a href="/" class="-m-1.5 p-1.5">
                     <span class="sr-only">Litestar</span>
                     <img class="h-16 w-auto" src="_static/logo.svg" alt="logo">
                 </a>
-                <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700"
+                <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700 dark:fill-gray-400"
                         onclick="document.getElementById('mobile-menu').classList.add('hidden')">
                     <span class="sr-only">Close menu</span>
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    <svg class="h-6 w-6 fill-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor"
                          aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
@@ -102,14 +103,12 @@
             <div class="mt-6 flow-root">
                 <div class="-my-6 divide-y divide-gray-500/10">
                     <div class="space-y-2 py-6">
-                        {% for title, menu_item in navbar_menu | items %}
+                        {% for title, menu_item in extra_navbar_items | items %}
                             {% if menu_item is string %}
-                                <a href="{{ menu_item }}"
-                                   class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ title }}</a>
+                                {{ mobile_menu_item(menu_item, title) }}
                             {% else %}
                                 {% for sub_title, sub_item in menu_item | items %}
-                                    <a href="{{ sub_item.link }}"
-                                       class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ sub_title }}</a>
+                                    {{ mobile_menu_item(sub_item, sub_title) }}
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}
@@ -121,32 +120,11 @@
 </header>
 
 {% block hero %}
-    <div>
+    <div class="hidden md:block">
         <div class="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20 dark:to-zinc-900">
             <div class="mx-auto max-w-7xl lg:pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-10 lg:px-8">
                 <div class="px-6 lg:px-0">
-                    <div class="mx-auto max-w-2xl">
-                        <div class="max-w-lg">
-                            <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-300 sm:text-6xl">{{ project_tagline }}</h1>
-                            <p class="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-200">
-                                with {{ project_name }}</p>
-                            <span class="text-gray-600 dark:text-gray-200">{{ project_description_short }}</span>
-                        </div>
-                        {# TODO: Hero section felt bare. not just the top button but this one removed as well? #}
-                        <div class="mt-10 flex items-center gap-x-6">
-                            <a href="https://docs.litestar.dev/2"
-                               class="
-                               px-3.5 py-2.5 rounded-md
-                               bg-litestar-gold text-sm font-semibold
-                               text-white shadow-sm focus-visible:outline focus-visible:outline-2
-                               focus-visible:outline-offset-2 focus-visible:outline-litestar-gold
-                               hover:shadow-xl"
-                            >Documentation</a>
-                            <a href="{{ project_github_url }}" class="text-sm font-semibold leading-6 text-gray-500 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
-                                View on GitHub <span aria-hidden="true">→</span>
-                            </a>
-                        </div>
-                    </div>
+                    {% include "hero_content.html" %}
                 </div>
                 <div class="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen">
                     <div class="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-white dark:bg-zinc-900 shadow-xl shadow-indigo-600/10 light:ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36"
@@ -156,7 +134,7 @@
                             <div class="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36"
                                  aria-hidden="true"></div>
                             {% if code_sample %}
-                                <div class="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
+                                <div class="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0 hidden md:block">
                                     <div class="mx-auto max-w-2xl md:mx-0 md:max-w-none">
                                         <div class="w-screen overflow-hidden rounded-tl-xl bg-[#202235]">
                                             <div class="flex bg-[#202235]/40 ring-1 ring-white/5">
@@ -181,10 +159,16 @@
             </div>
         </div>
     </div>
+
+    <div class="md:hidden">
+        <div class="p-6 lg:px-0 bg-white flex items-center">
+            {% include "hero_content.html" %}
+        </div>
+    </div>
 {% endblock hero %}
 
 
-<section class="p-24 bg-zinc-800">
+<section class="py-10 md:p-10 xl:p-24 bg-zinc-800 flex items-center">
     <div class="mx-auto max-w-7xl">
         <dl class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:grid-cols-3 lg:gap-x-10">
             {% for info_card in info_cards[:3] %}
@@ -203,7 +187,7 @@
 </section>
 
 {# TODO: No icons feel bare here too. #}
-<section class="bg-white w-full p-14 dark:bg-zinc-900">
+<section class="bg-white w-full px-2 py-14 lg:px-14 dark:bg-zinc-900">
     <div class="md:w-3/4 flex flex-col lg:grid grid-cols-3 lg:w-max gap-8 m-auto cursor-default">
         {% for feature_card in feature_cards %}
             <article
