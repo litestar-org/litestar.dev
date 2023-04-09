@@ -49,13 +49,14 @@ The rest of this document will assume this environment is active wherever comman
    use [Conventional Commits](https://www.conventionalcommits.org/) to structure your commit messages.
    For example,
 
-    - feat: allow provided a config object to extend other configs.
-    - fix: handle strings in config extending.
-    - docs: correct spelling of CHANGELOG.
-    - style: convert tabs to spaces.
+   - feat: allow provided a config object to extend other configs.
+   - fix: handle strings in config extending.
+   - docs: correct spelling of CHANGELOG.
+   - style: convert tabs to spaces.
 
-9. Wait for a maintainer to review your changes. If any changes are requested, make them and push them to your fork.
-   The maintainer will automatically be notified of the changes.
+9. Wait for the CI to run and for a maintainer to review your changes. If any changes are requested, make them and
+   commit them to the same branch. The CI will automatically run again, and the maintainer will review your changes
+   again. Repeat this process until your changes are approved.
 10. Once your changes have been approved, a maintainer will merge them into the main branch.
 11. Congratulations! You've successfully contributed to Litestar!
 12. (Optional) Add yourself to the list of contributors in the README.md file. This is not mandatory, but it is greatly
