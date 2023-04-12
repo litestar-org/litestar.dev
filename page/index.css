@@ -2,17 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
-[aria-expanded="true"] .menu-state-indicator  {
-    transform: rotate(-180deg);
+[aria-expanded="true"] .menu-state-indicator {
+  transform: rotate(-180deg);
 }
 
 .menu-state-indicator {
-    transition: transform .2s ease;
+  transition: transform 0.2s ease;
 }
 
 .theme-switch {
-    display: none;
+  display: none;
 }
 
 html[data-theme="light"] .theme-switch[data-theme="light"] {
