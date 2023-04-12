@@ -10,7 +10,7 @@ the [Litestar Discord server](https://discord.gg/X3FJqy8d2j). We're happy to hel
    install poetry.
 2. Install [Node.js](https://nodejs.org/en) - `https://nodejs.org/en`.
 3. Install [Pre-commit](https://pre-commit.com/) - Run `pip install pre-commit` to install pre-commit hooks.
-4. Run `poetry install` and run `pip install sphinx-autobuild`.
+4. Run `make install` to install Python and Node dependencies.
 5. Activate the virtual environment by running `poetry shell`.
 6. Run `make serve` to start the development server.
 
