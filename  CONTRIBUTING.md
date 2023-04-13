@@ -32,7 +32,7 @@ The rest of this document will assume this environment is active wherever comman
 
 ## Workflow
 
-1. Fork the [Litestar repository](https://github.com/litestar-org/litestar.dev) on GitHub by visiting the
+1. Fork the [this repository](https://github.com/litestar-org/litestar.dev) on GitHub by visiting the
    URL [https://github.com/litestar-org/litestar.dev/fork](https://github.com/litestar-org/litestar.dev/fork)
 2. Clone your fork of the repository to your local machine using Git.
 3. Follow the instructions described in the [above section](#setting-up-the-environment) to set up your environment.
