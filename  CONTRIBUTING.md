@@ -70,6 +70,6 @@ The rest of this document will assume this environment is active wherever comman
   and [Sphinx quickstart](https://www.sphinx-doc.org/en/master/lib/usage/quickstart.html) are recommended reads.
 - For css styling, we use [tailwindcss](https://tailwindcss.com/).
 - To Run the documentation locally, run the command `make serve`.
-- To build the documentation, run the command `make build`.
+- To build the documentation, run the command `make page`.
 - To build the documentation and serve it locally, run the command `make serve`.
 -
