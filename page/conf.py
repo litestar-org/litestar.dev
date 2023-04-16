@@ -21,12 +21,12 @@ html_theme_options = {
         "Community": {
             "Contributing": {
                 "description": "Learn how to contribute to the Litestar project",
-                "link": "/contributing",
+                "link": "https://docs.litestar.dev/2/contribution-guide.html",
                 "icon": "contributing",
             },
             "Code of Conduct": {
                 "description": "Review the etiquette for interacting with the Litestar community",
-                "link": "/code-of-conduct",
+                "link": "https://github.com/litestar-org/.github/blob/main/CODE_OF_CONDUCT.md",
                 "icon": "coc",
             },
         },
