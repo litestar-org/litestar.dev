@@ -167,9 +167,9 @@ html_context = {
         },
     ],
     "announcement": {
-        "title": "Litestar 2.0.0alpha3 is available",
+        "title": "Litestar 2.0.0alpha4 is available",
         "description": "Check out the latest release here",
-        "link": "https://github.com/litestar-org/litestar/releases/tag/v2.0.0alpha3",
+        "link": "https://github.com/litestar-org/litestar/releases/tag/v2.0.0alpha4",
     },
     "project_name": "Litestar",
     "project_url": "https://litestar.dev",
