@@ -37,7 +37,7 @@ html_theme_options = {
                 "icon": "org",
             },
             "Releases": {
-                "description": "View the release history for Litestar",
+                "description": "Details about the Litestar release process",
                 "link": "about/litestar-releases",
                 "icon": "releases",
             },
