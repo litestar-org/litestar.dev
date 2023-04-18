@@ -1,10 +1,10 @@
-Starlite releases
+Litestar releases
 =================
 
 Version numbering
 -----------------
 
-Starlite follows the `Semantic Versioning <https://semver.org/>`_ standard, using the
+Litestar follows the `Semantic Versioning <https://semver.org/>`_ standard, using the
 ``<major>.<minor>.<patch>`` schema, increasing the version numbers as follows:
 
 Major
@@ -46,20 +46,20 @@ The release types are:
 Release schedule
 ----------------
 
-Starlite follows a non-strict release schedule, targeting about 6 months between major,
-and 4 weeks between minor versions. For major releases, this is to be interpreted as a
-lower bound, meaning it may take longer for a particular major version to be released,
-but it won't be less than 6 months after the last major release.
+Litestar follows a non-strict release schedule, targeting 4 weeks between minor versions
+and about 1 year between major versions. For major versions, this is to be interpreted
+as a lower bound.
 
 
 About major version
 --------------------
 
-Starlite's major releases are *generally backwards compatible* and usually won't include
-major breaking changes. They can be seen as maintenance releases that offer the
-opportunity to make some backwards incompatible changes.
+Starting with version 2.0, Litestar's major releases are
+*generally backwards compatible* and usually won't include major breaking changes. They
+can be seen as maintenance releases that offer the opportunity to make some backwards
+incompatible changes.
 
-Due to the frequency of major releases, Starlite evolves gradually over time and there
+Due to the frequency of major releases, Litestar evolves gradually over time and there
 won't be sweeping changes that require a complete rewrite of an application or major
 migration efforts when upgrading to a new major version.
 
@@ -85,7 +85,7 @@ releases: The current version and the two major versions preceding it.
 Deprecation policy
 ------------------
 
-If a feature of Starlite is to be removed, a deprecation warning will be added in a
+If a feature of Litestar is to be removed, a deprecation warning will be added in a
 **minor** release. Deprecated features will still be supported throughout every release
 of the respective *major* release. In practice this means that if a deprecation warning
 is added in ``1.x``, the feature will continue to work for every ``1.`` release, and be
