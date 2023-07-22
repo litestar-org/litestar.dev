@@ -126,7 +126,7 @@ html_context = {
                 "First-class SQLAlchemy support let's you use your models for validation and serialization directly,"
                 " reducing code duplication"
             ),
-            "link": "https://docs.litestar.dev/2/usage/plugins/sqlalchemy.html",
+            "link": "https://docs.litestar.dev/2/usage/contrib/sqlalchemy/index.html",
         },
         {
             "title": "Dependency Injection",
