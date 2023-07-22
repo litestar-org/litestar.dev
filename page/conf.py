@@ -81,14 +81,15 @@ html_context = {
         {
             "title": "Data Validation And Parsing",
             "content": "Leverage the power of type hints to define how data should be validated, parsed and serialized",
-            "link": "https://docs.litestar.dev/2/usage/dto.html",
+            "link": "https://docs.litestar.dev/2/usage/dto/index.html",
         },
         {
             "title": "Open Ecosystem",
             "content": (
                 "Define schemas and models for validation with standard types such as dataclasses, libraries like "
-                "Pydantic, or integrate your own"
+                "Pydantic, msgspec, attr, or integrate your own"
             ),
+            "link": "https://docs.litestar.dev/2/usage/the-litestar-app.html",
         },
         {
             "title": "OpenAPI",
@@ -103,6 +104,7 @@ html_context = {
             "content": (
                 "Interactively explore your APIs through Swagger, Redoc or Stoplight Elements, powered by OpenAPI"
             ),
+            "link": "https://docs.litestar.dev/2/usage/openapi.html",
         },
         {
             "title": "Middlewares",
@@ -163,13 +165,13 @@ html_context = {
                 "Session and JWT based authentication and utilities at your disposal to start building your "
                 "authentication layer with ease"
             ),
-            "link": "https://docs.litestar.dev/2/usage/security.html",
+            "link": "https://docs.litestar.dev/2/usage/security/index.html",
         },
     ],
     "announcement": {
-        "title": "Litestar 2.0.0beta1 is available",
+        "title": "Litestar 2.0.0beta4 is available",
         "description": "Check out the latest release here",
-        "link": "https://github.com/litestar-org/litestar/releases/tag/v2.0.0beta1",
+        "link": "https://github.com/litestar-org/litestar/releases/tag/v2.0.0beta4",
     },
     "project_name": "Litestar",
     "project_url": "https://litestar.dev",
