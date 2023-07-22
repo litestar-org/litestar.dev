@@ -1,6 +1,7 @@
 .PHONY: page
 
 install:
+	pre-commit install
 	poetry install
 	npm install
 
