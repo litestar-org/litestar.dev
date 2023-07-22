@@ -232,7 +232,7 @@ macro mobile_menu_item(link, title) %}
     </div>
     {% endblock hero %}
 
-    <section class="py-10 px-4 md:p-10 xl:p-24 bg-zinc-800 flex items-center">
+    <section class="py-10 px-4 md:p-10 xl:p-24 bg-litestar-gold dark:bg-zinc-800 flex items-center">
       <div class="mx-auto max-w-7xl">
         <dl
           class="space-y-10 sm:grid sm:grid-cols-1 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 md:grid-cols-3 lg:gap-x-10"
@@ -246,10 +246,10 @@ macro mobile_menu_item(link, title) %}
               alt="{{ info_card.title }}"
             />
             {% endif %}
-            <dt class="text-litestar-gold text-xl uppercase pb-4">
+            <dt class="text-neutral-900 dark:text-litestar-gold text-xl uppercase pb-4">
               {{ info_card.title }}
             </dt>
-            <dd>{{ info_card.content }}</dd>
+            <dd class="text-neutral-950 dark:text-litestar-gray">{{ info_card.content }}</dd>
           </div>
           {% endfor %}
         </dl>
@@ -265,18 +265,24 @@ macro mobile_menu_item(link, title) %}
         <article
           class="lg:max-w-xs r flex flex-col p-2 group text-center text-slate-800 dark:text-gray-200 bg-white dark:bg-zinc-800 border rounded-md border-slate-200 dark:border-zinc-600 hover:shadow-lg dark:shadow-zinc-950"
         >
+          <a
+            href="{{ feature_card.link }}"
+            target="_blank"
+            >
           <h2 class="text-lg font-semibold group-hover:text-litestar-gold">
             {{ feature_card.title }}
           </h2>
           <p>{{ feature_card.content }}</p>
-          <a
+            <a
             href="{{ feature_card.link }}"
             target="_blank"
             class="rounded-md px-4 py-1 text-sm font-semibold leading-6 mt-auto mx-auto hover:text-litestar-gold"
-            >Learn more
-            <span class="sm:inline">→</span>
+            >
+          Click to Learn more <span class="sm:inline">→</span>
+          </a>
           </a>
         </article>
+
         {% endfor %}
       </div>
     </section>

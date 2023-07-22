@@ -8,7 +8,11 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                "litestar-gold": "#EDB641"
+                "litestar-gold": "#EDB641",
+                "litestar-blue": "#202235",
+                "litestar-yellow": "#FFD480",
+                "litestar-gray": "#DCDFE4",
+                "litestar-white": "#ffffff",
             }
         }
     }
