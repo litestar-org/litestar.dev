@@ -1,8 +1,8 @@
 {% from "macros.html" import icon %} {# TODO: #} {# - Fix section bareness #} {#
-- For both light and dark themes, utilize brand colors instead of grays #} {%
-macro mobile_menu_item(link, title) %}
+- For both light and dark themes, utilize brand colors instead of grays #}
+{% macro mobile_menu_item(item, title) %}
 <a
-  href="{{ link }}"
+  href="{{ item.link }}"
   class="-mx-3 block rounded-lg py-2 text-lg font-semibold leading-7 text-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-900"
   >{{ title }}</a
 >
@@ -152,11 +152,15 @@ macro mobile_menu_item(link, title) %}
               <div
                 class="space-y-2 py-6 flex flex-col justify-center items-center"
               >
-                {% for title, menu_item in extra_navbar_items | items %} {% if
-                menu_item is string %} {{ mobile_menu_item(menu_item, title) }}
-                {% else %} {% for sub_title, sub_item in menu_item | items %} {{
-                mobile_menu_item(sub_item, sub_title) }} {% endfor %} {% endif
-                %} {% endfor %}
+                {% for title, menu_item in extra_navbar_items | items %}
+                    {% if menu_item is string %}
+                        {{ mobile_menu_item(menu_item, title) }}
+                    {% else %}
+                        {% for sub_title, sub_item in menu_item | items %}
+                            {{mobile_menu_item(sub_item, sub_title) }}
+                        {% endfor %}
+                    {% endif%}
+                {% endfor %}
               </div>
             </div>
           </div>
