@@ -89,7 +89,7 @@ html_context = {
                 "Define schemas and models for validation with standard types such as dataclasses, libraries like "
                 "Pydantic, msgspec, attr, or integrate your own"
             ),
-            "link": "https://docs.litestar.dev/2/usage/the-litestar-app.html",
+            "link": "https://docs.litestar.dev/2/usage/applications.html",
         },
         {
             "title": "OpenAPI",
@@ -128,7 +128,7 @@ html_context = {
                 "First-class SQLAlchemy support let's you use your models for validation and serialization directly,"
                 " reducing code duplication"
             ),
-            "link": "https://docs.litestar.dev/2/usage/contrib/sqlalchemy/index.html",
+            "link": "https://docs.litestar.dev/2/usage/databases/sqlalchemy/index.html",
         },
         {
             "title": "Dependency Injection",
@@ -157,7 +157,7 @@ html_context = {
                 "Litestar is strictly typed and user supplied functions are meticulously validated to minimize "
                 "runtime errors"
             ),
-            "link": "https://docs.litestar.dev/2/usage/route-handlers.html",
+            "link": "https://docs.litestar.dev/2/usage/routing/handlers.html",
         },
         {
             "title": "Authentication And Authorization",
