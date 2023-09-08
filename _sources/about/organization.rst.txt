@@ -33,9 +33,6 @@ Maintainers
 Current maintainers of the project are:
 
 - Na'aman Hirschfeld (`@goldziher <https://github.com/Goldziher>`_)
-- Peter Schutt (`@peterschutt <https://github.com/peterschutt>`_)
-- Cody Fincher (`@cofin <https://github.com/cofin>`_)
-- Janek Nouvertné (`@provinzkraut <https://github.com/provinzkraut>`_)
 - Jacob Coffee (`@jacobcoffee <https://github.com/JacobCoffee>`_)
 
 New maintainers may be nominated by any member of the Litestar organization and have to
