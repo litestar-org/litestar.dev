@@ -1,75 +1,49 @@
-[tool.poetry]
-name = "litestar.dev"
-version = "0.1.0"
-description = "Source code for litestar.dev"
+[project]
 authors = [
-    "Janek Nouvertné <provinzkraut@posteo.de>",
-    "Jacob Coffee <jacob@z7x.org>",
+    {name = "Janek Nouvertné", email = "provinzkraut@posteo.de"},
+    {name = "Jacob Coffee", email = "jacob@z7x.org"},
 ]
-license = "MIT"
+name = "litestar.dev"
+description = "Source code for litestar.dev"
 readme = "README.md"
+version = "0.1.0"
+license = {text = "MIT"}
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "pre-commit<4.0.0,>=3.2.0",
+    "litestar-sphinx-theme @ git+https://github.com/litestar-org/litestar-sphinx-theme.git",
+    "sphinx<8.0.0,>=7.0.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-pre-commit = "^3.2.0"
-litestar-sphinx-theme = {git = "https://github.com/starlite-api/starlite-sphinx-theme.git"}
-sphinx = "<6"
+[tool.pdm.dev-dependencies]
+docs = [
+    "sphinx-autobuild>=2021.3.14",
+]
+lint = [
+    "ruff>=0.0.292",
+    "codespell>=2.2.6",
+    "pyright>=1.1.329",
+]
 
+[tool.hatch.metadata]
+allow-direct-references = true
 
-[tool.poetry.group.dev.dependencies]
-sphinx-autobuild = "^2021.3.14"
+[tool.hatch.build.targets.sdist]
+include = [
+    'README.md',
+    '/Makefile',
+    '/page',
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-
-[tool.black]
-line-length = 120
-include = '\.pyi?$'
-
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
 [tool.pyright]
 include = ["page"]
 
-
 [tool.ruff]
-select = [
-    "A", # flake8-builtins
-    "B", # flake8-bugbear
-    "BLE", # flake8-blind-except
-    "C4", # flake8-comprehensions
-    "C90", # mccabe
-    "D", # pydocstyle
-    "DJ", # flake8-django
-    "DTZ", # flake8-datetimez
-    "E", # pycodestyle errors
-    "ERA", # eradicate
-    "EXE", # flake8-executable
-    "F", # pyflakes
-    "G", # flake8-logging-format
-    "I", # isort
-    "ICN", # flake8-import-conventions
-    "ISC", # flake8-implicit-str-concat
-    "N", # pep8-naming
-    "PIE", # flake8-pie
-    "PLC", # pylint - convention
-    "PLE", # pylint - error
-    "PLW", # pylint - warning
-    "PTH", # flake8-use-pathlib
-    "Q", # flake8-quotes
-    "RET", # flake8-return
-    "RUF", # Ruff-specific rules
-    "S", # flake8-bandit
-    "SIM", # flake8-simplify
-    "T10", # flake8-debugger
-    "T20", # flake8-print
-    "TCH", # flake8-type-checking
-    "TID", # flake8-tidy-imports
-    "UP", # pyupgrade
-    "W", # pycodestyle - warning
-    "YTT", # flake8-2020
-]
+select = ["ALL"]
 ignore = [
     "E501", # pycodestyle line too long, handled by black
     "D100", # pydocstyle - missing docstring in public module
