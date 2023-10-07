@@ -6,25 +6,26 @@ the [Litestar Discord server](https://discord.gg/X3FJqy8d2j). We're happy to hel
 
 ## Setting up the environment
 
-1. Install [Poetry](https://python-poetry.org/) - Run `curl -sSL https://install.python-poetry.org | python3 - ` to
-   install poetry.
-2. Install [Node.js](https://nodejs.org/en) - `https://nodejs.org/en`.
-3. Install [Pre-commit](https://pre-commit.com/) - Run `pre-commit install` to install pre-commit hooks.
-4. Run `make install` to install Python and Node dependencies.
-5. Activate the virtual environment by running `poetry shell`.
-6. Run `make serve` to start the development server.
+1. Install `PDM <https://pdm.fming.dev/latest/>`_
+2. Run ``pdm install`` to create a `virtual environment <https://docs.python.org/3/tutorial/venv.html>`_ and install
+   the dependencies
+3. Install [Node.js](https://nodejs.org/en) - `https://nodejs.org/en`.
+4. Install [Pre-commit](https://pre-commit.com/) - Run `pre-commit install` to install pre-commit hooks.
+5. Run `make install` to install Python and Node dependencies.
+6. Activate the virtual environment. `Read more here <https://pdm.fming.dev/latest/usage/venv/#activate-a-virtualenv>`_.
+7. Run `make serve` to start the development server.
 
 ## Tips
 
-Many modern IDEs like PyCharm or VS Code will enable the poetry-managed virtualenv that is created in step 2 for you
+Many modern IDEs like PyCharm or VS Code will enable the pdm-managed virtualenv that is created in step 2 for you
 automatically.
 If your IDE / editor doesn't offer this functionality, then you will need to manually activate the virtualenv yourself.
 Otherwise, you may encounter errors or unexpected behaviour when trying to run the commands referenced within this
 document.
 
-The easiest way to activate this virtualenv manually is by running `poetry shell`, as described at
-`Using your virtual environment <https://python-poetry.org/docs/basic-usage/#using-your-virtual-environment>` in
-poetry's documentation.
+The easiest way to activate this virtualenv manually as described at
+`Working with virtual environments <https://pdm.fming.dev/latest/usage/venv/#activate-a-virtualenv>` in
+PDM's documentation.
 
 The rest of this document will assume this environment is active wherever commands are referenced.
 
