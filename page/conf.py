@@ -169,9 +169,9 @@ html_context = {
         },
     ],
     "announcement": {
-        "title": "Litestar 2.4 has just been released!",
+        "title": "Litestar 2.6 has just been released!",
         "description": "Check it out here",
-        "link": "https://docs.litestar.dev/2/release-notes/changelog.html#2.4.0",
+        "link": "https://docs.litestar.dev/2/release-notes/changelog.html#2.6.0",
     },
     "project_name": "Litestar",
     "project_url": "https://litestar.dev",
