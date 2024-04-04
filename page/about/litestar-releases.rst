@@ -7,9 +7,14 @@ Version Numbering
 
 Litestar follows the `Semantic Versioning standard <https://semver.org/>`_, using the ``<major>.<minor>.<patch>`` schema:
 
-- **Major**: Backwards incompatible changes have been made
-- **Minor**: Functionality was added in a backwards compatible manner
-- **Patch**: Bugfixes were applied in a backwards compatible manner
+**Major**
+    Backwards incompatible changes have been made
+
+**Minor**
+    Functionality was added in a backwards compatible manner
+
+**Patch**
+    Bugfixes were applied in a backwards compatible manner
 
 Pre-release Versions
 ++++++++++++++++++++
@@ -17,10 +22,15 @@ Pre-release Versions
 Before a new major release, we will make ``alpha``, ``beta``, and release candidate (``rc``) releases, numbered as
 ``<major>.<minor>.<patch><release_type><number>``. For example, ``2.0.0alpha1``, ``2.0.0beta1``, ``2.0.0rc1``.
 
-- **alpha**: Early developer preview. Features may not be complete and breaking changes can occur.
-- **beta**: More stable preview release. Feature complete, no major breaking changes expected.
-- **rc**: Release candidate. Feature freeze, only bugfixes until final release.
-  Suitable for testing migration to the upcoming major release.
+- ``alpha``
+    Early developer preview. Features may not be complete and breaking changes can occur.
+
+- ``beta``
+    More stable preview release. Feature complete, no major breaking changes expected.
+
+- ``rc``
+    Release candidate. Feature freeze, only bugfixes until final release.
+    Suitable for testing migration to the upcoming major release.
 
 Long-term Support Releases (LTS)
 --------------------------------
@@ -52,7 +62,7 @@ At any time, the Litestar team will actively support:
 
 - The current major release series
 - The previous major release series
-- Any other designated LTS releases
+- Any other designated LTS releases (Special cases)
 
 For example, if the current release is ``2.0``, we will actively support ``2.x`` and ``1.x``.
 When ``3.0`` is released, we will drop support for ``1.x``.
