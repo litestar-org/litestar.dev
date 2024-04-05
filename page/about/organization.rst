@@ -35,6 +35,9 @@ Current maintainers of the project are:
 - Cody Fincher (`@cofin <https://github.com/cofin>`_)
 - Jacob Coffee (`@jacobcoffee <https://github.com/JacobCoffee>`_)
 - Janek Nouvertné (`@provinzkraut <https://github.com/provinzkraut>`_)
+- Peter Schutt (`@peterschutt <https://github.com/peterschutt>`_)
+- Visakh Unnikrishnan (`@guacs <https://github.com/guacs>`_)
+- Alc-Alc  (`@Alc-Alc <https://github.com/Alc-Alc>`_)
 
 New maintainers may be nominated by any member of the Litestar organization and have to
 be approved unanimously by the current maintainers.
