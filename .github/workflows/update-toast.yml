@@ -33,7 +33,7 @@ jobs:
     - name: Update workflow file
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
       run: |
-        sed -i "s/CURRENT_VERSION: $CURRENT_VERSION/CURRENT_VERSION: ${{ steps.latest_release.outputs.version }}/g" .github/workflows/check-litestar-release.yml
+        sed -i "s/CURRENT_VERSION: $CURRENT_VERSION/CURRENT_VERSION: ${{ steps.latest_release.outputs.version }}/g" .github/workflows/update-toast.yml
 
     - name: Create pull request
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
