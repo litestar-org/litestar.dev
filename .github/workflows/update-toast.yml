@@ -1,0 +1,43 @@
+name: Check Litestar Release
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run every night at midnight
+
+jobs:
+  check_release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Get latest Litestar release
+      id: latest_release
+      run: |
+        latest_release=$(curl -s https://api.github.com/repos/litestar-org/litestar/releases/latest | jq -r '.tag_name')
+        echo "::set-output name=version::$latest_release"
+
+    - name: Update conf.py
+      if: steps.latest_release.outputs.version != env.CURRENT_VERSION
+      env:
+        CURRENT_VERSION: v2.8.2
+      run: |
+        sed -i "s/Litestar $CURRENT_VERSION/Litestar ${{ steps.latest_release.outputs.version }}/g" conf.py
+        sed -i "s|/release-notes/changelog.html#$CURRENT_VERSION|/release-notes/changelog.html#${{ steps.latest_release.outputs.version }}|g" conf.py
+
+    - name: Update workflow file
+      if: steps.latest_release.outputs.version != env.CURRENT_VERSION
+      run: |
+        sed -i "s/CURRENT_VERSION: $CURRENT_VERSION/CURRENT_VERSION: ${{ steps.latest_release.outputs.version }}/g" .github/workflows/check-litestar-release.yml
+
+    - name: Create pull request
+      if: steps.latest_release.outputs.version != env.CURRENT_VERSION
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Update Litestar version to ${{ steps.latest_release.outputs.version }}
+        title: Update Litestar version to ${{ steps.latest_release.outputs.version }}
+        body: |
+          A new Litestar release (${{ steps.latest_release.outputs.version }}) has been detected.
+          This PR updates the version in the `conf.py` file and the `CURRENT_VERSION` in the workflow file.
+        branch: update-litestar-version
