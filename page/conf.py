@@ -19,6 +19,11 @@ html_theme_options = {
     "extra_navbar_items": {
         "Docs": "https://docs.litestar.dev",
         "Community": {
+            "Blog": {
+                "description": "Read the latest updates from the Litestar team",
+                "link": "https://blog.litestar.dev",
+                "icon": "blog",
+            },
             "Contributing": {
                 "description": "Learn how to contribute to the Litestar project",
                 "link": "https://docs.litestar.dev/2/contribution-guide.html",
@@ -42,7 +47,26 @@ html_theme_options = {
                 "icon": "releases",
             },
         },
-        "Help": "https://github.com/orgs/litestar-org/discussions",
+        "Help": {
+            {
+                "title": "Discord Help Forum",
+                "summary": "Dedicated Discord help forum",
+                "url": "https://discord.gg/litestar-919193495116337154",
+                "icon": "coc",
+            },
+            {
+                "title": "GitHub Discussions",
+                "summary": "GitHub Discussions",
+                "url": "https://github.com/orgs/litestar-org/discussions",
+                "icon": "coc",
+            },
+            {
+                "title": "Stack Overflow",
+                "summary": "We monitor the <code><b>litestar</b></code> tag on Stack Overflow",
+                "url": "https://stackoverflow.com/questions/tagged/litestar",
+                "icon": "coc",
+            },
+        },
     },
 }
 
