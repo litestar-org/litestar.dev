@@ -90,3 +90,8 @@ custom support agreement. Please contact us via our official support channels:
 
 * `Discord <https://discord.gg/litestar-919193495116337154>`_
 * `GitHub Discussions <https://github.com/orgs/litestar-org/discussions>`_
+    
+.. note:: While we are committed to delivering the best possible experience for all users, 
+    including those in larger-scale or slower-moving environments, 
+    please note that this does not constitute a guarantee of SLAs or paid support.
+    
