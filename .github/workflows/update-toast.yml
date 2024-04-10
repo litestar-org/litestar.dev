@@ -10,6 +10,9 @@ on:
 
 jobs:
   check_release:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +40,7 @@ jobs:
 
     - name: Create pull request
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
-      uses: peter-evans/create-pull-request@v3
+      uses: peter-evans/create-pull-request@v6
       with:
         commit-message: Update Litestar version to ${{ steps.latest_release.outputs.version }}
         title: Update Litestar version to ${{ steps.latest_release.outputs.version }}
