@@ -42,6 +42,7 @@ jobs:
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
       uses: peter-evans/create-pull-request@v6
       with:
+        token: ${{ secrets.WORKFLOW_TOKEN }}
         commit-message: Update Litestar version to ${{ steps.latest_release.outputs.version }}
         title: Update Litestar version to ${{ steps.latest_release.outputs.version }}
         body: |
