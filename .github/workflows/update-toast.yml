@@ -28,7 +28,7 @@ jobs:
     - name: Update docs/conf.py
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
       env:
-        CURRENT_VERSION: 2.8.2
+        CURRENT_VERSION: 2.6
       run: |
         sed -i "s/\"title\": \"Litestar [0-9.]* has just been released!\"/\"title\": \"Litestar ${{ steps.latest_release.outputs.version }} has just been released!\"/" docs/conf.py
         sed -i "s|https://docs.litestar.dev/[0-9.]*/release-notes/changelog.html#[0-9.]*|https://docs.litestar.dev/latest/release-notes/changelog.html#${{ steps.latest_release.outputs.version }}|" docs/conf.py
@@ -36,7 +36,7 @@ jobs:
     - name: Update workflow file
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
       run: |
-        sed -i "s/CURRENT_VERSION: ${CURRENT_VERSION}/CURRENT_VERSION: \${{ steps.latest_release.outputs.version }}/g" .github/workflows/update-toast.yml
+        sed -i "/^CURRENT_VERSION: /s/: .*/: ${{ steps.latest_release.outputs.version }}/" .github/workflows/update-toast.yml
 
     - name: Create pull request
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
