@@ -1,92 +1,96 @@
-Litestar releases
+=================
+Litestar Releases
 =================
 
-Version numbering
+Version Numbering
 -----------------
 
-Litestar follows the `Semantic Versioning <https://semver.org/>`_ standard, using the
-``<major>.<minor>.<patch>`` schema, increasing the version numbers as follows:
+Litestar follows the `Semantic Versioning standard <https://semver.org/>`_, using the ``<major>.<minor>.<patch>`` schema:
 
-Major
+**Major**
     Backwards incompatible changes have been made
 
-Minor
-    Functionality was added, in a backwards compatible manner
+**Minor**
+    Functionality was added in a backwards compatible manner
 
-Patch
-    Bugfixes were applied, in a backwards compatible manner
+**Patch**
+    Bugfixes were applied in a backwards compatible manner
 
-
-Pre-release versions
+Pre-release Versions
 ++++++++++++++++++++
 
-A major release may be preceded by a number of pre-releases. The pre-release identifier
-will be appended to the major version number and follow the schema ``<release type><release number>``. The resulting
-version number will have the schema ``<major>.<minor>.<patch><release type><release number>``, for example
-``2.0.0alpha1``.
+Before a new major release, we will make ``alpha``, ``beta``, and release candidate (``rc``) releases, numbered as
+``<major>.<minor>.<patch><release_type><number>``. For example, ``2.0.0alpha1``, ``2.0.0beta1``, ``2.0.0rc1``.
 
-The release types are:
+- ``alpha``
+    Early developer preview. Features may not be complete and breaking changes can occur.
 
-``alpha``
-    A developmental release, equivalent to the current status of the development branch. At this point, new
-    features can still be added and breaking changes introduced. These releases should be considered very unstable and
-    are intended for early developer feedback.
+- ``beta``
+    More stable preview release. Feature complete, no major breaking changes expected.
 
-``beta``
-    A more stable development release. New features might be added at this point, but no major breaking changes are to
-    be expected
+- ``rc``
+    Release candidate. Feature freeze, only bugfixes until final release.
+    Suitable for testing migration to the upcoming major release.
 
-``rc``
-    "Release candidate". This is the first release after the feature freeze before a new major release. No new features
-    and breaking changes will be introduced at this point, only bugfixes will be added at this point. This release is
-    suitable for testing migration to the upcoming major release. Each major version will be preceded by *at least* one
-    release candidate.
+Long-term Support Releases (LTS)
+--------------------------------
 
+Major releases are designated as LTS releases for the life of that major release series.
+These releases will receive bugfixes for a guaranteed period of time as defined in
+`Supported Versions <#supported-versions>`_.
 
-Release schedule
-----------------
+Release Cadence
+---------------
 
-Litestar follows a non-strict release schedule, targeting 4 weeks between minor versions
-and about 1 year between major versions. For major versions, this is to be interpreted
-as a lower bound.
+Litestar aims to release a new major version every 12-18 months, with minor releases every 4-6 weeks.
 
+.. note:: This schedule is flexible and may change based on community feedback and development progress.
 
-About major version
---------------------
-
-Starting with version 2.0, Litestar's major releases are
-*generally backwards compatible* and usually won't include major breaking changes. They
-can be seen as maintenance releases that offer the opportunity to make some backwards
-incompatible changes.
-
-Due to the frequency of major releases, Litestar evolves gradually over time and there
-won't be sweeping changes that require a complete rewrite of an application or major
-migration efforts when upgrading to a new major version.
-
-
-Supported versions
+Deprecation Policy
 ------------------
 
-Current version
-    The current version is the last release of the most recent major version. This
-    version is under active development and will receive bugfixes as well as feature
-    updates in minor releases (see `Version numbering`_)
+When a feature is going to be removed, a deprecation warning will be added in a **minor** release.
+The feature will continue to work for all releases in that major series, and will be removed in the next major release.
 
-Maintenance versions
-    When a new major version is released, the last *minor* version before it enters
-    maintenance mode. It will receive bugfixes and other critical patches during the
-    next two release cycles
+For example, if a deprecation warning is added in ``1.1``, the feature will work throughout all ``1.x`` releases,
+and be removed in ``2.0``.
 
-
-In practice this means that, at any given time, there may be up to 3 currently supported
-releases: The current version and the two major versions preceding it.
-
-
-Deprecation policy
+Supported Versions
 ------------------
 
-If a feature of Litestar is to be removed, a deprecation warning will be added in a
-**minor** release. Deprecated features will still be supported throughout every release
-of the respective *major* release. In practice this means that if a deprecation warning
-is added in ``1.x``, the feature will continue to work for every ``1.`` release, and be
-removed in the ``2.0`` release.
+At any time, the Litestar team will actively support:
+
+- The current major release series
+- The previous major release series
+- Any other designated LTS releases (Special cases)
+
+For example, if the current release is ``2.0``, we will actively support ``2.x`` and ``1.x``.
+When ``3.0`` is released, we will drop support for ``1.x``.
+
+Bugfixes will be applied to the current major release, and selectively backported to older
+supported versions based on severity and feasibility.
+
+Release Process
+---------------
+
+Each major release cycle consists of a few phases:
+
+#. **Planning**: Define roadmap, spec out major features. Work should begin on implementation.
+#. **Development**: Active development on planned features. Ends with an alpha release and branch of ``A.B.x``
+   branch from `main`.
+#. **Bugfixes**: Only bugfixes, no new features. Progressively release beta, release candidates.
+   Feature freeze at RC. Become more selective with backports to avoid regressions.
+
+Business / Enterprise Support
+-----------------------------
+
+While our typical release cadence and LTS strategy is designed to support most users, we understand that some
+organizations may require additional support. If you require this support we are happy to work with you on a
+custom support agreement. Please contact us via our official support channels:
+
+* `Discord <https://discord.gg/litestar-919193495116337154>`_
+* `GitHub Discussions <https://github.com/orgs/litestar-org/discussions>`_
+
+.. note:: While we are committed to delivering the best possible experience for all users,
+    including those in larger-scale or slower-moving environments,
+    please note that this does not constitute a guarantee of SLAs or paid support.
