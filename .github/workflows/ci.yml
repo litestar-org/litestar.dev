@@ -58,3 +58,19 @@ jobs:
           clean-exclude: |
             1
             lib
+
+  engage_toaster:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Trigger Litestar Toast Update Release Workflow
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'update-toast.yml',
+              ref: 'main'
+            });

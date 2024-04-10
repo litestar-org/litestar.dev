@@ -3,6 +3,10 @@ name: Check Litestar Release
 on:
   schedule:
     - cron: '0 0 * * *'  # Run every night at midnight
+  workflow_run:
+    workflows: ["Tests and Linting"]
+    types:
+      - completed
 
 jobs:
   check_release:
