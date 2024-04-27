@@ -2,7 +2,7 @@
 
 welcome to Litestar! We're excited that you're interested in contributing to Litestar.dev. Before you get started,
 please read the following guidelines. If you have any questions, feel free to ask in
-the [Litestar Discord server](https://discord.gg/X3FJqy8d2j). We're happy to help!
+the [Litestar Discord server](https://discord.gg/litestar). We're happy to help!
 
 ## Setting up the environment
 

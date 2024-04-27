@@ -88,7 +88,7 @@ While our typical release cadence and LTS strategy is designed to support most u
 organizations may require additional support. If you require this support we are happy to work with you on a
 custom support agreement. Please contact us via our official support channels:
 
-* `Discord <https://discord.gg/litestar-919193495116337154>`_
+* `Discord <https://discord.gg/litestar>`_
 * `GitHub Discussions <https://github.com/orgs/litestar-org/discussions>`_
 
 .. note:: While we are committed to delivering the best possible experience for all users,
