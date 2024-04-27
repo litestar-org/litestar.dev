@@ -1,73 +1,117 @@
-copyright = "2024 - The Litestar Organization"  # noqa: A001
+from datetime import datetime
 
-html_theme = "litestar_sphinx_theme"
+# -- Environmental Data ------------------------------------------------------
+suppress_warnings = ["config.cache"]
 
+# -- Project information -----------------------------------------------------
+current_year = datetime.now().year  # noqa: DTZ005
+copyright = f"{current_year}, Litestar Organization"  # noqa: A001
+
+# -- Config -------------------------------------------------------------------
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
-
-templates_path = ["_templates"]
-
-html_static_path = ["_static"]
-html_show_sourcelink = False
-html_sidebars = {"**": []}
-html_additional_pages = {"index": "landing-page.html"}
 nitpicky = True
 
+# -- Style configuration -----------------------------------------------------
+html_theme = "litestar_sphinx_theme"
+html_title = "Litestar Framework"
+pygments_style = "lightbulb"
+todo_include_todos = True
+
+html_static_path = ["_static"]
+templates_path = ["_templates"]
+
+html_show_sourcelink = False
+html_copy_source = False
+html_additional_pages = {"index": "landing-page.html"}
+
 html_theme_options = {
-    "use_page_nav": False,
-    "show_prev_next": False,
+    "logo_target": "/",
     "github_repo_name": "litestar",
-    "extra_navbar_items": {
-        "Docs": "https://docs.litestar.dev",
-        "Community": {
-            "Blog": {
-                "description": "Read the latest updates from the Litestar team",
-                "link": "https://blog.litestar.dev",
-                "icon": "coc",
-            },
-            "Contributing": {
-                "description": "Learn how to contribute to the Litestar project",
-                "link": "https://docs.litestar.dev/2/contribution-guide.html",
-                "icon": "contributing",
-            },
-            "Code of Conduct": {
-                "description": "Review the etiquette for interacting with the Litestar community",
-                "link": "https://github.com/litestar-org/.github/blob/main/CODE_OF_CONDUCT.md",
-                "icon": "coc",
-            },
+    "navigation_with_keys": True,
+    "use_page_nav": False,
+    "nav_links": [  # TODO(provinzkraut): I need a guide on extra_navbar_items and its magic :P  # noqa: TD003, FIX002
+        {"title": "Home", "url": "index"},
+        {
+            "title": "Community",
+            "children": [
+                {
+                    "title": "Contributing",
+                    "summary": "Learn how to contribute to the Type Lens project",
+                    "url": "https://docs.litestar.dev/latest/contribution-guide.html",
+                    "icon": "contributing",
+                },
+                {
+                    "title": "Code of Conduct",
+                    "summary": "Review the etiquette for interacting with the Litestar community",
+                    "url": "https://github.com/litestar-org/.github?tab=coc-ov-file",
+                    "icon": "coc",
+                },
+                {
+                    "title": "Security",
+                    "summary": "Overview of Litestar's security protocols",
+                    "url": "https://github.com/litestar-org/.github?tab=coc-ov-file#security-ov-file",
+                    "icon": "coc",
+                },
+            ],
         },
-        "About": {
-            "Litestar Organization": {
-                "description": "Details about the Litestar organization",
-                "link": "about/organization",
-                "icon": "org",
-            },
-            "Releases": {
-                "description": "Details about the Litestar release process",
-                "link": "about/litestar-releases",
-                "icon": "releases",
-            },
+        {
+            "title": "About",
+            "children": [
+                {
+                    "title": "Litestar Organization",
+                    "summary": "Details about the Litestar organization",
+                    "url": "https://litestar.dev/about/organization",
+                    "icon": "org",
+                },
+                {
+                    "title": "Releases",
+                    "summary": "Explore the release process, versioning, and deprecation policy for Litestar",
+                    "url": "releases",
+                    "icon": "releases",
+                },
+            ],
         },
-        "Help": {
-            "Discord Help Forum": {
-                "description": "Dedicated Discord help forum",
-                "link": "https://discord.gg/litestar",
-                "icon": "coc",
-            },
-            "GitHub Discussions": {
-                "description": "GitHub Discussions",
-                "link": "https://github.com/orgs/litestar-org/discussions",
-                "icon": "coc",
-            },
-            "StackOverflow Tag": {
-                "description": "We monitor the <code><b>litestar</b></code> tag on Stack Overflow",
-                "link": "https://stackoverflow.com/questions/tagged/litestar",
-                "icon": "coc",
-            },
+        {
+            "title": "Release notes",
+            "children": [
+                {
+                    "title": "1.x Changelog",
+                    "url": "changelog",
+                    "summary": "All changes in the 1.x series",
+                },
+            ],
         },
-    },
+        {
+            "title": "Help",
+            "children": [
+                {
+                    "title": "Discord Help Forum",
+                    "summary": "Dedicated Discord help forum",
+                    "url": "https://discord.gg/litestar",
+                    "icon": "coc",
+                },
+                {
+                    "title": "GitHub Discussions",
+                    "summary": "GitHub Discussions",
+                    "url": "https://github.com/litestar-org/dtos/discussions",
+                    "icon": "coc",
+                },
+                {
+                    "title": "Stack Overflow",
+                    "summary": "We monitor the <code><b>litestar</b></code> tag on Stack Overflow",
+                    "url": "https://stackoverflow.com/questions/tagged/litestar",
+                    "icon": "coc",
+                },
+            ],
+        },
+        {"title": "Sponsor", "url": "https://github.com/sponsors/Litestar-Org", "icon": "heart"},
+    ],
 }
 
 html_context = {
+    "source_type": "github",
+    "source_user": "litestar-org",
+    "source_repo": "litestar",
     "code_sample": True,
     "info_cards": [
         {
