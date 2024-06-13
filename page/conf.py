@@ -118,14 +118,14 @@ html_context = {
                 "Automatically generated OpenAPI schemas help to document APIs and integrate with the frontend via "
                 "TypeScript schema generation"
             ),
-            "link": "https://docs.litestar.dev/2/usage/openapi.html",
+            "link": "https://docs.litestar.dev/2/usage/openapi/index.html",
         },
         {
             "title": "Interactive API Documentation",
             "content": (
                 "Interactively explore your APIs through Swagger, Redoc or Stoplight Elements, powered by OpenAPI"
             ),
-            "link": "https://docs.litestar.dev/2/usage/openapi.html",
+            "link": "https://docs.litestar.dev/2/usage/openapi/ui_plugins.html",
         },
         {
             "title": "Middlewares",
