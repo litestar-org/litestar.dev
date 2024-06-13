@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -1300,8 +1300,7 @@ video {
 }
 
 .\[clip-path\:inset\(0\)\] {
-  -webkit-clip-path: inset(0);
-          clip-path: inset(0);
+  clip-path: inset(0);
 }
 
 [aria-expanded="true"] .menu-state-indicator {
@@ -1700,8 +1699,7 @@ html[data-theme="dark"] .theme-switch[data-theme="dark"] {
   }
 
   .md\:\[clip-path\:inset\(0_round_theme\(borderRadius\.3xl\)\)\] {
-    -webkit-clip-path: inset(0 round 1.5rem);
-            clip-path: inset(0 round 1.5rem);
+    clip-path: inset(0 round 1.5rem);
   }
 }
 
