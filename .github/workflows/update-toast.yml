@@ -31,12 +31,12 @@ jobs:
         CURRENT_VERSION: 2.6
       run: |
         sed -i "s/\"title\": \"Litestar [0-9.]* has just been released!\"/\"title\": \"Litestar ${{ steps.latest_release.outputs.version }} has just been released!\"/" page/conf.py
-        sed -i "s|https://docs.litestar.dev/[0-9.]*/release-notes/changelog.html#[0-9.]*|https://docs.litestar.dev/latest/release-notes/changelog.html#${{ steps.latest_release.outputs.version }}|" page/conf.py
+        sed -i "s|https://docs.litestar.dev/latest/release-notes/changelog.html#[0-9.]*|https://docs.litestar.dev/latest/release-notes/changelog.html#${{ steps.latest_release.outputs.version }}|" page/conf.py
 
     - name: Update workflow file
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
       run: |
-        sed -i "/^CURRENT_VERSION: /s/: .*/: ${{ steps.latest_release.outputs.version }}/" .github/workflows/update-toast.yml
+        sed -Ei "s/(CURRENT_VERSION: )[[:digit:].]+/\1${{ steps.latest_release.outputs.version }}/" .github/workflows/update-toast.yml
 
     - name: Create pull request
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
@@ -47,5 +47,5 @@ jobs:
         title: Update Litestar version to ${{ steps.latest_release.outputs.version }}
         body: |
           A new Litestar release (${{ steps.latest_release.outputs.version }}) has been detected.
-          This PR updates the version in the `docs/conf.py` file and the `CURRENT_VERSION` in the workflow file.
+          This PR updates the version in the `page/conf.py` file and the `CURRENT_VERSION` in the workflow file.
         branch: update-litestar-version
