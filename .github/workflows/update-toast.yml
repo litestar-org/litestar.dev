@@ -30,8 +30,8 @@ jobs:
       env:
         CURRENT_VERSION: 2.6
       run: |
-        sed -i "s/\"title\": \"Litestar [0-9.]* has just been released!\"/\"title\": \"Litestar ${{ steps.latest_release.outputs.version }} has just been released!\"/" page/conf.py
-        sed -i "s|https://docs.litestar.dev/latest/release-notes/changelog.html#[0-9.]*|https://docs.litestar.dev/latest/release-notes/changelog.html#${{ steps.latest_release.outputs.version }}|" page/conf.py
+        sed -Ei "s/(\"title\": \"Litestar )[[:digit:].]*( has just been released!)\"/\1${{ steps.latest_release.outputs.version }}\2/" page/conf.py
+        sed -Ei "s|(https://docs.litestar.dev/latest/release-notes/changelog.html#)[[:digit:].]*|\1${{ steps.latest_release.outputs.version }}|" page/conf.py
 
     - name: Update workflow file
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
