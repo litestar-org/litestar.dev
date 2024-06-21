@@ -192,7 +192,7 @@ html_context = {
     "announcement": {
         "title": "Litestar 2.9.0 has just been released!",
         "description": "Check it out here",
-        "link": "https://docs.litestar.dev/latest/release-notes/changelog.html#2.8.2",
+        "link": "https://docs.litestar.dev/latest/release-notes/changelog.html#2.9.0",
     },
     "project_name": "Litestar",
     "project_url": "https://litestar.dev",
