@@ -19,3 +19,11 @@ page: clean build-assets
 
 serve:
 	pdm run sphinx-autobuild page page/_build/ -j auto --pre-build="make clean build-assets" --watch=tailwind.config.js --ignore=page/_static/index.css
+
+.PHONY: refresh-lockfiles
+refresh-lockfiles:                                 ## Sync lockfiles with requirements files.
+	pdm update --update-reuse --group :all
+
+.PHONY: lock
+lock:                                             ## Rebuild lockfiles from scratch, updating all dependencies
+	pdm update --update-eager --group :all
