@@ -1,4 +1,5 @@
-:html_theme.sidebar_secondary.remove:
+:orphan:
+:layout: landing
 
 Organization
 ============
