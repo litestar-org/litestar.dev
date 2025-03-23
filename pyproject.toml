@@ -15,8 +15,8 @@ dependencies = [
     "sphinx<8.0.0,>=7.0.0",
 ]
 
-[tool.pdm.dev-dependencies]
-docs = [
+[dependency-groups]
+dev = [
     "sphinx-autobuild>=2021.3.14",
 ]
 lint = [
