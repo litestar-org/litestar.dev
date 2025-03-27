@@ -1,11 +1,6 @@
 default_language_version:
   python: "3.12"
 repos:
-  - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v3.6.0
-    hooks:
-      - id: conventional-pre-commit
-        stages: [commit-msg]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
