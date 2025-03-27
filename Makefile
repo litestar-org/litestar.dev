@@ -1,15 +1,20 @@
 .PHONY: page
 
 install:
-	pre-commit install
-	pdm install
+	uv sync
 	npm install
+	pre-commit install
 
 lint:
 	uv run pre-commit run --all-files
 
+ifeq ($(OS),Windows_NT)
+clean:
+	if exist page\_build rmdir /s /q page\_build
+else
 clean:
 	rm -rf page/_build
+endif
 
 build-assets:
 	npx tailwindcss -i page/index.css -o page/_static/index.css
