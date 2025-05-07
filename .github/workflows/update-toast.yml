@@ -28,7 +28,7 @@ jobs:
     - name: Update docs/conf.py
       if: steps.latest_release.outputs.version != env.CURRENT_VERSION
       env:
-        CURRENT_VERSION: 2.15.2
+        CURRENT_VERSION: 2.16.0
       run: |
         sed -Ei "s/(\"title\": \"Litestar )[[:digit:].]*( has just been released!\")/\1${{ steps.latest_release.outputs.version }}\2/" page/conf.py
         sed -Ei "s|(https://docs.litestar.dev/latest/release-notes/changelog.html#)[[:digit:].]*|\1${{ steps.latest_release.outputs.version }}|" page/conf.py
