@@ -1,4 +1,4 @@
-copyright = "2025 - The Litestar Organization"  # noqa: A001
+copyright = "2026 - The Litestar Organization"  # noqa: A001
 
 html_theme = "litestar_sphinx_theme"
 
