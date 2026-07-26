@@ -89,10 +89,6 @@ export default defineNuxtConfig({
     // plugin pages) are sourced from prerendered routes during `generate`, so
     // the dev sitemap only lists static routes — the deployed one is complete.
     zeroRuntime: true,
-    // Drop the phantom doubled-baseURL home entry: under the /litestar.dev-v2/
-    // subpath the prerender source records the baseURL itself as a route, which
-    // the module then re-prefixes. Exclude matches the route path (pre-baseURL).
-    exclude: ['/litestar.dev-v2'],
   },
   robots: {
     // robots.txt only works at a domain root; under the /litestar.dev-v2/ subpath
@@ -120,7 +116,7 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://litestar-org.github.io',
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://litestar.dev',
     name: 'Litestar',
   },
   $development: {
@@ -150,10 +146,8 @@ export default defineNuxtConfig({
     },
   },
   app: {
-    // Defaults to '/' so local `nuxt generate` + `npx serve .output/public` work
-    // at the root. CI sets NUXT_APP_BASE_URL=/litestar.dev-v2/ for the GitHub Pages
-    // project-site subpath. When the site moves to a root domain, just drop the env
-    // var in the workflow — no code change needed.
+    // '/' for the litestar.dev custom domain on GitHub Pages. NUXT_APP_BASE_URL
+    // still allows a subpath deploy (e.g. a project-site preview) without code changes.
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     // Baked default so every document — including the SPA fallback shells
     // (200.html / 404.html) — has a lang attribute.
