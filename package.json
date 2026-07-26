@@ -45,7 +45,7 @@
     "@vueuse/nuxt": "^14.3.0",
     "better-sqlite3": "^12.11.1",
     "motion-v": "^2.3.0",
-    "nuxt": "^4.4.8",
+    "nuxt": "^4.5.0",
     "nuxt-link-checker": "^5.1.0",
     "nuxt-og-image": "^6.6.0",
     "nuxt-schema-org": "^6.2.1",
