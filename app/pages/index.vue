@@ -106,9 +106,9 @@ defineOgImage('OgImageMain', {})
 
       <template #description>
         <p>
-          Fast APIs with automatic OpenAPI documentation, dependency
-          injection, type safety, and a lot of batteries included. Litestar
-          makes designing complex web apps simpler
+          Fast APIs with automatic OpenAPI documentation, dependency injection,
+          type safety, and a lot of batteries included. Litestar makes designing
+          complex web apps simpler
         </p>
       </template>
 
