@@ -149,10 +149,9 @@ export default defineNuxtConfig({
     // '/' for the litestar.dev custom domain on GitHub Pages. NUXT_APP_BASE_URL
     // still allows a subpath deploy (e.g. a project-site preview) without code changes.
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
-    // Baked default so every document — including the SPA fallback shells
-    // (200.html / 404.html) — has a lang attribute.
     head: {
       htmlAttrs: { lang: 'en' },
+      title: 'Litestar',
     },
     pageTransition: false,
     layoutTransition: false,
