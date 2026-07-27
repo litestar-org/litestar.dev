@@ -161,11 +161,7 @@ export default defineNuxtConfig({
     optimizeDeps: {
       // Pre-bundle Vue Flow (used by the architecture diagram) so Vite doesn't
       // discover it at runtime and trigger a dev page reload on first visit.
-      include: [
-        '@vue-flow/core',
-        '@vue-flow/background',
-        '@vue-flow/node-toolbar',
-      ],
+      include: ['@vue-flow/core', '@vue-flow/background'],
     },
   },
   experimental: {
