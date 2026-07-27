@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { Node, Edge } from '@vue-flow/core'
-import { VueFlow, MarkerType, Position } from '@vue-flow/core'
+import { VueFlow, MarkerType, Position, useVueFlow } from '@vue-flow/core'
 import { Background } from '@vue-flow/background'
 import { NodeToolbar } from '@vue-flow/node-toolbar'
 // Vue Flow's CSS is only needed where the diagram renders. Importing it here
@@ -15,6 +15,19 @@ import ConfigNode from './nodes/ConfigNode.vue'
 
 const colorMode = useColorMode()
 const isDark = computed(() => colorMode.value === 'dark')
+
+const { fitView, onPaneReady, vueFlowRef } = useVueFlow()
+const paneReady = ref(false)
+
+onPaneReady(() => {
+  paneReady.value = true
+})
+
+// fitView() before pane-ready is a silent no-op (nodes unmeasured), hence the flag.
+const refit = useDebounceFn(() => {
+  if (paneReady.value) fitView({ duration: 0 })
+}, 150)
+useResizeObserver(vueFlowRef, refit)
 
 // Litestar configuration layers
 const nodes = computed<Node[]>(() => [
