@@ -124,7 +124,7 @@ const nodes = computed<Node[]>(() => [
 <strong>response_headers:</strong> {"X-App-Version": "1.0"}
 <strong>tags:</strong> ["public-api"]
 <strong>cache:</strong> 300`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 230, y: 155 },
     style: {
@@ -168,7 +168,7 @@ const nodes = computed<Node[]>(() => [
 <em>Adds/Overrides:</em>
 <strong>tags:</strong> ["public-api", "users"] <em>(extended)</em>
 <strong>guards:</strong> [AuthGuard]`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 230, y: 335 },
     style: {
@@ -228,7 +228,7 @@ const nodes = computed<Node[]>(() => [
 <strong>cache:</strong> 600 <em>(overridden)</em>
 <strong>summary:</strong> "List all users"
 <strong>response_description:</strong> "List of users"`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 80, y: 130 },
     parentNode: 'handler-layer-box-1',
@@ -263,7 +263,7 @@ const nodes = computed<Node[]>(() => [
 <strong>guards:</strong> [AuthGuard, AdminGuard] <em>(extended)</em>
 <strong>summary:</strong> "Create a new user"
 <strong>status_code:</strong> 201`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 80, y: 130 },
     parentNode: 'handler-layer-box-2',
