@@ -197,7 +197,11 @@ defineOgImage('OgImageMain', {})
           'flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-[5fr_7fr] lg:items-center',
       }"
     >
-      <LitestarWorkflow />
+      <div
+        class="w-full aspect-[25/32] max-h-[640px] overflow-x-clip lg:aspect-auto lg:max-h-none lg:h-full"
+      >
+        <LitestarWorkflow />
+      </div>
     </UPageSection>
 
     <USeparator />
