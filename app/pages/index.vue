@@ -198,7 +198,7 @@ defineOgImage('OgImageMain', {})
       }"
     >
       <div
-        class="w-full aspect-[25/32] max-h-[640px] overflow-x-clip lg:aspect-auto lg:max-h-none lg:h-full"
+        class="w-full aspect-[25/32] max-h-[640px] lg:aspect-auto lg:max-h-none lg:h-full"
       >
         <LitestarWorkflow />
       </div>

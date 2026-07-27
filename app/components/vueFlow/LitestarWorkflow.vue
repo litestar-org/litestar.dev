@@ -3,7 +3,6 @@ import { computed, ref } from 'vue'
 import type { Node, Edge } from '@vue-flow/core'
 import { VueFlow, MarkerType, Position, useVueFlow } from '@vue-flow/core'
 import { Background } from '@vue-flow/background'
-import { NodeToolbar } from '@vue-flow/node-toolbar'
 // Vue Flow's CSS is only needed where the diagram renders. Importing it here
 // (instead of globally in main.css) keeps its self-referential --vf-node-color
 // out of the global stylesheet that nuxt-og-image's renderer scans.
@@ -124,7 +123,7 @@ const nodes = computed<Node[]>(() => [
 <strong>response_headers:</strong> {"X-App-Version": "1.0"}
 <strong>tags:</strong> ["public-api"]
 <strong>cache:</strong> 300`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 230, y: 155 },
     style: {
@@ -168,7 +167,7 @@ const nodes = computed<Node[]>(() => [
 <em>Adds/Overrides:</em>
 <strong>tags:</strong> ["public-api", "users"] <em>(extended)</em>
 <strong>guards:</strong> [AuthGuard]`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 230, y: 335 },
     style: {
@@ -228,7 +227,7 @@ const nodes = computed<Node[]>(() => [
 <strong>cache:</strong> 600 <em>(overridden)</em>
 <strong>summary:</strong> "List all users"
 <strong>response_description:</strong> "List of users"`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 80, y: 130 },
     parentNode: 'handler-layer-box-1',
@@ -263,7 +262,7 @@ const nodes = computed<Node[]>(() => [
 <strong>guards:</strong> [AuthGuard, AdminGuard] <em>(extended)</em>
 <strong>summary:</strong> "Create a new user"
 <strong>status_code:</strong> 201`,
-      toolbarPosition: Position.Right,
+      toolbarPosition: Position.Bottom,
     },
     position: { x: 80, y: 130 },
     parentNode: 'handler-layer-box-2',
@@ -371,15 +370,6 @@ const edges = computed<Edge[]>(() => {
       <ToolbarNode :id="props.id" :data="props.data" />
     </template>
 
-    <template #node-default="{ data, id }">
-      <div class="custom-node">
-        {{ data.label }}
-        <NodeToolbar v-if="data.tooltip" :node-id="id">
-          <div class="toolbar-content">{{ data.tooltip }}</div>
-        </NodeToolbar>
-      </div>
-    </template>
-
     <Background />
   </VueFlow>
 </template>
@@ -389,23 +379,10 @@ const edges = computed<Edge[]>(() => {
   width: 100%;
   height: 100%;
   background: #ffffff;
-  overflow: visible !important;
 }
 
 .dark .vue-flow {
   background: #0f172a;
-}
-
-:deep(.vue-flow__viewport) {
-  overflow: visible !important;
-}
-
-:deep(.vue-flow__transformationpane) {
-  overflow: visible !important;
-}
-
-:deep(.vue-flow__node-toolbar) {
-  z-index: 1000;
 }
 
 .vue-flow__node {
@@ -433,29 +410,5 @@ const edges = computed<Edge[]>(() => {
   transform: scale(1.05);
   transition: transform 0.2s ease;
   cursor: help;
-}
-
-.custom-node {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.toolbar-content {
-  background: #18181b;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  white-space: nowrap;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.dark .toolbar-content {
-  background: #1f2937;
-  color: #f3f4f6;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 </style>
