@@ -373,7 +373,8 @@ const edges = computed<Edge[]>(() => {
 
 <style scoped>
 .vue-flow {
-  flex: 1;
+  width: 100%;
+  height: 100%;
   background: #ffffff;
   overflow: visible !important;
 }
