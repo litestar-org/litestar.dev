@@ -33,25 +33,31 @@ await fetchList()
 // URLs match the prerendered files (the hash drops _path before computing:
 // node_modules/nuxt-og-image/dist/runtime/shared/urlEncoding.js:97). Distinct
 // keys keep each call as its own payload entry instead of overwriting the
-// 'Page' card or earlier per-article entries (utils.js:67-77). useState
-// rehydrates the SSR result so the computed below produces stable values on
-// the client (defineOgImage returns [] during hydration; _defineOgImageRaw.js:19-20).
-const blogOgPaths = useState<string[]>('blog-og-paths', () =>
-  import.meta.server
-    ? defineOgImage(
-        'Blog',
-        (articles.value || []).map((article, i) => ({
-          props: {
-            blog: { title: article.title, category: article.category },
-          },
-          key: `blog-${i}`,
-        })),
-      )
-    : [],
+// 'Page' card or earlier per-article entries (utils.js:67-77). useAsyncData
+// (not useState) because its result lands in the extracted /blog/_payload.json:
+// client-side navigations never re-run defineOgImage (it returns [] outside
+// SSR; _defineOgImageRaw.js:19-20), so the paths must ride the payload on both
+// entry modes — hard load AND in-app navigation.
+const { data: blogOgPaths } = await useAsyncData<string[]>(
+  'blog-og-paths',
+  () =>
+    Promise.resolve(
+      import.meta.server
+        ? defineOgImage(
+            'Blog',
+            (articles.value || []).map((article, i) => ({
+              props: {
+                blog: { title: article.title, category: article.category },
+              },
+              key: `blog-${i}`,
+            })),
+          )
+        : [],
+    ),
 )
 
 const articlesWithImages = computed(() =>
-  enrichArticlesWithImages(articles.value || [], blogOgPaths.value),
+  enrichArticlesWithImages(articles.value || [], blogOgPaths.value ?? []),
 )
 </script>
 
