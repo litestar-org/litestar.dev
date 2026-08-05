@@ -13,9 +13,9 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: corepack enable
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: 'pnpm'
@@ -29,9 +29,9 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: corepack enable
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: 'pnpm'
@@ -40,3 +40,62 @@ jobs:
         run: pnpm test-all
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  preview:
+    needs: [lint, test]
+    # Fork PRs don't get secrets, so the deploy can't run there
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      # All steps skip until the Cloudflare secrets exist — previews activate
+      # by just adding CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID repo secrets
+      # (Cloudflare Pages project: `litestar-dev`).
+      CF_CONFIGURED: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+    steps:
+      - if: env.CF_CONFIGURED == 'true'
+        uses: actions/checkout@v7
+      - if: env.CF_CONFIGURED == 'true'
+        run: corepack enable
+      - if: env.CF_CONFIGURED == 'true'
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - if: env.CF_CONFIGURED == 'true'
+        run: pnpm install --frozen-lockfile
+      - name: Update stats
+        if: env.CF_CONFIGURED == 'true'
+        run: pnpm run update-stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate site (root baseURL, non-indexable preview)
+        if: env.CF_CONFIGURED == 'true'
+        run: pnpm generate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Bakes Disallow-all robots.txt + noindex meta into the preview build;
+          # Cloudflare also sends X-Robots-Tag: noindex on preview deployments.
+          NUXT_SITE_ENV: preview
+      - name: Deploy preview to Cloudflare Pages
+        if: env.CF_CONFIGURED == 'true'
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .output/public --project-name=litestar-dev --branch=pr-${{ github.event.number }}
+      - name: Comment preview link on PR
+        if: env.CF_CONFIGURED == 'true'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: preview
+          message: |
+            🚀 **Preview deployed**
+
+            | | URL |
+            |---|---|
+            | Latest for this PR | ${{ steps.deploy.outputs.pages-deployment-alias-url }} |
+            | This commit | ${{ steps.deploy.outputs.deployment-url }} |
