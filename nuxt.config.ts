@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     // JSON-LD structured data (Organization/WebSite/WebPage — see `schemaOrg`).
     'nuxt-schema-org',
     'motion-v/nuxt',
+    'nuxt-ai-ready',
     '@nuxtjs/google-fonts',
     '@nuxtjs/html-validator',
     // Build-time scan for broken internal links (see `linkChecker` config).

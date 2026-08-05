@@ -7,8 +7,14 @@ allowBuilds:
   puppeteer: false
   vue-demi: false
 minimumReleaseAgeExclude:
+  - nuxt-ai-ready@1.7.3
+  - '@nuxtjs/sitemap@8.3.3'
   - nuxt@4.5.1
   - '@nuxt/kit@4.5.1'
   - '@nuxt/nitro-server@4.5.1'
   - '@nuxt/schema@4.5.1'
   - '@nuxt/vite-builder@4.5.1'
+  - nuxtseo-shared@5.3.10
+  - nuxt-site-config-kit@4.1.5
+  - nuxt-site-config@4.1.5
+  - site-config-stack@4.1.5
