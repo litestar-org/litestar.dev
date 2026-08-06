@@ -296,7 +296,7 @@ defineOgImage('OgImageMain', {})
       </UCarousel>
     </UPageSection>
 
-    <!-- <USeparator />
+    <USeparator />
 
     <UPageSection
       :title="page.templates.title"
@@ -356,7 +356,7 @@ defineOgImage('OgImageMain', {})
           </template>
         </UTabs>
       </div>
-    </UPageSection> -->
+    </UPageSection>
 
     <USeparator />
 
