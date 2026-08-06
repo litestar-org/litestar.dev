@@ -39,3 +39,24 @@ describe('landmark accessible names', () => {
     expect(offenders).toEqual([])
   })
 })
+
+describe('anchor attribute misuse', () => {
+  // html-validate `attribute-misuse`: rel requires href. Nuxt UI renders
+  // disabled link buttons as <a rel=...> with href stripped (LinkBase.vue),
+  // so any disabled UButton/link with a `to` trips this in dev validation.
+  it('no <a> carries rel without href', async () => {
+    const offenders: string[] = []
+
+    for (const page of await pagePaths()) {
+      const html = await readFile(htmlPath(page), 'utf8')
+      for (const m of html.matchAll(/<a\b[^>]*>/g)) {
+        const tag = m[0]
+        if (tag.includes('rel=') && !tag.includes('href')) {
+          offenders.push(`${page}: ${tag.slice(0, 120)}`)
+        }
+      }
+    }
+
+    expect(offenders).toEqual([])
+  })
+})
