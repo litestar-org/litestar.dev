@@ -76,16 +76,16 @@ function copyCommand() {
       <USeparator type="dashed" class="mb-4" />
 
       <div class="flex items-center justify-between gap-2">
-        <!-- :to="githubUrl" -->
         <UTooltip text="View on GitHub">
           <UButton
+            :to="githubUrl"
+            target="_blank"
             icon="i-lucide-github"
             color="neutral"
             size="sm"
             variant="outline"
             external
             @click.stop
-            disabled
           >
             GitHub
             <span class="sr-only">View {{ starter.title }} on GitHub</span>
