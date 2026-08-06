@@ -10,23 +10,17 @@ const { starter } = defineProps<{
 }>()
 
 const { copy } = useClipboard()
-const { selectedPackageManager } = usePackageManager()
 
-// The manifest `name` doubles as the CLI template slug; the folder lives at
-// `directory` in the litestar-templates repo.
+// The folder lives at `directory` in the litestar-templates repo.
 const githubUrl = computed(
   () =>
     `https://github.com/litestar-org/litestar-templates/tree/main/${starter.directory}`,
 )
 
+// giget downloads just that folder from the repo tarball.
 const dynamicCommand = computed(() => {
-  if (!starter.name) return ''
-
-  if (selectedPackageManager.value.label === 'pip') {
-    return `pipx litestar create -t ${starter.name}`
-  } else {
-    return `uvx litestar@latest create -t ${starter.name}`
-  }
+  if (!starter.directory) return ''
+  return `npx giget@latest gh:litestar-org/litestar-templates/${starter.directory} ${starter.name}`
 })
 
 function copyCommand() {
@@ -93,13 +87,12 @@ function copyCommand() {
         </UTooltip>
 
         <UTooltip text="Copy command">
-          <!-- @click.stop="copyCommand()" -->
           <UButton
             icon="i-lucide-terminal"
             color="neutral"
             size="sm"
             variant="outline"
-            disabled
+            @click.stop="copyCommand()"
           >
             <span class="sr-only">Copy command for {{ starter.title }}</span>
           </UButton>
