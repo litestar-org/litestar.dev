@@ -11,17 +11,20 @@ definePageMeta({
 
 const [
   { data: page },
-  { data: starters },
+  { data: starterManifest },
   { data: templates },
   { data: plugins },
   { data: sponsors },
 ] = await Promise.all([
   useAsyncData('index', () => queryCollection('index').first()),
-  useAsyncData('starters', () => queryCollection('starters').all()),
+  useAsyncData('starters', () => queryCollection('starters').first()),
   useAsyncData('templates', () => queryCollection('templates').all()),
   useAsyncData('plugins', () => queryCollection('plugins').all()),
   useAsyncData('sponsors', () => queryCollection('sponsors').all()),
 ])
+
+// The starters collection is the litestar-templates repo manifest (one entry).
+const starters = computed(() => starterManifest.value?.templates ?? [])
 
 const { packageManagers, selectedPackageManager } = usePackageManager()
 

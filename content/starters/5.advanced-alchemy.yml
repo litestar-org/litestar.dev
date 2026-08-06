@@ -1,5 +1,0 @@
-title: Advanced-Alchemy (SQLAlchemy + Alembic)
-description: Starter with ORM, database migration and services for a Rest API
-github: https://github.com/litestar-org/litestar-templates/tree/main/sqlalchemy-template
-icon: i-lucide-database
-template: 'advanced-alchemy'

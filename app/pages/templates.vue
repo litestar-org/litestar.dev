@@ -4,12 +4,15 @@ definePageMeta({
 })
 
 // Retrieving the data for the page, starters, and templates
-const [{ data: templateData }, { data: starters }, { data: templates }] =
+const [{ data: templateData }, { data: starterManifest }, { data: templates }] =
   await Promise.all([
     useAsyncData('templatePage', () => queryCollection('templatePage').first()),
-    useAsyncData('starters', () => queryCollection('starters').all()),
+    useAsyncData('starters', () => queryCollection('starters').first()),
     useAsyncData('templates', () => queryCollection('templates').all()),
   ])
+
+// The starters collection is the litestar-templates repo manifest (one entry).
+const starters = computed(() => starterManifest.value?.templates ?? [])
 
 // Creating a 404 if no data found
 if (!templateData.value) {

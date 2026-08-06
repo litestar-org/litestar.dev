@@ -1,20 +1,31 @@
 <script setup lang="ts">
 import type { StartersCollectionItem } from '@nuxt/content'
 
+// One entry of the litestar-templates manifest (the collection holds the
+// whole manifest as a single item).
+type Starter = StartersCollectionItem['templates'][number]
+
 const { starter } = defineProps<{
-  starter: StartersCollectionItem
+  starter: Starter
 }>()
 
 const { copy } = useClipboard()
 const { selectedPackageManager } = usePackageManager()
 
+// The manifest `name` doubles as the CLI template slug; the folder lives at
+// `directory` in the litestar-templates repo.
+const githubUrl = computed(
+  () =>
+    `https://github.com/litestar-org/litestar-templates/tree/main/${starter.directory}`,
+)
+
 const dynamicCommand = computed(() => {
-  if (!starter.template) return ''
+  if (!starter.name) return ''
 
   if (selectedPackageManager.value.label === 'pip') {
-    return `pipx litestar create -t ${starter.template}`
+    return `pipx litestar create -t ${starter.name}`
   } else {
-    return `uvx litestar@latest create -t ${starter.template}`
+    return `uvx litestar@latest create -t ${starter.name}`
   }
 })
 
@@ -34,7 +45,7 @@ function copyCommand() {
     :description="starter.description"
     external
     :ui="{
-      footer: starter.template
+      footer: starter.name
         ? 'w-full mt-auto pointer-events-auto pt-4 z-[1]'
         : '',
     }"
@@ -61,11 +72,11 @@ function copyCommand() {
       <span class="line-clamp-2">{{ starter.description }}</span>
     </template>
 
-    <template v-if="starter.template" #footer>
+    <template v-if="starter.name" #footer>
       <USeparator type="dashed" class="mb-4" />
 
       <div class="flex items-center justify-between gap-2">
-        <!-- :to="starter.github" -->
+        <!-- :to="githubUrl" -->
         <UTooltip text="View on GitHub">
           <UButton
             icon="i-lucide-github"
