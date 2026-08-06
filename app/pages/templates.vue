@@ -31,6 +31,8 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   ogTitle: title,
+  twitterTitle: title,
+  twitterDescription: description,
 })
 
 // Open Graph Image
