@@ -275,6 +275,7 @@ defineOgImage('OgImageMain', {})
       </template>
       <UCarousel
         v-slot="{ item }"
+        aria-label="Official Litestar plugins"
         dots
         wheel-gestures
         arrows
@@ -321,6 +322,7 @@ defineOgImage('OgImageMain', {})
           <template #starter="{ item }">
             <UCarousel
               v-slot="{ item }"
+              aria-label="Starter templates"
               loop
               dots
               wheel-gestures
@@ -339,6 +341,7 @@ defineOgImage('OgImageMain', {})
           <template #templates="{ item }">
             <UCarousel
               v-slot="{ item }"
+              aria-label="Project templates"
               loop
               dots
               wheel-gestures
