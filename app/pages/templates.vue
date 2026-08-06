@@ -51,6 +51,7 @@ defineOgImage('Page', {
       :title="title"
       :description="description"
       :links="templateData?.hero.links"
+      :ui="{ container: 'pb-8 sm:pb-12 lg:pb-12' }"
     >
     </UPageHero>
 
@@ -62,6 +63,7 @@ defineOgImage('Page', {
       :title="templateData?.starter.title"
       :description="templateData?.starter.description"
       :ui="{
+        container: 'pt-8 sm:pt-12 lg:pt-12',
         title: 'text-left !text-3xl',
         description: 'text-left',
       }"
