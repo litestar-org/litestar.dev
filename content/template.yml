@@ -2,7 +2,7 @@ hero:
   title: Litestar Starter & Templates
   description: Kickstart your Litestar project with pre-built templates featuring common patterns, integrations, and best practices.
 starter:
-  title: Starter Templates
+  title: Starters
   description: Perfect for learning Litestar fundamentals or building simple applications quickly.
 template:
   title: Templates
