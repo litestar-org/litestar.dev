@@ -134,13 +134,16 @@ const Template = z.object({
   links: z.array(Button).optional(),
 })
 
-const Starter = z.object({
+// One entry of the litestar-templates manifest (templates.json). `name` is
+// also the CLI slug; the GitHub URL derives from `directory`.
+const StarterTemplate = z.object({
+  name: z.string(),
+  directory: z.string(),
   title: z.string(),
   description: z.string(),
-  template: z.string(),
   icon: z.string().editor({ input: 'icon' }),
-  github: z.string(),
   featured: z.boolean().optional(),
+  tags: z.array(z.string()).optional(),
 })
 
 const Plugin = z.object({
@@ -324,8 +327,20 @@ export default defineContentConfig({
     }),
     starters: defineCollection({
       type: 'data',
-      source: 'starters/*',
-      schema: Starter,
+      source: {
+        // Single source of truth: the starter registry lives in the
+        // litestar-templates repo alongside the starters themselves.
+        // TODO: switch back to litestar-org/litestar-templates once that
+        // repo is public (Kumzy/* is a temporary public test mirror).
+        repository: 'https://github.com/Kumzy/litestar-templates',
+        include: 'templates.json',
+        // Authenticate the clone so it uses GitHub's 5000/h limit instead of
+        // the ~60/h anonymous one (avoids throttling). No-op if unset.
+        authToken: process.env.GITHUB_TOKEN,
+      },
+      schema: z.object({
+        templates: z.array(StarterTemplate),
+      }),
     }),
   },
 })

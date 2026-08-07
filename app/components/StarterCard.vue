@@ -1,21 +1,26 @@
 <script setup lang="ts">
 import type { StartersCollectionItem } from '@nuxt/content'
 
+// One entry of the litestar-templates manifest (the collection holds the
+// whole manifest as a single item).
+type Starter = StartersCollectionItem['templates'][number]
+
 const { starter } = defineProps<{
-  starter: StartersCollectionItem
+  starter: Starter
 }>()
 
 const { copy } = useClipboard()
-const { selectedPackageManager } = usePackageManager()
 
+// The folder lives at `directory` in the litestar-templates repo.
+const githubUrl = computed(
+  () =>
+    `https://github.com/litestar-org/litestar-templates/tree/main/${starter.directory}`,
+)
+
+// giget downloads just that folder from the repo tarball.
 const dynamicCommand = computed(() => {
-  if (!starter.template) return ''
-
-  if (selectedPackageManager.value.label === 'pip') {
-    return `pipx litestar create -t ${starter.template}`
-  } else {
-    return `uvx litestar@latest create -t ${starter.template}`
-  }
+  if (!starter.directory) return ''
+  return `npx giget@latest gh:litestar-org/litestar-templates/${starter.directory} ${starter.name}`
 })
 
 function copyCommand() {
@@ -34,7 +39,7 @@ function copyCommand() {
     :description="starter.description"
     external
     :ui="{
-      footer: starter.template
+      footer: starter.name
         ? 'w-full mt-auto pointer-events-auto pt-4 z-[1]'
         : '',
     }"
@@ -61,20 +66,20 @@ function copyCommand() {
       <span class="line-clamp-2">{{ starter.description }}</span>
     </template>
 
-    <template v-if="starter.template" #footer>
+    <template v-if="starter.name" #footer>
       <USeparator type="dashed" class="mb-4" />
 
       <div class="flex items-center justify-between gap-2">
-        <!-- :to="starter.github" -->
         <UTooltip text="View on GitHub">
           <UButton
+            :to="githubUrl"
+            target="_blank"
             icon="i-lucide-github"
             color="neutral"
             size="sm"
             variant="outline"
             external
             @click.stop
-            disabled
           >
             GitHub
             <span class="sr-only">View {{ starter.title }} on GitHub</span>
@@ -82,13 +87,12 @@ function copyCommand() {
         </UTooltip>
 
         <UTooltip text="Copy command">
-          <!-- @click.stop="copyCommand()" -->
           <UButton
             icon="i-lucide-terminal"
             color="neutral"
             size="sm"
             variant="outline"
-            disabled
+            @click.stop="copyCommand()"
           >
             <span class="sr-only">Copy command for {{ starter.title }}</span>
           </UButton>

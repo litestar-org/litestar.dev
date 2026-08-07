@@ -4,12 +4,15 @@ definePageMeta({
 })
 
 // Retrieving the data for the page, starters, and templates
-const [{ data: templateData }, { data: starters }, { data: templates }] =
+const [{ data: templateData }, { data: starterManifest }, { data: templates }] =
   await Promise.all([
     useAsyncData('templatePage', () => queryCollection('templatePage').first()),
-    useAsyncData('starters', () => queryCollection('starters').all()),
+    useAsyncData('starters', () => queryCollection('starters').first()),
     useAsyncData('templates', () => queryCollection('templates').all()),
   ])
+
+// The starters collection is the litestar-templates repo manifest (one entry).
+const starters = computed(() => starterManifest.value?.templates ?? [])
 
 // Creating a 404 if no data found
 if (!templateData.value) {
@@ -31,6 +34,8 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   ogTitle: title,
+  twitterTitle: title,
+  twitterDescription: description,
 })
 
 // Open Graph Image
@@ -46,6 +51,7 @@ defineOgImage('Page', {
       :title="title"
       :description="description"
       :links="templateData?.hero.links"
+      :ui="{ container: 'pb-8 sm:pb-12 lg:pb-12' }"
     >
     </UPageHero>
 
@@ -57,6 +63,7 @@ defineOgImage('Page', {
       :title="templateData?.starter.title"
       :description="templateData?.starter.description"
       :ui="{
+        container: 'pt-8 sm:pt-12 lg:pt-12 pb-8 sm:pb-12 lg:pb-12',
         title: 'text-left !text-3xl',
         description: 'text-left',
       }"
@@ -82,6 +89,7 @@ defineOgImage('Page', {
       :title="templateData?.template.title"
       :description="templateData?.template.description"
       :ui="{
+        container: 'pt-8 sm:pt-12 lg:pt-12',
         title: 'text-left !text-3xl',
         description: 'text-left',
       }"

@@ -1,5 +1,0 @@
-title: Minimal Litestar
-description: Starter for a minimal API.
-github: https://github.com/litestar-org/litestar-templates/tree/main/hello-world
-icon: i-lucide-globe
-template: 'minimal'

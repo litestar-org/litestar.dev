@@ -1,6 +1,0 @@
-title: Litestar
-description: Starter for an API with OpenAPI documentation, validation and CRUD operations.
-github: https://github.com/litestar-org/litestar-templates/tree/main/basic-api
-icon: i-lucide-leaf
-featured: true
-template: 'api'
