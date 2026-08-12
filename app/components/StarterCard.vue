@@ -17,10 +17,10 @@ const githubUrl = computed(
     `https://github.com/litestar-org/litestar-templates/tree/main/${starter.directory}`,
 )
 
-// giget downloads just that folder from the repo tarball.
+// litestar-create scaffolds the template and prompts for the project name.
 const dynamicCommand = computed(() => {
-  if (!starter.directory) return ''
-  return `npx giget@latest gh:litestar-org/litestar-templates/${starter.directory} ${starter.name}`
+  if (!starter.name) return ''
+  return `uvx litestar-create@latest -t ${starter.name}`
 })
 
 function copyCommand() {
