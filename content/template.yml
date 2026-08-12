@@ -1,15 +1,8 @@
 hero:
   title: Litestar Starter & Templates
   description: Kickstart your Litestar project with pre-built templates featuring common patterns, integrations, and best practices.
-  links:
-    - icon: 'i-lucide-github'
-      label: 'Browse Templates'
-      to: 'https://github.com/litestar-org/litestar-templates'
-      color: 'neutral'
-      size: 'md'
-      disabled: true
 starter:
-  title: Starter Templates
+  title: Starters
   description: Perfect for learning Litestar fundamentals or building simple applications quickly.
 template:
   title: Templates

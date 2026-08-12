@@ -28,12 +28,12 @@ function _useHeaderLinks() {
       //   icon: 'i-lucide-rocket',
       //   search: false,
       // },
-      // {
-      //   label: 'Templates',
-      //   icon: 'i-lucide-app-window',
-      //   to: '/templates',
-      //   search: false,
-      // },
+      {
+        label: 'Templates',
+        icon: 'i-lucide-app-window',
+        to: '/templates',
+        search: false,
+      },
       {
         label: 'Blog',
         icon: 'i-lucide-newspaper',
@@ -83,10 +83,10 @@ const footerLinks = [
         label: 'Plugins',
         to: '/plugins',
       },
-      // {
-      //   label: 'Templates',
-      //   to: '/templates',
-      // },
+      {
+        label: 'Templates',
+        to: '/templates',
+      },
       // {
       //   label: 'Deploy',
       //   to: '/deploy',
