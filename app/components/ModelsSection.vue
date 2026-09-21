@@ -95,7 +95,7 @@ const models: Model[] = [
       'Fast serialization and validation library with JSON and MessagePack support.',
     icon: 'i-custom-msgspec',
     iconDark: 'i-custom-msgspec-dark',
-    link: 'https://jcristharif.com/msgspec/',
+    link: 'https://msgspec.dev/',
   },
 ]
 </script>
