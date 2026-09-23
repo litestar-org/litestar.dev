@@ -6,6 +6,9 @@ allowBuilds:
   '@parcel/watcher': false
   puppeteer: false
   vue-demi: false
+  # wrangler's local-dev runtime; its postinstall only downloads the workerd
+  # binary, which `wrangler pages deploy` never uses.
+  workerd: false
 minimumReleaseAgeExclude:
   - nuxt-ai-ready@1.7.3
   - '@nuxtjs/sitemap@8.3.3'
@@ -18,3 +21,4 @@ minimumReleaseAgeExclude:
   - nuxt-site-config-kit@4.1.5
   - nuxt-site-config@4.1.5
   - site-config-stack@4.1.5
+  - '@mdream/rust-wasm32-wasi@1.5.12'

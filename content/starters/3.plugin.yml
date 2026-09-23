@@ -1,5 +1,0 @@
-title: Plugin
-description: Starter for a plugin.
-github: https://github.com/litestar-org/litestar-templates/tree/main/cli-app
-icon: i-lucide-terminal
-template: 'plugin'

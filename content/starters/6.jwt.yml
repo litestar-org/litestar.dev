@@ -1,5 +1,0 @@
-title: JWT Authentication
-description: Complete authentication system with JWT tokens, user management, and protected routes.
-github: https://github.com/litestar-org/litestar-templates/tree/main/jwt-auth
-icon: i-lucide-shield-check
-template: 'jwt-auth'

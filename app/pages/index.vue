@@ -11,17 +11,20 @@ definePageMeta({
 
 const [
   { data: page },
-  { data: starters },
+  { data: starterManifest },
   { data: templates },
   { data: plugins },
   { data: sponsors },
 ] = await Promise.all([
   useAsyncData('index', () => queryCollection('index').first()),
-  useAsyncData('starters', () => queryCollection('starters').all()),
+  useAsyncData('starters', () => queryCollection('starters').first()),
   useAsyncData('templates', () => queryCollection('templates').all()),
   useAsyncData('plugins', () => queryCollection('plugins').all()),
   useAsyncData('sponsors', () => queryCollection('sponsors').all()),
 ])
+
+// The starters collection is the litestar-templates repo manifest (one entry).
+const starters = computed(() => starterManifest.value?.templates ?? [])
 
 const { packageManagers, selectedPackageManager } = usePackageManager()
 
@@ -275,6 +278,7 @@ defineOgImage('OgImageMain', {})
       </template>
       <UCarousel
         v-slot="{ item }"
+        aria-label="Official Litestar plugins"
         dots
         wheel-gestures
         arrows
@@ -296,7 +300,7 @@ defineOgImage('OgImageMain', {})
       </UCarousel>
     </UPageSection>
 
-    <!-- <USeparator />
+    <USeparator />
 
     <UPageSection
       :title="page.templates.title"
@@ -321,6 +325,7 @@ defineOgImage('OgImageMain', {})
           <template #starter="{ item }">
             <UCarousel
               v-slot="{ item }"
+              aria-label="Starter templates"
               loop
               dots
               wheel-gestures
@@ -339,6 +344,7 @@ defineOgImage('OgImageMain', {})
           <template #templates="{ item }">
             <UCarousel
               v-slot="{ item }"
+              aria-label="Project templates"
               loop
               dots
               wheel-gestures
@@ -356,7 +362,7 @@ defineOgImage('OgImageMain', {})
           </template>
         </UTabs>
       </div>
-    </UPageSection> -->
+    </UPageSection>
 
     <USeparator />
 

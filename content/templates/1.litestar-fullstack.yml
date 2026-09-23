@@ -1,9 +1,9 @@
 title: 'Litestar Fullstack'
-description: 'A complete fullstack web application template built with Litestar backend and modern frontend frameworks. Includes user authentication, database integration, and responsive design patterns.'
+description: 'A production-ready fullstack reference application with a Litestar backend and React + Vite frontend. Includes user authentication, SQLAlchemy database integration via Advanced Alchemy, background task queues, and Docker-based development.'
 icon: i-lucide-user
 thumbnail:
-  dark: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2Rhc2hib2FyZC10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTczOTQ2MzU2N30._VElt4uvLjvAMdnTLytCInOajMElzWDKbmvOaMZhZUI.jpg?theme=dark'
-  light: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2Rhc2hib2FyZC10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTczOTQ2MzU2N30._VElt4uvLjvAMdnTLytCInOajMElzWDKbmvOaMZhZUI.jpg?theme=light'
+  dark: '/templates/litestar-fullstack-dark.png'
+  light: '/templates/litestar-fullstack-light.png'
 features:
   - title: Database integration with Advanced Alchemy
     icon: i-lucide-database
@@ -11,9 +11,13 @@ features:
     icon: i-lucide-user
   - title: Front-end using React
     icon: i-simple-icons-react
+  - title: Background task queues
+    icon: i-lucide-list-checks
+  - title: Dockerized development environment
+    icon: i-simple-icons-docker
 links:
   - label: Preview
-    to: 'https://github.com/litestar-org/litestar-fullstack'
+    to: 'https://fullstack.litestar.dev/'
     target: _blank
     leadingIcon: i-custom-litestar
     trailingIcon: i-lucide-arrow-up-right
