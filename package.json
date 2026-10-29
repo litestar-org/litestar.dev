@@ -65,7 +65,7 @@
     "@nuxt/test-utils": "^4.1.0",
     "@shikijs/transformers": "^4.4.1",
     "@vue/test-utils": "^2.4.11",
-    "happy-dom": "^20.11.1",
+    "happy-dom": "^21.0.4",
     "nuxt-content-twoslash": "^0.4.0",
     "oxfmt": "^0.62.0",
     "oxlint": "^1.77.0",
