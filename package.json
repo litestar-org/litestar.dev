@@ -22,7 +22,7 @@
     "update-stats": "npx tsx scripts/update-stats.ts"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.150",
+    "@iconify-json/lucide": "^1.2.151",
     "@iconify-json/simple-icons": "^1.2.101",
     "@nuxt/content": "^3.16.2",
     "@nuxt/fonts": "^1.2.0",
@@ -42,7 +42,7 @@
     "@vueuse/core": "^15.0.0",
     "@vueuse/nuxt": "^15.0.0",
     "better-sqlite3": "^13.0.3",
-    "motion-v": "^2.10.0",
+    "motion-v": "^2.11.0",
     "nuxt": "^4.6.4",
     "nuxt-ai-ready": "^3.4.0",
     "nuxt-link-checker": "^6.0.1",
@@ -59,17 +59,17 @@
   },
   "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72",
   "devDependencies": {
-    "@j178/prek": "^0.5.9",
+    "@j178/prek": "^0.5.10",
     "@nuxt/test-utils": "^4.3.4",
     "@shikijs/transformers": "^4.6.0",
     "@vue/test-utils": "^2.5.1",
     "happy-dom": "^21.0.4",
     "nuxt-content-twoslash": "^0.4.0",
-    "oxfmt": "^0.75.0",
-    "oxlint": "^1.90.0",
+    "oxfmt": "^0.76.0",
+    "oxlint": "^1.91.0",
     "shiki": "^4.6.0",
     "twoslash": "^0.3.9",
     "vitest": "^5.1.0",
-    "wrangler": "^4.156.2"
+    "wrangler": "^4.157.0"
   }
 }
