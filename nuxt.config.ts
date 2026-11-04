@@ -56,7 +56,6 @@ export default defineNuxtConfig({
     'nuxt-schema-org',
     'motion-v/nuxt',
     'nuxt-ai-ready',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/html-validator',
     // Build-time scan for broken internal links (see `linkChecker` config).
     'nuxt-link-checker',
@@ -74,6 +73,10 @@ export default defineNuxtConfig({
         'multiple-labeled-controls': 'off',
         'heading-level': 'off',
         'no-dup-class': 'off',
+        // USelectMenu's trigger always carries aria-controls, but the listbox it
+        // points at is only rendered while open — so the reference dangles in
+        // every prerendered page (aria-expanded="false"). Not ours to fix.
+        'no-missing-references': 'off',
         // Noise from third-party plugin README HTML (GitHub markdown):
         'attribute-allowed-values': 'off',
         'wcag/h63': 'off',
@@ -128,9 +131,9 @@ export default defineNuxtConfig({
   ogImage: {
     zeroRuntime: true,
   },
-  // OG images source their fonts from @nuxt/fonts in v6 (the old
-  // `ogImage.fonts` option was removed). `global: true` is required so the
-  // @font-face is globally emitted — OG images can't read Tailwind v4 @theme.
+  // OG images source their fonts from @nuxt/fonts (the old `ogImage.fonts`
+  // option was removed in v6). `global: true` is required so the @font-face is
+  // globally emitted — OG images can't read Tailwind v4 @theme.
   fonts: {
     families: [
       {
@@ -140,11 +143,6 @@ export default defineNuxtConfig({
         global: true,
       },
     ],
-  },
-  googleFonts: {
-    families: {
-      Inter: [400, 500, 600, 700],
-    },
   },
   app: {
     // '/' for the litestar.dev custom domain on GitHub Pages. NUXT_APP_BASE_URL

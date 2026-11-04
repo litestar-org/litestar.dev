@@ -12,17 +12,32 @@ const DIST = new URL('../../.output/public/', import.meta.url).pathname
 // A `useState`-only carrier covers the first but not the second (payload
 // extraction only includes asyncData), which left the cards imageless after
 // in-app navigation until a refresh.
+async function cardSrcs(): Promise<string[]> {
+  const html = await readFile(join(DIST, 'blog', 'index.html'), 'utf8')
+  return [...html.matchAll(/src="([^"]*_og\/s\/[^"]+)"/g)].map((m) => m[1]!)
+}
+
 describe('blog listing OG card images', () => {
   it('extracted payload carries the per-article OG paths', async () => {
-    const payload = await readFile(join(DIST, 'blog', '_payload.json'), 'utf8')
-    expect(payload).toContain('k_blog-0')
+    // Compare against the paths the prerendered HTML actually uses rather than
+    // an expected filename: nuxt-og-image derives the filename from the custom
+    // `key`, and the scheme is internal (v6 emitted `k_<key>.png`, v7 emits
+    // `o_<hash>.png`). devalue escapes the slashes, so unescape before matching.
+    const payload = (
+      await readFile(join(DIST, 'blog', '_payload.json'), 'utf8')
+    ).replaceAll('\\u002F', '/')
+    const srcs = await cardSrcs()
+    expect(srcs.length).toBeGreaterThan(0)
+    for (const src of srcs) {
+      expect(
+        payload,
+        `OG path ${src} missing from extracted payload`,
+      ).toContain(src)
+    }
   })
 
   it('prerendered HTML references OG files that exist in the dist', async () => {
-    const html = await readFile(join(DIST, 'blog', 'index.html'), 'utf8')
-    const srcs = [...html.matchAll(/src="([^"]*_og\/s\/[^"]+)"/g)].map(
-      (m) => m[1]!,
-    )
+    const srcs = await cardSrcs()
     expect(srcs.length).toBeGreaterThan(0)
     for (const src of srcs) {
       const file = decodeURIComponent(src.replace(/^.*_og\/s\//, ''))
