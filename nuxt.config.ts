@@ -128,6 +128,14 @@ export default defineNuxtConfig({
       url: 'http://localhost:3000',
     },
   },
+  $test: {
+    // The vitest `nuxt` environment builds the app with SSR disabled, which
+    // makes nuxt-og-image warn on every run. It isn't used in component tests —
+    // only `test-build` checks OG output, and that reads the generated dist.
+    ogImage: {
+      enabled: false,
+    },
+  },
   ogImage: {
     zeroRuntime: true,
   },
