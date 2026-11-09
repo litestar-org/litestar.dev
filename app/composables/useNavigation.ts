@@ -9,13 +9,12 @@ function _useHeaderLinks() {
         target: '_blank',
         search: false,
       },
-      // {
-      //   label: 'Tutorial',
-      //   icon: 'i-lucide-graduation-cap',
-      //   to: '#',
-      //   search: false,
-      //   disabled: true,
-      // },
+      {
+        label: 'Tutorial',
+        icon: 'i-lucide-graduation-cap',
+        to: '/tutorial',
+        search: false,
+      },
       {
         label: 'Plugins',
         to: '/plugins',

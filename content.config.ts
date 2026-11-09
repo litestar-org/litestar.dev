@@ -38,6 +38,14 @@ const Timeline = z.object({
   value: z.union([z.string(), z.number()]).optional(),
 })
 
+/** One request fired against a tutorial step's app when the reader hits Run. */
+const TutorialRequest = z.object({
+  label: z.string().optional(),
+  method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE']).optional(),
+  path: z.string(),
+  body: z.record(z.string(), z.unknown()).optional(),
+})
+
 const Link = z.object({
   label: z.string(),
   to: z.string(),
@@ -282,6 +290,41 @@ export default defineContentConfig({
         category: z.string(),
         nitroPreset: z.string(),
         website: z.string().url(),
+      }),
+    }),
+    // Copy for the tutorial overview page. `hero.snippet` is markdown that the
+    // `content:file:afterParse` hook highlights at build time.
+    tutorialPage: defineCollection({
+      type: 'data',
+      source: 'tutorial.yml',
+      schema: z.object({
+        hero: z.object({
+          title: z.string(),
+          description: z.string(),
+          cta: z.string(),
+          note: z.string(),
+          snippet: z.any(),
+          response: z.object({
+            status: z.number(),
+            request: z.string(),
+            body: z.string(),
+          }),
+        }),
+      }),
+    }),
+    // Interactive tutorial steps. Directories are named `NN-slug`: the numeric
+    // prefix orders them, the rest is the public slug (see app/utils/tutorial.ts).
+    // Each step directory also holds `files/` and `solution/` Python sources,
+    // which reach the client through import.meta.glob rather than this collection.
+    tutorial: defineCollection({
+      type: 'page',
+      source: 'tutorial/*/index.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        // One line on what the step teaches, shown on the tutorial overview.
+        teaches: z.string(),
+        requests: z.array(TutorialRequest),
       }),
     }),
     templates: defineCollection({

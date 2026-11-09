@@ -1,0 +1,22 @@
+hero:
+  title: Learn Litestar in your browser
+  description: Write real Python and send real requests to a real Litestar app, without installing anything. The tutorial runs entirely in your browser.
+  cta: Start the tutorial
+  note: Your code runs as CPython compiled to WebAssembly, and requests go straight to the ASGI app. The runtime downloads once, about 5 MB, and your browser caches it from then on.
+  # Highlighted at build time by the `content:file:afterParse` hook in
+  # nuxt.config.ts — MDC's runtime highlighter needs a server route, which a
+  # static build doesn't have.
+  snippet: |
+    ```python [main.py]
+    from litestar import Litestar, get
+
+    @get("/")
+    async def index() -> dict[str, str]:
+        return {"hello": "litestar"}
+
+    app = Litestar([index])
+    ```
+  response:
+    status: 200
+    request: GET /
+    body: '{"hello":"litestar"}'
