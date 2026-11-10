@@ -28,14 +28,21 @@ if (!step.value) {
   })
 }
 
+const stepKey = computed(() => `${trackSlug.value}/${slug.value}`)
+
 const stepFiles = useTutorialStepFiles()
 const code = computed(
-  () =>
-    stepFiles[`${trackSlug.value}/${slug.value}`] ?? {
-      files: {},
-      solution: {},
-    },
+  () => stepFiles[stepKey.value] ?? { files: {}, solution: {} },
 )
+
+// Owned here rather than inside the workspace: the toolbar and the editor sit
+// on opposite sides of the splitter.
+const session = useTutorialSession({
+  step: () => stepKey.value,
+  files: () => code.value.files,
+  solution: () => code.value.solution,
+  requests: () => step.value?.requests ?? [],
+})
 
 const title = computed(() => step.value!.title)
 const description = computed(() => step.value!.description)
@@ -52,15 +59,17 @@ useSeoMeta({
 </script>
 
 <template>
-  <div v-if="step && track" class="h-full">
+  <div v-if="step && track" class="flex h-full flex-col">
+    <TutorialBar :step="step" :track="track" :session="session" />
+
     <USplitter
-      :key="kebabCase(`${trackSlug}-${slug}`)"
+      :key="kebabCase(stepKey)"
       auto-save-id="litestar-tutorial"
       :items="[
         { slot: 'lesson', defaultSize: 42, minSize: 25 },
         { slot: 'workspace', minSize: 30 },
       ]"
-      class="h-full bg-default"
+      class="min-h-0 flex-1 bg-default"
       :ui="{
         handle:
           'border-e border-default transition-colors hover:border-primary data-[resize-handle-state=drag]:border-primary',
@@ -72,15 +81,10 @@ useSeoMeta({
 
       <template #workspace>
         <ClientOnly>
-          <TutorialWorkspace
-            :step="`${trackSlug}/${slug}`"
-            :files="code.files"
-            :solution="code.solution"
-            :requests="step.requests"
-          />
+          <TutorialWorkspace :step="stepKey" :session="session" />
 
           <template #fallback>
-            <div class="flex h-full flex-col gap-3 p-4">
+            <div class="flex h-full w-full flex-col gap-3 p-4">
               <USkeleton class="h-6 w-40" />
               <USkeleton class="h-full w-full" />
             </div>

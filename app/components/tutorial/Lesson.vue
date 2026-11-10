@@ -4,7 +4,7 @@ import type { TutorialChapter, TutorialTrack } from '~/types'
 const { step, track } = defineProps<{
   /** The chapter being read. */
   step: TutorialChapter
-  /** Its track — drives the switcher and the prev/next links. */
+  /** Its track — drives the prev/next links. */
   track: TutorialTrack
 }>()
 
@@ -16,41 +16,6 @@ const chapterUrl = (slug: string) => `/tutorial/${track.slug}/${slug}`
 
 <template>
   <div class="flex h-full flex-col">
-    <div class="flex items-center gap-2 border-b border-default px-4 py-2">
-      <!-- Grouped tight and borderless so the three read as one control
-           cluster rather than three separate widgets. -->
-      <div class="flex items-center gap-0.5">
-        <TutorialChapterMenu :track="track" :current="step.slug" />
-
-        <UButton
-          icon="i-lucide-arrow-left"
-          color="neutral"
-          variant="ghost"
-          size="xs"
-          square
-          :to="surrounding.prev ? chapterUrl(surrounding.prev) : undefined"
-          :disabled="!surrounding.prev"
-          aria-label="Previous chapter"
-        />
-        <UButton
-          icon="i-lucide-arrow-right"
-          color="neutral"
-          variant="ghost"
-          size="xs"
-          square
-          :to="surrounding.next ? chapterUrl(surrounding.next) : undefined"
-          :disabled="!surrounding.next"
-          aria-label="Next chapter"
-        />
-      </div>
-
-      <p class="truncate text-sm">
-        <span class="text-muted">{{ step.section }}</span>
-        <span class="mx-1.5 text-dimmed">/</span>
-        <span class="font-medium text-highlighted">{{ step.title }}</span>
-      </p>
-    </div>
-
     <div class="flex-1 overflow-y-auto px-4 py-5">
       <h1 class="mb-3 text-xl font-semibold text-highlighted">
         {{ step.title }}
