@@ -1,7 +1,7 @@
 ---
 title: Path and query parameters
 description: Let Litestar parse, coerce and validate your parameters straight from type annotations.
-section: Basics
+section: First steps
 teaches: coercion, and why /items/abc is a 404
 requests:
   - label: GET /items/42

@@ -197,13 +197,13 @@ describe('chapter 03 — request body validation', () => {
   ]
 
   it('accepts an empty title before the constraint is added', async () => {
-    const result = await run(step('03-validation', 'files'), requests)
+    const result = await run(step('04-validation', 'files'), requests)
 
     expect(result.results?.map((r) => r.status)).toEqual([201, 201, 400])
   })
 
   it('rejects an empty title once min_length is declared', async () => {
-    const result = await run(step('03-validation', 'solution'), requests)
+    const result = await run(step('04-validation', 'solution'), requests)
 
     expect(result.results?.map((r) => r.status)).toEqual([201, 400, 400])
     expect(result.results?.[1]?.body).toContain('length >= 1')
@@ -220,24 +220,49 @@ describe('chapter 04 — controllers across folders', () => {
   ]
 
   it('ships both files to the runner', () => {
-    expect(Object.keys(step('04-controllers', 'files')).sort()).toEqual([
+    expect(Object.keys(step('08-controllers', 'files')).sort()).toEqual([
       'controllers/greet.py',
       'main.py',
     ])
   })
 
   it('has no routes until the controller is registered', async () => {
-    const result = await run(step('04-controllers', 'files'), requests)
+    const result = await run(step('08-controllers', 'files'), requests)
 
     expect(result.error).toBeUndefined()
     expect(result.results?.map((r) => r.status)).toEqual([404, 404])
   })
 
   it('greets through the controller once solved', async () => {
-    const result = await run(step('04-controllers', 'solution'), requests)
+    const result = await run(step('08-controllers', 'solution'), requests)
 
     expect(result.results?.map((r) => r.status)).toEqual([200, 200])
     expect(result.results?.[0]?.body).toBe('{"message":"Hello, world"}')
     expect(result.results?.[1]?.body).toBe('{"message":"Hello, litestar!"}')
+  })
+})
+
+describe('chapter 03 — query parameters', () => {
+  const requests = [
+    { label: 'limit=2', path: '/items?limit=2' },
+    { label: 'no limit', path: '/items' },
+    { label: 'limit=3&q=spec', path: '/items?limit=3&q=spec' },
+    { label: 'limit=0', path: '/items?limit=0' },
+  ]
+
+  it('rejects a request missing the required parameter', async () => {
+    const result = await run(step('03-query-params', 'files'), requests)
+
+    // `limit` has no default, so /items never reaches the handler.
+    expect(result.results?.map((r) => r.status)).toEqual([200, 400, 200, 200])
+  })
+
+  it('filters on q and rejects limit=0 once solved', async () => {
+    const result = await run(step('03-query-params', 'solution'), requests)
+
+    expect(result.results?.map((r) => r.status)).toEqual([200, 400, 200, 400])
+    expect(result.results?.[2]?.body).toBe(
+      '{"items":["msgspec","sqlspec"],"q":"spec"}',
+    )
   })
 })

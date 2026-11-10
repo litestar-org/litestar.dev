@@ -20,6 +20,10 @@ export const useTutorialChapters = async () => {
 
   const chapters = computed<TutorialChapter[]>(() =>
     (chapterData.value ?? []).flatMap((item) => {
+      // Drafts are scaffolding: readable while writing them, absent from the
+      // build so the live tutorial only lists chapters that exist.
+      if (item.draft && !import.meta.dev) return []
+
       const location = chapterFromPath(item.path)
       return location ? [{ ...item, ...location }] : []
     }),

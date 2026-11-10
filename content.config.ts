@@ -340,6 +340,9 @@ export default defineContentConfig({
         section: z.string(),
         // One line on what the step teaches, shown on the tutorial overview.
         teaches: z.string(),
+        // Scaffolded but unwritten. Visible in dev, hidden from the build, so
+        // the outline can exist in the repo without shipping empty chapters.
+        draft: z.boolean().default(false),
         requests: z.array(TutorialRequest),
       }),
     }),

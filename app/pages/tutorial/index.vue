@@ -107,8 +107,13 @@ useSeoMeta({
 
     <div class="mt-16 grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12">
       <!-- Tracks. Selecting one swaps the chapter list beside it rather than
-           navigating, so comparing tracks costs nothing. -->
-      <nav aria-label="Tracks">
+           navigating, so comparing tracks costs nothing. `self-start` matters:
+           a stretched grid item is as tall as the list, which leaves sticky
+           nothing to stick to. -->
+      <nav
+        aria-label="Tracks"
+        class="lg:sticky lg:top-[calc(var(--ui-header-height)+1.5rem)] lg:self-start"
+      >
         <ul class="flex flex-col gap-1">
           <li v-for="candidate of tracks" :key="candidate.slug">
             <button

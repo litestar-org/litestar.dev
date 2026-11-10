@@ -1,7 +1,7 @@
 ---
 title: Your first route
 description: Build a Litestar app with a single route handler and watch it answer a request — all inside your browser.
-section: Introduction
+section: First steps
 teaches: routing and type-driven responses
 requests:
   - label: GET /
