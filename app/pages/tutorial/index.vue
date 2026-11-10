@@ -13,8 +13,31 @@ const [{ data: page }, { tracks }] = await Promise.all([
 const hero = computed(() => page.value?.hero)
 
 const selected = ref(tracks.value[0]?.slug ?? '')
-const track = computed(() =>
-  tracks.value.find((candidate) => candidate.slug === selected.value),
+
+/** Chapters grouped under their section heading, consecutively. */
+const groupBySection = (chapters: TutorialChapter[]) => {
+  const groups: { title: string; chapters: TutorialChapter[] }[] = []
+
+  for (const chapter of chapters) {
+    const last = groups.at(-1)
+    if (last?.title === chapter.section) last.chapters.push(chapter)
+    else groups.push({ title: chapter.section, chapters: [chapter] })
+  }
+
+  return groups
+}
+
+/**
+ * Every track's chapter list is rendered, with the inactive ones hidden rather
+ * than removed: `crawlLinks` only prerenders what it can find in the markup, so
+ * swapping lists on click would leave every non-default track's chapters
+ * unbuilt — and 404 on a static host.
+ */
+const lists = computed(() =>
+  tracks.value.map((track) => ({
+    track,
+    sections: groupBySection(track.chapters),
+  })),
 )
 
 /** First chapter of the first track that has any — where the CTA goes. */
@@ -24,19 +47,6 @@ const start = computed(() => {
     if (first) return `/tutorial/${candidate.slug}/${first.slug}`
   }
   return undefined
-})
-
-/** Chapters of the selected track, grouped under their section heading. */
-const sections = computed(() => {
-  const groups: { title: string; chapters: TutorialChapter[] }[] = []
-
-  for (const chapter of track.value?.chapters ?? []) {
-    const last = groups.at(-1)
-    if (last?.title === chapter.section) last.chapters.push(chapter)
-    else groups.push({ title: chapter.section, chapters: [chapter] })
-  }
-
-  return groups
 })
 
 const title = computed(() => hero.value?.title ?? 'Litestar tutorial')
@@ -136,48 +146,54 @@ useSeoMeta({
         </ul>
       </nav>
 
-      <div v-if="track" class="max-w-2xl">
+      <div class="max-w-2xl">
         <div
-          v-for="section of sections"
-          :key="section.title"
-          class="mb-8 last:mb-0"
+          v-for="list of lists"
+          v-show="list.track.slug === selected"
+          :key="list.track.slug"
         >
-          <h2 class="mb-1 text-xs font-medium text-dimmed">
-            {{ section.title }}
-          </h2>
+          <div
+            v-for="section of list.sections"
+            :key="section.title"
+            class="mb-8 last:mb-0"
+          >
+            <h2 class="mb-1 text-xs font-medium text-dimmed">
+              {{ section.title }}
+            </h2>
 
-          <ul class="divide-y divide-default border-y border-default">
-            <li v-for="chapter of section.chapters" :key="chapter.slug">
-              <NuxtLink
-                :to="`/tutorial/${track.slug}/${chapter.slug}`"
-                class="group flex items-center gap-4 py-3.5 transition-colors hover:bg-elevated/40"
-              >
-                <span class="min-w-0">
-                  <span class="block font-medium text-highlighted">
-                    {{ chapter.title }}
+            <ul class="divide-y divide-default border-y border-default">
+              <li v-for="chapter of section.chapters" :key="chapter.slug">
+                <NuxtLink
+                  :to="`/tutorial/${list.track.slug}/${chapter.slug}`"
+                  class="group flex items-center gap-4 py-3.5 transition-colors hover:bg-elevated/40"
+                >
+                  <span class="min-w-0">
+                    <span class="block font-medium text-highlighted">
+                      {{ chapter.title }}
+                    </span>
+                    <span class="mt-0.5 block text-sm text-muted">
+                      {{ chapter.description }}
+                    </span>
                   </span>
-                  <span class="mt-0.5 block text-sm text-muted">
-                    {{ chapter.description }}
-                  </span>
-                </span>
 
-                <UIcon
-                  name="i-lucide-arrow-right"
-                  class="ms-auto size-4 shrink-0 text-dimmed transition-colors group-hover:text-primary"
-                />
-              </NuxtLink>
-            </li>
-          </ul>
+                  <UIcon
+                    name="i-lucide-arrow-right"
+                    class="ms-auto size-4 shrink-0 text-dimmed transition-colors group-hover:text-primary"
+                  />
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
+
+          <!-- A track can exist before anything is written for it. -->
+          <p
+            v-if="!list.sections.length"
+            class="rounded-lg border border-dashed border-default px-4 py-8 text-center text-sm text-muted"
+          >
+            {{ list.track.description }}
+            <span class="mt-1 block text-dimmed">Chapters coming soon.</span>
+          </p>
         </div>
-
-        <!-- A track can exist before anything is written for it. -->
-        <p
-          v-if="!sections.length"
-          class="rounded-lg border border-dashed border-default px-4 py-8 text-center text-sm text-muted"
-        >
-          {{ track.description }}
-          <span class="mt-1 block text-dimmed">Chapters coming soon.</span>
-        </p>
       </div>
     </div>
   </UContainer>

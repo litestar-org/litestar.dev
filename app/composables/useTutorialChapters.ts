@@ -9,6 +9,12 @@ import type { TutorialChapter, TutorialTrack } from '~/types'
  * whatever the filesystem says, with no `order` field to keep in sync.
  */
 export const useTutorialChapters = async () => {
+  // Drafts are scaffolding. They're for reviewing the outline, so they show in
+  // dev and on PR previews (`NUXT_SITE_ENV: preview` in .github/workflows/pr.yml)
+  // and are left out of the production build.
+  const site = useSiteConfig()
+  const showDrafts = import.meta.dev || site.env === 'preview'
+
   const [{ data: trackData }, { data: chapterData }] = await Promise.all([
     useAsyncData('tutorial-tracks', () =>
       queryCollection('tutorialTracks').order('stem', 'ASC').all(),
@@ -20,9 +26,7 @@ export const useTutorialChapters = async () => {
 
   const chapters = computed<TutorialChapter[]>(() =>
     (chapterData.value ?? []).flatMap((item) => {
-      // Drafts are scaffolding: readable while writing them, absent from the
-      // build so the live tutorial only lists chapters that exist.
-      if (item.draft && !import.meta.dev) return []
+      if (item.draft && !showDrafts) return []
 
       const location = chapterFromPath(item.path)
       return location ? [{ ...item, ...location }] : []
