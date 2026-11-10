@@ -292,13 +292,46 @@ export default defineContentConfig({
         website: z.string().url(),
       }),
     }),
-    // Interactive tutorial steps. Directories are named `NN-slug`: the numeric
-    // prefix orders them, the rest is the public slug (see app/utils/tutorial.ts).
-    // Each step directory also holds `files/` and `solution/` Python sources,
-    // which reach the client through import.meta.glob rather than this collection.
+    // Copy for the tutorial overview's hero. `hero.snippet` is markdown that the
+    // `content:file:afterParse` hook highlights at build time.
+    tutorialPage: defineCollection({
+      type: 'data',
+      source: 'tutorial.yml',
+      schema: z.object({
+        hero: z.object({
+          title: z.string(),
+          description: z.string(),
+          cta: z.string(),
+          note: z.string(),
+          snippet: z.any(),
+          response: z.object({
+            status: z.number(),
+            request: z.string(),
+            body: z.string(),
+          }),
+        }),
+      }),
+    }),
+    // Top level of the tutorial. Declared by a `track.yml` per directory rather
+    // than inferred from the chapters, so a track can exist before anything has
+    // been written for it. The slug comes from the directory name.
+    tutorialTracks: defineCollection({
+      type: 'data',
+      source: 'tutorial/*/track.yml',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+      }),
+    }),
+    // Interactive tutorial chapters, two levels deep:
+    // `tutorial/<NN-track>/<NN-chapter>`. Both levels are named `NN-slug` — the
+    // numeric prefix orders them, the rest is the public slug (see
+    // app/utils/tutorial.ts). Each chapter directory also holds `files/` and
+    // `solution/` Python sources, which reach the client through
+    // import.meta.glob rather than this collection.
     tutorial: defineCollection({
       type: 'page',
-      source: 'tutorial/*/index.md',
+      source: 'tutorial/*/*/index.md',
       schema: z.object({
         title: z.string(),
         description: z.string(),

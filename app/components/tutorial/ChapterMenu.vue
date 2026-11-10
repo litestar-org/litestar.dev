@@ -1,18 +1,36 @@
 <script setup lang="ts">
-import type { TutorialChapter } from '~/types'
+import type { TutorialChapter, TutorialTrack } from '~/types'
 
-const { chapters, current } = defineProps<{
-  chapters: TutorialChapter[]
+const { track, current } = defineProps<{
+  track: TutorialTrack
   /** Slug of the chapter being read, marked and highlighted in the list. */
   current: string
 }>()
+
+/**
+ * Chapters grouped under their section heading.
+ *
+ * Grouping is consecutive rather than by lookup, so a section that appears
+ * twice in a track stays two groups instead of being silently merged.
+ */
+const sections = computed(() => {
+  const groups: { title: string; chapters: TutorialChapter[] }[] = []
+
+  for (const chapter of track.chapters) {
+    const last = groups.at(-1)
+    if (last?.title === chapter.section) last.chapters.push(chapter)
+    else groups.push({ title: chapter.section, chapters: [chapter] })
+  }
+
+  return groups
+})
 </script>
 
 <template>
   <USlideover
     side="left"
-    title="Chapters"
-    description="Jump to any chapter of the tutorial."
+    :title="track.title"
+    :description="`${track.chapters.length} chapters`"
     :ui="{ content: 'max-w-sm' }"
   >
     <UButton
@@ -25,42 +43,42 @@ const { chapters, current } = defineProps<{
     />
 
     <template #body="{ close }">
-      <nav>
-        <ul class="flex flex-col gap-1">
-          <li v-for="(chapter, index) of chapters" :key="chapter.slug">
-            <NuxtLink
-              :to="`/tutorial/${chapter.slug}`"
-              class="flex items-start gap-3 rounded-lg px-3 py-2.5 transition-colors"
-              :class="
-                chapter.slug === current
-                  ? 'bg-elevated'
-                  : 'hover:bg-elevated/50'
-              "
-              :aria-current="chapter.slug === current ? 'page' : undefined"
-              @click="close()"
-            >
-              <span
-                class="flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold"
+      <nav class="flex flex-col gap-5">
+        <div v-for="section of sections" :key="section.title">
+          <p class="px-3 pb-1 text-xs font-medium text-dimmed">
+            {{ section.title }}
+          </p>
+
+          <ul>
+            <li v-for="chapter of section.chapters" :key="chapter.slug">
+              <NuxtLink
+                :to="`/tutorial/${track.slug}/${chapter.slug}`"
+                class="block rounded-lg px-3 py-2 transition-colors"
                 :class="
                   chapter.slug === current
-                    ? 'bg-primary text-inverted'
-                    : 'bg-elevated text-muted'
+                    ? 'bg-elevated'
+                    : 'hover:bg-elevated/50'
                 "
+                :aria-current="chapter.slug === current ? 'page' : undefined"
+                @click="close()"
               >
-                {{ index + 1 }}
-              </span>
-
-              <span class="min-w-0">
-                <span class="block text-sm font-medium text-highlighted">
+                <span
+                  class="block text-sm"
+                  :class="
+                    chapter.slug === current
+                      ? 'font-medium text-primary'
+                      : 'font-medium text-highlighted'
+                  "
+                >
                   {{ chapter.title }}
                 </span>
                 <span class="block text-xs text-muted">
                   {{ chapter.teaches }}
                 </span>
-              </span>
-            </NuxtLink>
-          </li>
-        </ul>
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
       </nav>
     </template>
 

@@ -20,9 +20,9 @@ const runnerSource = readFileSync(
   'utf8',
 )
 
-/** Read a step's code from disk, exactly as the glob hands it to the browser. */
+/** Read a chapter's code from disk, exactly as the glob hands it to the browser. */
 const step = (dir: string, kind: 'files' | 'solution') => {
-  const base = join(root, 'content/tutorial', dir, kind)
+  const base = join(root, 'content/tutorial/01-basics', dir, kind)
 
   return Object.fromEntries(
     globSync('**/*.py', { cwd: base }).map((file) => [

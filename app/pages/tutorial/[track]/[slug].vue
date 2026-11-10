@@ -7,32 +7,34 @@ definePageMeta({
 })
 
 const route = useRoute()
+const trackSlug = computed(() => String(route.params.track))
 const slug = computed(() => String(route.params.slug))
 
-const { data: steps } = await useAsyncData('tutorial-steps', () =>
-  queryCollection('tutorial').order('path', 'ASC').all(),
+const { tracks } = await useTutorialChapters()
+
+const track = computed(() =>
+  tracks.value.find((candidate) => candidate.slug === trackSlug.value),
 )
 
-const chapters = computed(() =>
-  (steps.value ?? []).flatMap((item) => {
-    const stepSlug = stepSlugFromPath(item.path)
-    return stepSlug ? [{ ...item, slug: stepSlug }] : []
-  }),
+const step = computed(() =>
+  track.value?.chapters.find((chapter) => chapter.slug === slug.value),
 )
-
-const step = computed(() => chapters.value.find((c) => c.slug === slug.value))
 
 if (!step.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Tutorial step not found',
+    statusMessage: 'Tutorial chapter not found',
     fatal: true,
   })
 }
 
 const stepFiles = useTutorialStepFiles()
 const code = computed(
-  () => stepFiles[slug.value] ?? { files: {}, solution: {} },
+  () =>
+    stepFiles[`${trackSlug.value}/${slug.value}`] ?? {
+      files: {},
+      solution: {},
+    },
 )
 
 const title = computed(() => step.value!.title)
@@ -50,9 +52,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <div v-if="step" class="h-full">
+  <div v-if="step && track" class="h-full">
     <USplitter
-      :key="kebabCase(slug)"
+      :key="kebabCase(`${trackSlug}-${slug}`)"
       auto-save-id="litestar-tutorial"
       :items="[
         { slot: 'lesson', defaultSize: 42, minSize: 25 },
@@ -65,13 +67,13 @@ useSeoMeta({
       }"
     >
       <template #lesson>
-        <TutorialLesson :step="step" :chapters="chapters" />
+        <TutorialLesson :step="step" :track="track" />
       </template>
 
       <template #workspace>
         <ClientOnly>
           <TutorialWorkspace
-            :step="slug"
+            :step="`${trackSlug}/${slug}`"
             :files="code.files"
             :solution="code.solution"
             :requests="step.requests"

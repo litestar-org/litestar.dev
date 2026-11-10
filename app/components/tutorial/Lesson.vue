@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import type { TutorialChapter } from '~/types'
+import type { TutorialChapter, TutorialTrack } from '~/types'
 
-const { step, chapters } = defineProps<{
+const { step, track } = defineProps<{
   /** The chapter being read. */
   step: TutorialChapter
-  /** Every chapter, in order — drives the switcher and the prev/next links. */
-  chapters: TutorialChapter[]
+  /** Its track — drives the switcher and the prev/next links. */
+  track: TutorialTrack
 }>()
 
-const slugs = computed(() => chapters.map((chapter) => chapter.slug))
-
+const slugs = computed(() => track.chapters.map((chapter) => chapter.slug))
 const surrounding = computed(() => stepSurroundings(slugs.value, step.slug))
+
+const chapterUrl = (slug: string) => `/tutorial/${track.slug}/${slug}`
 </script>
 
 <template>
@@ -19,7 +20,7 @@ const surrounding = computed(() => stepSurroundings(slugs.value, step.slug))
       <!-- Grouped tight and borderless so the three read as one control
            cluster rather than three separate widgets. -->
       <div class="flex items-center gap-0.5">
-        <TutorialChapterMenu :chapters="chapters" :current="step.slug" />
+        <TutorialChapterMenu :track="track" :current="step.slug" />
 
         <UButton
           icon="i-lucide-arrow-left"
@@ -27,7 +28,7 @@ const surrounding = computed(() => stepSurroundings(slugs.value, step.slug))
           variant="ghost"
           size="xs"
           square
-          :to="surrounding.prev ? `/tutorial/${surrounding.prev}` : undefined"
+          :to="surrounding.prev ? chapterUrl(surrounding.prev) : undefined"
           :disabled="!surrounding.prev"
           aria-label="Previous chapter"
         />
@@ -37,7 +38,7 @@ const surrounding = computed(() => stepSurroundings(slugs.value, step.slug))
           variant="ghost"
           size="xs"
           square
-          :to="surrounding.next ? `/tutorial/${surrounding.next}` : undefined"
+          :to="surrounding.next ? chapterUrl(surrounding.next) : undefined"
           :disabled="!surrounding.next"
           aria-label="Next chapter"
         />
@@ -66,7 +67,7 @@ const surrounding = computed(() => stepSurroundings(slugs.value, step.slug))
     >
       <UButton
         v-if="surrounding.prev"
-        :to="`/tutorial/${surrounding.prev}`"
+        :to="chapterUrl(surrounding.prev)"
         icon="i-lucide-arrow-left"
         color="neutral"
         variant="ghost"
@@ -87,7 +88,7 @@ const surrounding = computed(() => stepSurroundings(slugs.value, step.slug))
 
       <UButton
         v-if="surrounding.next"
-        :to="`/tutorial/${surrounding.next}`"
+        :to="chapterUrl(surrounding.next)"
         trailing-icon="i-lucide-arrow-right"
         size="sm"
       >

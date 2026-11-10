@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest'
 import {
+  chapterFromPath,
   groupStepFiles,
   parseStepDir,
-  stepSlugFromPath,
   stepSurroundings,
+  trackSlugFromStem,
 } from '../../app/utils/tutorial'
 
 describe('parseStepDir', () => {
@@ -26,61 +27,98 @@ describe('parseStepDir', () => {
   })
 })
 
-describe('stepSlugFromPath', () => {
-  it('derives the slug from a content path', () => {
-    expect(stepSlugFromPath('/tutorial/01-hello')).toBe('hello')
-    expect(stepSlugFromPath('/tutorial/02-path-params')).toBe('path-params')
+describe('chapterFromPath', () => {
+  it('derives the track and chapter slugs', () => {
+    expect(chapterFromPath('/tutorial/01-basics/01-hello')).toEqual({
+      trackSlug: 'basics',
+      slug: 'hello',
+    })
+    expect(chapterFromPath('/tutorial/02-database/03-repositories')).toEqual({
+      trackSlug: 'database',
+      slug: 'repositories',
+    })
   })
 
-  it('tolerates a trailing segment or slash', () => {
-    expect(stepSlugFromPath('/tutorial/01-hello/')).toBe('hello')
+  it('tolerates a trailing slash', () => {
+    expect(chapterFromPath('/tutorial/01-basics/01-hello/')).toEqual({
+      trackSlug: 'basics',
+      slug: 'hello',
+    })
   })
 
-  it('returns null for paths outside the tutorial tree', () => {
-    expect(stepSlugFromPath('/blog/some-post')).toBeNull()
-    expect(stepSlugFromPath('/tutorial')).toBeNull()
+  it('returns null for anything that is not a chapter', () => {
+    expect(chapterFromPath('/blog/some-post')).toBeNull()
+    expect(chapterFromPath('/tutorial')).toBeNull()
+    expect(chapterFromPath('/tutorial/01-basics')).toBeNull()
+    // Both levels need their ordering prefix.
+    expect(chapterFromPath('/tutorial/basics/01-hello')).toBeNull()
+    expect(chapterFromPath('/tutorial/01-basics/hello')).toBeNull()
+  })
+})
+
+describe('trackSlugFromStem', () => {
+  it('derives the slug from a track file stem', () => {
+    expect(trackSlugFromStem('tutorial/01-basics/track')).toBe('basics')
+    expect(trackSlugFromStem('tutorial/02-advanced/track')).toBe('advanced')
+  })
+
+  it('tolerates a leading slash', () => {
+    expect(trackSlugFromStem('/tutorial/01-basics/track')).toBe('basics')
+  })
+
+  it('returns null outside the tutorial tree or without an order prefix', () => {
+    expect(trackSlugFromStem('blog/some-post')).toBeNull()
+    expect(trackSlugFromStem('tutorial/basics/track')).toBeNull()
+    expect(trackSlugFromStem('tutorial')).toBeNull()
   })
 })
 
 describe('groupStepFiles', () => {
   const modules = {
-    '/content/tutorial/01-hello/files/main.py': 'starting hello',
-    '/content/tutorial/01-hello/solution/main.py': 'solved hello',
-    '/content/tutorial/02-path-params/files/main.py': 'starting params',
-    '/content/tutorial/02-path-params/solution/main.py': 'solved params',
+    '/content/tutorial/01-basics/01-hello/files/main.py': 'starting hello',
+    '/content/tutorial/01-basics/01-hello/solution/main.py': 'solved hello',
+    '/content/tutorial/01-basics/02-path-params/files/main.py':
+      'starting params',
+    '/content/tutorial/01-basics/02-path-params/solution/main.py':
+      'solved params',
   }
 
-  it('groups raw modules by step slug, split by kind', () => {
+  it('keys steps by track and slug, split by kind', () => {
     expect(groupStepFiles(modules)).toEqual({
-      hello: {
+      'basics/hello': {
         files: { 'main.py': 'starting hello' },
         solution: { 'main.py': 'solved hello' },
       },
-      'path-params': {
+      'basics/path-params': {
         files: { 'main.py': 'starting params' },
         solution: { 'main.py': 'solved params' },
       },
     })
   })
 
-  it('keeps multiple files per step', () => {
+  it('keeps chapters from different tracks apart', () => {
     const grouped = groupStepFiles({
-      '/content/tutorial/01-hello/files/main.py': 'app',
-      '/content/tutorial/01-hello/files/models.py': 'models',
+      '/content/tutorial/01-basics/01-hello/files/main.py': 'basics',
+      '/content/tutorial/02-database/01-hello/files/main.py': 'database',
     })
 
-    expect(Object.keys(grouped.hello!.files)).toEqual(['main.py', 'models.py'])
-    expect(grouped.hello!.solution).toEqual({})
+    expect(Object.keys(grouped).sort()).toEqual([
+      'basics/hello',
+      'database/hello',
+    ])
+    expect(grouped['database/hello']!.files['main.py']).toBe('database')
   })
 
   it('keeps the subpath of files in folders', () => {
     const grouped = groupStepFiles({
-      '/content/tutorial/04-controllers/files/main.py': 'app',
-      '/content/tutorial/04-controllers/files/controllers/greet.py': 'greet',
-      '/content/tutorial/04-controllers/solution/controllers/greet.py': 'done',
+      '/content/tutorial/01-basics/04-controllers/files/main.py': 'app',
+      '/content/tutorial/01-basics/04-controllers/files/controllers/greet.py':
+        'greet',
+      '/content/tutorial/01-basics/04-controllers/solution/controllers/greet.py':
+        'done',
     })
 
-    expect(grouped.controllers).toEqual({
+    expect(grouped['basics/controllers']).toEqual({
       files: { 'main.py': 'app', 'controllers/greet.py': 'greet' },
       solution: { 'controllers/greet.py': 'done' },
     })
@@ -89,12 +127,13 @@ describe('groupStepFiles', () => {
   it('ignores paths that are not step files', () => {
     expect(
       groupStepFiles({
-        '/content/tutorial/01-hello/notes.py': 'stray',
-        '/content/tutorial/hello/files/main.py': 'unprefixed',
-        '/content/tutorial/01-hello/files/main.py': 'kept',
+        '/content/tutorial/01-basics/01-hello/notes.py': 'stray',
+        '/content/tutorial/basics/01-hello/files/main.py': 'unprefixed track',
+        '/content/tutorial/01-basics/hello/files/main.py': 'unprefixed chapter',
+        '/content/tutorial/01-basics/01-hello/files/main.py': 'kept',
       }),
     ).toEqual({
-      hello: { files: { 'main.py': 'kept' }, solution: {} },
+      'basics/hello': { files: { 'main.py': 'kept' }, solution: {} },
     })
   })
 })
