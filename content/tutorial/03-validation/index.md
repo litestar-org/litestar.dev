@@ -1,6 +1,7 @@
 ---
 title: Validating request bodies
 description: Declare a msgspec Struct and get parsing, validation and typed error responses for free.
+section: Basics
 teaches: msgspec Structs and typed 400s
 requests:
   - label: POST /todos

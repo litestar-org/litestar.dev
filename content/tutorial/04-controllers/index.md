@@ -1,6 +1,7 @@
 ---
 title: Organising with controllers
 description: Group related handlers into a Controller and split them out of main.py, the way a real project grows.
+section: Structure
 teaches: splitting handlers out of main.py
 requests:
   - label: GET /greet/world

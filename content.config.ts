@@ -292,26 +292,6 @@ export default defineContentConfig({
         website: z.string().url(),
       }),
     }),
-    // Copy for the tutorial overview page. `hero.snippet` is markdown that the
-    // `content:file:afterParse` hook highlights at build time.
-    tutorialPage: defineCollection({
-      type: 'data',
-      source: 'tutorial.yml',
-      schema: z.object({
-        hero: z.object({
-          title: z.string(),
-          description: z.string(),
-          cta: z.string(),
-          note: z.string(),
-          snippet: z.any(),
-          response: z.object({
-            status: z.number(),
-            request: z.string(),
-            body: z.string(),
-          }),
-        }),
-      }),
-    }),
     // Interactive tutorial steps. Directories are named `NN-slug`: the numeric
     // prefix orders them, the rest is the public slug (see app/utils/tutorial.ts).
     // Each step directory also holds `files/` and `solution/` Python sources,
@@ -322,6 +302,9 @@ export default defineContentConfig({
       schema: z.object({
         title: z.string(),
         description: z.string(),
+        // First level of the chapter hierarchy, e.g. `Basics / Path and query
+        // parameters`. Consecutive chapters sharing a section are grouped.
+        section: z.string(),
         // One line on what the step teaches, shown on the tutorial overview.
         teaches: z.string(),
         requests: z.array(TutorialRequest),

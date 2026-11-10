@@ -119,112 +119,136 @@ const formatBody = (body: string, contentType: string) => {
     </div>
 
     <USplitter
-      auto-save-id="litestar-tutorial-files"
+      orientation="vertical"
+      auto-save-id="litestar-tutorial-output"
       :items="[
-        { slot: 'files', defaultSize: 30, minSize: 15 },
-        { slot: 'editor', minSize: 30 },
+        { slot: 'code', minSize: 20 },
+        { slot: 'output', defaultSize: 30, minSize: 10 },
       ]"
-      class="min-h-48 flex-1 overflow-hidden"
+      class="min-h-0 flex-1"
       :ui="{
         handle:
-          'border-e border-default transition-colors hover:border-primary data-[resize-handle-state=drag]:border-primary',
+          'border-b border-default transition-colors hover:border-primary data-[resize-handle-state=drag]:border-primary',
       }"
     >
-      <template #files>
-        <!-- Same component the home page hero uses, so the file tree, folder
+      <template #code>
+        <USplitter
+          auto-save-id="litestar-tutorial-files"
+          :items="[
+            { slot: 'files', defaultSize: 30, minSize: 15 },
+            { slot: 'editor', minSize: 30 },
+          ]"
+          class="min-h-0 w-full flex-1 overflow-hidden"
+          :ui="{
+            handle:
+              'border-e border-default transition-colors hover:border-primary data-[resize-handle-state=drag]:border-primary',
+          }"
+        >
+          <template #files>
+            <!-- Same component the home page hero uses, so the file tree, folder
              icons and per-extension file icons match across the site. Its
              content half is hidden: the editor lives in the sibling panel so a
              splitter can sit between them. -->
-        <ProseCodeTree
-          v-model="activeFile"
-          :items="items"
-          expand-all
-          :ui="{
-            // `w-full min-w-0`: the splitter panel is a flex container, so the
-            // tree would otherwise shrink to the width of its longest filename.
-            // The `lg:` resets matter — the theme sets those at that breakpoint,
-            // and an unprefixed utility doesn't override a prefixed one.
-            root: 'my-0 block h-full lg:h-full w-full min-w-0 rounded-none border-0',
-            list: 'h-full border-b-0 border-e-0 lg:border-b-0 lg:border-e-0',
-            content: 'hidden',
-          }"
-        />
-      </template>
-
-      <template #editor>
-        <TutorialCodeEditor
-          v-model="sources[activeFile]!"
-          :key="`${step}-${activeFile}`"
-        />
-      </template>
-    </USplitter>
-
-    <div
-      class="flex max-h-[45%] min-h-32 flex-col overflow-y-auto bg-elevated/40"
-    >
-      <div
-        v-if="status === 'booting'"
-        class="flex flex-col gap-2 px-3 py-4 text-sm text-muted"
-      >
-        <span class="flex items-center gap-2">
-          <UIcon name="i-lucide-loader-circle" class="animate-spin" />
-          {{ statusMessage || 'Starting Python…' }}
-        </span>
-        <UProgress size="sm" />
-        <span class="text-xs text-dimmed">
-          CPython and Litestar are downloaded once, then cached by your browser.
-        </span>
-      </div>
-
-      <UAlert
-        v-else-if="status === 'failed'"
-        color="error"
-        variant="subtle"
-        icon="i-lucide-triangle-alert"
-        title="Couldn't start Python"
-        :description="error"
-        class="m-3"
-      />
-
-      <template v-else>
-        <UAlert
-          v-if="error"
-          color="error"
-          variant="subtle"
-          icon="i-lucide-circle-x"
-          title="Your code raised an error"
-          class="m-3"
-        >
-          <template #description>
-            <pre class="overflow-x-auto text-xs whitespace-pre-wrap">{{
-              error
-            }}</pre>
+            <ProseCodeTree
+              v-model="activeFile"
+              :items="items"
+              expand-all
+              :ui="{
+                // `w-full min-w-0`: the splitter panel is a flex container, so
+                // the tree would otherwise shrink to the width of its longest
+                // filename. The `lg:` resets matter — the theme sets those at
+                // that breakpoint, and an unprefixed utility doesn't override a
+                // prefixed one.
+                root: 'my-0 block h-full lg:h-full w-full min-w-0 rounded-none border-0',
+                list: 'h-full border-b-0 border-e-0 lg:border-b-0 lg:border-e-0',
+                content: 'hidden',
+              }"
+            />
           </template>
-        </UAlert>
 
-        <p v-else-if="!results.length" class="px-3 py-4 text-sm text-muted">
-          Press <UKbd value="Run" /> to send
-          {{ requests.length }}
-          {{ requests.length === 1 ? 'request' : 'requests' }}
-          to your app.
-        </p>
+          <template #editor>
+            <TutorialCodeEditor
+              v-model="sources[activeFile]!"
+              :key="`${step}-${activeFile}`"
+            />
+          </template>
+        </USplitter>
+      </template>
 
-        <div v-for="result of results" :key="result.label" class="px-3 py-2">
-          <div class="flex items-center gap-2">
-            <UBadge
-              :color="statusColor(result.status)"
-              variant="subtle"
-              size="sm"
-            >
-              {{ result.status }}
-            </UBadge>
-            <span class="font-mono text-xs text-muted">{{ result.label }}</span>
+      <template #output>
+        <div class="flex h-full w-full flex-col overflow-y-auto bg-elevated/40">
+          <div
+            v-if="status === 'booting'"
+            class="flex flex-col gap-2 px-3 py-4 text-sm text-muted"
+          >
+            <span class="flex items-center gap-2">
+              <UIcon name="i-lucide-loader-circle" class="animate-spin" />
+              {{ statusMessage || 'Starting Python…' }}
+            </span>
+            <UProgress size="sm" />
+            <span class="text-xs text-dimmed">
+              CPython and Litestar are downloaded once, then cached by your
+              browser.
+            </span>
           </div>
-          <pre class="mt-1.5 overflow-x-auto font-mono text-xs text-default">{{
-            formatBody(result.body, result.contentType)
-          }}</pre>
+
+          <UAlert
+            v-else-if="status === 'failed'"
+            color="error"
+            variant="subtle"
+            icon="i-lucide-triangle-alert"
+            title="Couldn't start Python"
+            :description="error"
+            class="m-3"
+          />
+
+          <template v-else>
+            <UAlert
+              v-if="error"
+              color="error"
+              variant="subtle"
+              icon="i-lucide-circle-x"
+              title="Your code raised an error"
+              class="m-3"
+            >
+              <template #description>
+                <pre class="overflow-x-auto text-xs whitespace-pre-wrap">{{
+                  error
+                }}</pre>
+              </template>
+            </UAlert>
+
+            <p v-else-if="!results.length" class="px-3 py-4 text-sm text-muted">
+              Press <UKbd value="Run" /> to send
+              {{ requests.length }}
+              {{ requests.length === 1 ? 'request' : 'requests' }}
+              to your app.
+            </p>
+
+            <div
+              v-for="result of results"
+              :key="result.label"
+              class="px-3 py-2"
+            >
+              <div class="flex items-center gap-2">
+                <UBadge
+                  :color="statusColor(result.status)"
+                  variant="subtle"
+                  size="sm"
+                >
+                  {{ result.status }}
+                </UBadge>
+                <span class="font-mono text-xs text-muted">{{
+                  result.label
+                }}</span>
+              </div>
+              <pre
+                class="mt-1.5 overflow-x-auto font-mono text-xs text-default"
+                >{{ formatBody(result.body, result.contentType) }}</pre>
+            </div>
+          </template>
         </div>
       </template>
-    </div>
+    </USplitter>
   </div>
 </template>
