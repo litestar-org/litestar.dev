@@ -93,7 +93,7 @@ def _reset_user_modules() -> None:
     importlib.invalidate_caches()
 
 
-def load_app(files: dict[str, str], entrypoint: str = "main.py") -> Any:
+def load_app(files: dict[str, str]) -> Any:
     """Write the step's files to the virtual FS and import its ``app``.
 
     The whole workdir is recreated each run: a file the reader removed (or one
@@ -109,14 +109,37 @@ def load_app(files: dict[str, str], entrypoint: str = "main.py") -> Any:
         target.write_text(source)
 
     _reset_user_modules()
-    module = importlib.import_module(entrypoint.removesuffix(".py"))
+    module = importlib.import_module("main")
 
     app = getattr(module, "app", None)
     if app is None:
         raise AttributeError(
-            f"{entrypoint} must define an `app` variable, e.g. `app = Litestar([index])`"
+            "main.py must define an `app` variable, e.g. `app = Litestar([index])`"
         )
     return app
+
+
+def _user_traceback() -> str:
+    """Format the exception being handled, keeping only the step's own frames.
+
+    The frames above them are this runner and ``importlib``, and the ones below
+    are Litestar's internals — neither tells the reader which of their lines
+    to look at.
+    """
+    error = sys.exception()
+    assert error is not None
+    frames = [
+        frame
+        for frame in traceback.extract_tb(error.__traceback__)
+        if frame.filename.startswith(str(WORKDIR))
+    ]
+    return "".join(
+        [
+            "Traceback (most recent call last):\n",
+            *traceback.format_list(frames),
+            *traceback.format_exception_only(error),
+        ]
+    )
 
 
 async def run(payload: str) -> str:
@@ -131,9 +154,9 @@ async def run(payload: str) -> str:
     requests: list[dict[str, Any]] = request.get("requests") or []
 
     try:
-        app = load_app(files, request.get("entrypoint", "main.py"))
+        app = load_app(files)
     except Exception:
-        return json.dumps({"error": traceback.format_exc(limit=3), "phase": "load"})
+        return json.dumps({"error": _user_traceback()})
 
     import httpx
 
@@ -162,12 +185,6 @@ async def run(payload: str) -> str:
                     }
                 )
     except Exception:
-        return json.dumps(
-            {
-                "error": traceback.format_exc(limit=5),
-                "phase": "request",
-                "results": results,
-            }
-        )
+        return json.dumps({"error": _user_traceback(), "results": results})
 
     return json.dumps({"results": results})

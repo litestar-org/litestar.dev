@@ -15,7 +15,6 @@ export interface RunnerResponse {
 interface RunnerPayload {
   results?: RunnerResponse[]
   error?: string
-  phase?: 'load' | 'request'
 }
 
 export type RunnerStatus = 'idle' | 'booting' | 'ready' | 'failed'

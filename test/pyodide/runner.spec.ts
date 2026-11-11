@@ -34,7 +34,6 @@ const step = (dir: string, kind: 'files' | 'solution') => {
 
 interface RunResult {
   error?: string
-  phase?: string
   results?: { label: string; status: number; body: string }[]
 }
 
@@ -83,14 +82,54 @@ describe('litestar runner in pyodide', () => {
   it('reports a traceback for broken user code instead of throwing', async () => {
     const result = await run({ 'main.py': 'def oops(:' }, [{ path: '/' }])
 
-    expect(result.phase).toBe('load')
     expect(result.error).toContain('SyntaxError')
+  })
+
+  it('points at the failing line in the step, not at the runner', async () => {
+    const result = await run(
+      {
+        'main.py': 'from helper import boom\n\nvalue = boom()\n',
+        'helper.py': 'def boom():\n    return undefined_name\n',
+      },
+      [],
+    )
+
+    expect(result.error).toContain('main.py", line 3')
+    expect(result.error).toContain('helper.py", line 2')
+    expect(result.error).toContain("NameError: name 'undefined_name'")
+    expect(result.error).not.toContain('litestar_runner')
+    expect(result.error).not.toContain('importlib')
+  })
+
+  it('runs startup hooks before the first request', async () => {
+    const result = await run(
+      {
+        'main.py': [
+          'from litestar import Litestar, get',
+          '',
+          'ready = False',
+          '',
+          'async def warm_up() -> None:',
+          '    global ready',
+          '    ready = True',
+          '',
+          '@get("/")',
+          'async def index() -> dict[str, bool]:',
+          '    return {"ready": ready}',
+          '',
+          'app = Litestar([index], on_startup=[warm_up])',
+        ].join('\n'),
+      },
+      [{ path: '/' }],
+    )
+
+    expect(result.error).toBeUndefined()
+    expect(result.results?.[0]?.body).toBe('{"ready":true}')
   })
 
   it('requires an app variable', async () => {
     const result = await run({ 'main.py': 'x = 1' }, [{ path: '/' }])
 
-    expect(result.phase).toBe('load')
     expect(result.error).toContain('must define an `app` variable')
   })
 

@@ -4,7 +4,9 @@
  * Pyodide is pulled from jsDelivr rather than bundled: it's ~5 MB brotli and
  * would otherwise land in the GitHub Pages deploy on every build. The CDN
  * version must match the `pyodide` devDependency, since `indexURL` also decides
- * where the prebuilt msgspec/multidict wheels come from.
+ * where the prebuilt msgspec/multidict wheels come from. The devDependency is
+ * pinned to an exact version for that reason: the Pyodide tests run against
+ * the installed package, so the two must not drift apart.
  */
 import type { PyodideInterface } from 'pyodide'
 import runnerSource from './litestar-runner.py?raw'
@@ -35,7 +37,6 @@ export type RunnerOut =
 
 const post = (message: RunnerOut) => self.postMessage(message)
 
-let pyodide: PyodideInterface | undefined
 let booting: Promise<PyodideInterface> | undefined
 
 /**
@@ -79,7 +80,6 @@ async function boot(): Promise<PyodideInterface> {
       'litestar_runner.install_shim()',
   )
 
-  pyodide = instance
   post({ type: 'ready' })
   return instance
 }
@@ -106,7 +106,7 @@ self.addEventListener('message', async (event: MessageEvent<RunnerIn>) => {
   }
 
   try {
-    const instance = pyodide ?? (await ensureBooted())
+    const instance = await ensureBooted()
     instance.globals.set('_payload', message.payload)
     const payload = await instance.runPythonAsync(
       'await __import__("litestar_runner").run(_payload)',
