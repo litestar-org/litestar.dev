@@ -158,3 +158,23 @@ export function formatBody(body: string, contentType: string): string {
 export function errorSummary(error: string): string {
   return error.trim().split('\n').at(-1)?.trim() ?? ''
 }
+
+const SITE_REPO = 'https://github.com/litestar-org/litestar.dev'
+
+/** GitHub's editor for a chapter's markdown, from its content `stem`. */
+export function chapterEditUrl(stem: string): string {
+  return `${SITE_REPO}/edit/main/content/${stem}.md`
+}
+
+/** A new GitHub issue, prefilled with the chapter it is about. */
+export function chapterIssueUrl(chapter: {
+  title: string
+  to: string
+}): string {
+  const query = new URLSearchParams({
+    title: `Tutorial: ${chapter.title}`,
+    body: `Chapter: https://litestar.dev${chapter.to}\n\nWhat went wrong?\n`,
+  })
+
+  return `${SITE_REPO}/issues/new?${query}`
+}

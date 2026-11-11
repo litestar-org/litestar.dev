@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import {
   chapterFromPath,
+  chapterEditUrl,
+  chapterIssueUrl,
   chapterPath,
   errorSummary,
   formatBody,
@@ -251,5 +253,32 @@ describe('errorSummary', () => {
 
   it('returns a one-line message as is', () => {
     expect(errorSummary('network down')).toBe('network down')
+  })
+})
+
+describe('chapterEditUrl', () => {
+  it('points at the chapter markdown on the main branch', () => {
+    expect(chapterEditUrl('tutorial/01-basics/01-hello/index')).toBe(
+      'https://github.com/litestar-org/litestar.dev/edit/main/content/tutorial/01-basics/01-hello/index.md',
+    )
+  })
+})
+
+describe('chapterIssueUrl', () => {
+  it('prefills the issue with the chapter title and link', () => {
+    const url = new URL(
+      chapterIssueUrl({
+        title: 'Your first route',
+        to: '/tutorial/basics/hello',
+      }),
+    )
+
+    expect(url.origin + url.pathname).toBe(
+      'https://github.com/litestar-org/litestar.dev/issues/new',
+    )
+    expect(url.searchParams.get('title')).toBe('Tutorial: Your first route')
+    expect(url.searchParams.get('body')).toContain(
+      'https://litestar.dev/tutorial/basics/hello',
+    )
   })
 })
