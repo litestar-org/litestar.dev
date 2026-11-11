@@ -14,6 +14,19 @@ export default defineAppConfig({
         title: 'sm:text-5xl',
       },
     },
+    // Panels are flush, so the handle draws the line between them.
+    splitter: {
+      slots: {
+        handle:
+          'border-default transition-colors hover:border-primary data-[resize-handle-state=drag]:border-primary',
+      },
+      variants: {
+        orientation: {
+          horizontal: { handle: 'border-e' },
+          vertical: { handle: 'border-b' },
+        },
+      },
+    },
     prose: {
       img: {
         base: 'w-full',

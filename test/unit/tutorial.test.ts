@@ -1,8 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import {
   chapterFromPath,
+  chapterPath,
+  formatBody,
+  groupBySection,
   groupStepFiles,
   parseStepDir,
+  statusColor,
   stepSurroundings,
   trackSlugFromStem,
 } from '../../app/utils/tutorial'
@@ -167,5 +171,70 @@ describe('stepSurroundings', () => {
       prev: undefined,
       next: undefined,
     })
+  })
+})
+
+describe('chapterPath', () => {
+  it('builds the public URL from the two slugs', () => {
+    expect(chapterPath('basics', 'hello')).toBe('/tutorial/basics/hello')
+  })
+})
+
+describe('groupBySection', () => {
+  const chapter = (slug: string, section: string) => ({ slug, section })
+
+  it('groups consecutive chapters that share a section', () => {
+    const hello = chapter('hello', 'First steps')
+    const params = chapter('path-params', 'First steps')
+    const errors = chapter('errors', 'Responses')
+
+    expect(groupBySection([hello, params, errors])).toEqual([
+      { title: 'First steps', chapters: [hello, params] },
+      { title: 'Responses', chapters: [errors] },
+    ])
+  })
+
+  it('keeps a section that comes back as a separate group', () => {
+    const groups = groupBySection([
+      chapter('a', 'First steps'),
+      chapter('b', 'Responses'),
+      chapter('c', 'First steps'),
+    ])
+
+    expect(groups.map((group) => group.title)).toEqual([
+      'First steps',
+      'Responses',
+      'First steps',
+    ])
+  })
+
+  it('returns nothing for an empty track', () => {
+    expect(groupBySection([])).toEqual([])
+  })
+})
+
+describe('statusColor', () => {
+  it('maps each status class to a badge colour', () => {
+    expect(statusColor(200)).toBe('success')
+    expect(statusColor(201)).toBe('success')
+    expect(statusColor(307)).toBe('info')
+    expect(statusColor(404)).toBe('warning')
+    expect(statusColor(500)).toBe('error')
+  })
+})
+
+describe('formatBody', () => {
+  it('pretty-prints JSON bodies', () => {
+    expect(formatBody('{"hello":"litestar"}', 'application/json')).toBe(
+      '{\n  "hello": "litestar"\n}',
+    )
+  })
+
+  it('leaves other content types untouched', () => {
+    expect(formatBody('{"a":1}', 'text/plain')).toBe('{"a":1}')
+  })
+
+  it('leaves a body that claims to be JSON but is not', () => {
+    expect(formatBody('not json', 'application/json')).toBe('not json')
   })
 })

@@ -29,7 +29,10 @@ export const useTutorialChapters = async () => {
       if (item.draft && !showDrafts) return []
 
       const location = chapterFromPath(item.path)
-      return location ? [{ ...item, ...location }] : []
+      if (!location) return []
+
+      const to = chapterPath(location.trackSlug, location.slug)
+      return [{ ...item, ...location, to }]
     }),
   )
 

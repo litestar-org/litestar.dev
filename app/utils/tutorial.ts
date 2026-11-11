@@ -104,3 +104,49 @@ export function stepSurroundings(
 
   return { prev: slugs[index - 1], next: slugs[index + 1] }
 }
+
+/** Public URL of a chapter. */
+export function chapterPath(trackSlug: string, slug: string): string {
+  return `/tutorial/${trackSlug}/${slug}`
+}
+
+/**
+ * Group chapters under their section heading.
+ *
+ * Grouping is consecutive rather than by lookup, so a section that appears
+ * twice in a track stays two groups instead of being silently merged.
+ */
+export function groupBySection<T extends { section: string }>(
+  chapters: T[],
+): { title: string; chapters: T[] }[] {
+  const groups: { title: string; chapters: T[] }[] = []
+
+  for (const chapter of chapters) {
+    const last = groups.at(-1)
+    if (last?.title === chapter.section) last.chapters.push(chapter)
+    else groups.push({ title: chapter.section, chapters: [chapter] })
+  }
+
+  return groups
+}
+
+/** Badge colour for an HTTP status code. */
+export function statusColor(
+  code: number,
+): 'success' | 'info' | 'warning' | 'error' {
+  if (code < 300) return 'success'
+  if (code < 400) return 'info'
+  if (code < 500) return 'warning'
+  return 'error'
+}
+
+/** Pretty-print JSON bodies, leave anything else untouched. */
+export function formatBody(body: string, contentType: string): string {
+  if (!contentType.includes('json')) return body
+
+  try {
+    return JSON.stringify(JSON.parse(body), null, 2)
+  } catch {
+    return body
+  }
+}

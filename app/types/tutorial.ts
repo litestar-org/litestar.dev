@@ -8,7 +8,11 @@ import type { ChapterLocation } from '~/utils/tutorial'
  * (see `app/utils/tutorial.ts`), so they're attached to the collection item once,
  * where the chapters are resolved.
  */
-export type TutorialChapter = TutorialCollectionItem & ChapterLocation
+export type TutorialChapter = TutorialCollectionItem &
+  ChapterLocation & {
+    /** Public URL, e.g. `/tutorial/basics/hello`. `path` is the content path. */
+    to: string
+  }
 
 /** A track and the chapters inside it, in reading order. */
 export interface TutorialTrack {

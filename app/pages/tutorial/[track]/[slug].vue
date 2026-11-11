@@ -28,6 +28,17 @@ if (!step.value) {
   })
 }
 
+// Resolved once here: the toolbar and the lesson footer both link to them.
+const surround = computed(() => {
+  const slugs = track.value?.chapters.map((chapter) => chapter.slug) ?? []
+  const { prev, next } = stepSurroundings(slugs, slug.value)
+
+  return {
+    prev: prev && chapterPath(trackSlug.value, prev),
+    next: next && chapterPath(trackSlug.value, next),
+  }
+})
+
 const stepKey = computed(() => `${trackSlug.value}/${slug.value}`)
 
 const stepFiles = useTutorialStepFiles()
@@ -60,7 +71,19 @@ useSeoMeta({
 
 <template>
   <div v-if="step && track" class="flex h-full flex-col">
-    <TutorialBar :step="step" :track="track" :session="session" />
+    <TutorialBar
+      :chapter="step"
+      :track="track"
+      :prev="surround.prev"
+      :next="surround.next"
+      :running="session.running.value"
+      :run-disabled="session.status.value === 'failed'"
+      :has-solution="session.hasSolution.value"
+      :showing-solution="session.showingSolution.value"
+      @run="session.execute()"
+      @reset="session.reset()"
+      @toggle-solution="session.toggleSolution()"
+    />
 
     <USplitter
       :key="kebabCase(stepKey)"
@@ -70,18 +93,18 @@ useSeoMeta({
         { slot: 'workspace', minSize: 30 },
       ]"
       class="min-h-0 flex-1 bg-default"
-      :ui="{
-        handle:
-          'border-e border-default transition-colors hover:border-primary data-[resize-handle-state=drag]:border-primary',
-      }"
     >
       <template #lesson>
-        <TutorialLesson :step="step" :track="track" />
+        <TutorialLesson
+          :chapter="step"
+          :prev="surround.prev"
+          :next="surround.next"
+        />
       </template>
 
       <template #workspace>
         <ClientOnly>
-          <TutorialWorkspace :step="stepKey" :session="session" />
+          <TutorialWorkspace :chapter-key="stepKey" :session="session" />
 
           <template #fallback>
             <div class="flex h-full w-full flex-col gap-3 p-4">
