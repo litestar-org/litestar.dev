@@ -38,6 +38,14 @@ const Timeline = z.object({
   value: z.union([z.string(), z.number()]).optional(),
 })
 
+/** One request fired against a tutorial step's app when the reader hits Run. */
+const TutorialRequest = z.object({
+  label: z.string().optional(),
+  method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE']).optional(),
+  path: z.string(),
+  body: z.record(z.string(), z.unknown()).optional(),
+})
+
 const Link = z.object({
   label: z.string(),
   to: z.string(),
@@ -282,6 +290,60 @@ export default defineContentConfig({
         category: z.string(),
         nitroPreset: z.string(),
         website: z.string().url(),
+      }),
+    }),
+    // Copy for the tutorial overview's hero. `hero.snippet` is markdown that the
+    // `content:file:afterParse` hook highlights at build time.
+    tutorialPage: defineCollection({
+      type: 'data',
+      source: 'tutorial.yml',
+      schema: z.object({
+        hero: z.object({
+          title: z.string(),
+          description: z.string(),
+          cta: z.string(),
+          note: z.string(),
+          snippet: z.any(),
+          response: z.object({
+            status: z.number(),
+            request: z.string(),
+            body: z.string(),
+          }),
+        }),
+      }),
+    }),
+    // Top level of the tutorial. Declared by a `track.yml` per directory rather
+    // than inferred from the chapters, so a track can exist before anything has
+    // been written for it. The slug comes from the directory name.
+    tutorialTracks: defineCollection({
+      type: 'data',
+      source: 'tutorial/*/track.yml',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+      }),
+    }),
+    // Interactive tutorial chapters, two levels deep:
+    // `tutorial/<NN-track>/<NN-chapter>`. Both levels are named `NN-slug` — the
+    // numeric prefix orders them, the rest is the public slug (see
+    // app/utils/tutorial.ts). Each chapter directory also holds `files/` and
+    // `solution/` Python sources, which reach the client through
+    // import.meta.glob rather than this collection.
+    tutorial: defineCollection({
+      type: 'page',
+      source: 'tutorial/*/*/index.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        // First level of the chapter hierarchy, e.g. `Basics / Path and query
+        // parameters`. Consecutive chapters sharing a section are grouped.
+        section: z.string(),
+        // One line on what the step teaches, shown on the tutorial overview.
+        teaches: z.string(),
+        // Scaffolded but unwritten. Not filtered anywhere: drafts are listed and
+        // built like any other chapter.
+        draft: z.boolean().default(false),
+        requests: z.array(TutorialRequest),
       }),
     }),
     templates: defineCollection({

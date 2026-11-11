@@ -218,6 +218,16 @@ export default defineNuxtConfig({
         delete content.meta.body
       }
 
+      // Same reason as the home hero: MDC's runtime highlighter calls a server
+      // route that a static build doesn't have, so the tutorial hero's snippet
+      // is parsed (and Shiki-highlighted) here instead.
+      if (file.id === 'tutorialPage/tutorial.yml') {
+        // @ts-expect-error -- TODO: fix this
+        content.hero.snippet = await parseMdc(content.hero.snippet)
+        // @ts-expect-error -- TODO: fix this
+        delete content.meta.body
+      }
+
       // Drop the README's leading <h1> so it doesn't duplicate <UPageHeader>'s title on /plugins/<slug>.
       if (file.id?.startsWith('readme/')) {
         // @ts-expect-error -- meta.body is the minimark AST for data .md files

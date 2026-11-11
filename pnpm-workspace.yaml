@@ -21,3 +21,36 @@ minimumReleaseAgeExclude:
   - nuxt-site-config-kit@4.1.5
   - nuxt-site-config@4.1.5
   - site-config-stack@4.1.5
+  - '@iconify-json/lucide@1.2.151'
+  - '@j178/prek-android-arm64@0.5.10'
+  - '@j178/prek-darwin-arm64@0.5.10'
+  - '@j178/prek-darwin-x64@0.5.10'
+  - '@j178/prek-linux-arm64-gnu@0.5.10'
+  - '@j178/prek-linux-arm64-musl@0.5.10'
+  - '@j178/prek-linux-x64-gnu@0.5.10'
+  - '@j178/prek-linux-x64-musl@0.5.10'
+  - '@j178/prek-win32-arm64-msvc@0.5.10'
+  - '@j178/prek-win32-x64-msvc@0.5.10'
+  - '@j178/prek@0.5.10'
+  - '@oxlint/binding-android-arm-eabi@1.91.0'
+  - '@oxlint/binding-android-arm64@1.91.0'
+  - '@oxlint/binding-darwin-arm64@1.91.0'
+  - '@oxlint/binding-darwin-x64@1.91.0'
+  - '@oxlint/binding-freebsd-x64@1.91.0'
+  - '@oxlint/binding-linux-arm-gnueabihf@1.91.0'
+  - '@oxlint/binding-linux-arm-musleabihf@1.91.0'
+  - '@oxlint/binding-linux-arm64-gnu@1.91.0'
+  - '@oxlint/binding-linux-arm64-musl@1.91.0'
+  - '@oxlint/binding-linux-ppc64-gnu@1.91.0'
+  - '@oxlint/binding-linux-riscv64-gnu@1.91.0'
+  - '@oxlint/binding-linux-riscv64-musl@1.91.0'
+  - '@oxlint/binding-linux-s390x-gnu@1.91.0'
+  - '@oxlint/binding-linux-x64-gnu@1.91.0'
+  - '@oxlint/binding-linux-x64-musl@1.91.0'
+  - '@oxlint/binding-openharmony-arm64@1.91.0'
+  - '@oxlint/binding-win32-arm64-msvc@1.91.0'
+  - '@oxlint/binding-win32-ia32-msvc@1.91.0'
+  - '@oxlint/binding-win32-x64-msvc@1.91.0'
+  - miniflare@5.20261103.0-beta
+  - oxlint@1.91.0
+  - wrangler@4.157.0
