@@ -21,6 +21,11 @@ const {
   /** How many requests Run will send — shown before the first run. */
   requestCount?: number
 }>()
+
+const emit = defineEmits<{
+  /** The reader asked to boot Python again after a failure. */
+  retry: []
+}>()
 </script>
 
 <template>
@@ -45,9 +50,25 @@ const {
       variant="subtle"
       icon="i-lucide-triangle-alert"
       title="Couldn't start Python"
-      :description="error"
+      :actions="[
+        {
+          label: 'Try again',
+          icon: 'i-lucide-rotate-cw',
+          color: 'error',
+          variant: 'outline',
+          onClick: () => emit('retry'),
+        },
+      ]"
       class="m-3"
-    />
+    >
+      <template #description>
+        A download was blocked or interrupted. Check your connection, or any ad
+        blocker, then try again.
+        <span v-if="error" class="mt-1 block font-mono text-xs opacity-75">
+          {{ errorSummary(error) }}
+        </span>
+      </template>
+    </UAlert>
 
     <template v-else>
       <UAlert

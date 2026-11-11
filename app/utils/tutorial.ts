@@ -150,3 +150,11 @@ export function formatBody(body: string, contentType: string): string {
     return body
   }
 }
+
+/**
+ * The line of a Python traceback that says what went wrong — its last one.
+ * The frames above it mean nothing to someone reading a tutorial.
+ */
+export function errorSummary(error: string): string {
+  return error.trim().split('\n').at(-1)?.trim() ?? ''
+}

@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   chapterFromPath,
   chapterPath,
+  errorSummary,
   formatBody,
   groupBySection,
   groupStepFiles,
@@ -236,5 +237,19 @@ describe('formatBody', () => {
 
   it('leaves a body that claims to be JSON but is not', () => {
     expect(formatBody('not json', 'application/json')).toBe('not json')
+  })
+})
+
+describe('errorSummary', () => {
+  it('keeps the last line of a traceback', () => {
+    expect(
+      errorSummary(
+        'Traceback (most recent call last):\n  File "main.py", line 3\nNameError: nope\n',
+      ),
+    ).toBe('NameError: nope')
+  })
+
+  it('returns a one-line message as is', () => {
+    expect(errorSummary('network down')).toBe('network down')
   })
 })

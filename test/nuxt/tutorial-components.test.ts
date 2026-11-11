@@ -68,13 +68,28 @@ describe('TutorialOutput', () => {
     expect(output.text()).toContain('Installing Litestar…')
   })
 
-  it('reports a failed boot', async () => {
+  it('reports a failed boot with only the last line of the traceback', async () => {
+    const output = await mountSuspended(TutorialOutput, {
+      props: {
+        status: 'failed',
+        error:
+          'Traceback (most recent call last):\n  File "x.py"\nAbortError: NetworkError',
+      },
+    })
+
+    expect(output.text()).toContain("Couldn't start Python")
+    expect(output.text()).toContain('AbortError: NetworkError')
+    expect(output.text()).not.toContain('Traceback')
+  })
+
+  it('asks to boot again when the reader clicks Try again', async () => {
     const output = await mountSuspended(TutorialOutput, {
       props: { status: 'failed', error: 'network down' },
     })
 
-    expect(output.text()).toContain("Couldn't start Python")
-    expect(output.text()).toContain('network down')
+    await output.find('button').trigger('click')
+
+    expect(output.emitted('retry')).toHaveLength(1)
   })
 
   it('says how many requests Run will send before the first run', async () => {

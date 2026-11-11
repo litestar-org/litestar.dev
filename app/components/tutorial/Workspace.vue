@@ -76,6 +76,7 @@ const items = computed(() =>
         :error="session.error.value"
         :results="session.results.value"
         :request-count="session.requests.value.length"
+        @retry="session.retryBoot()"
       />
     </template>
   </USplitter>

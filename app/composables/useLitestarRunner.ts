@@ -66,7 +66,8 @@ export const useLitestarRunner = () => {
           pending.delete(message.id)
           break
         case 'failed':
-          // A boot failure is terminal for the page; a run failure is not.
+          // A boot failure stops everything until `retryBoot`; a run failure
+          // only ends that run.
           if (message.id === undefined) {
             status.value = 'failed'
           } else {
@@ -88,6 +89,16 @@ export const useLitestarRunner = () => {
   /** Start downloading Python ahead of the first Run click. */
   const boot = () => {
     if (status.value === 'idle') send({ type: 'init' })
+  }
+
+  /** Try booting again after a failure — the reader's "Try again" button. */
+  const retryBoot = () => {
+    if (status.value !== 'failed') return
+
+    status.value = 'booting'
+    statusMessage.value = 'Starting Python…'
+    error.value = undefined
+    send({ type: 'init' })
   }
 
   const run = async (
@@ -132,6 +143,7 @@ export const useLitestarRunner = () => {
     results,
     error,
     boot,
+    retryBoot,
     run,
   }
 }

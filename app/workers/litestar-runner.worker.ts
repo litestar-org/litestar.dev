@@ -8,6 +8,7 @@
  */
 import type { PyodideInterface } from 'pyodide'
 import runnerSource from './litestar-runner.py?raw'
+import { withRetry } from '../utils/retry'
 
 const PYODIDE_VERSION = '314.0.7'
 const PYODIDE_INDEX = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`
@@ -37,20 +38,37 @@ const post = (message: RunnerOut) => self.postMessage(message)
 let pyodide: PyodideInterface | undefined
 let booting: Promise<PyodideInterface> | undefined
 
+/**
+ * Booting pulls ~30 files from jsDelivr and PyPI, and one dropped request
+ * fails the lot — so each download step gets a few tries before giving up.
+ * Files that did arrive are in the browser's cache, so a retry is cheap.
+ */
+const download = <T>(task: () => Promise<T>) =>
+  withRetry(task, {
+    onRetry: (attempt, attempts) =>
+      post({
+        type: 'status',
+        message: `Download failed, retrying (${attempt} of ${attempts})…`,
+      }),
+  })
+
 async function boot(): Promise<PyodideInterface> {
   post({ type: 'status', message: 'Downloading Python…' })
 
-  // The CDN URL must stay a runtime import — Vite would try to resolve it.
-  const { loadPyodide } = (await import(
-    /* @vite-ignore */ `${PYODIDE_INDEX}pyodide.mjs`
-  )) as typeof import('pyodide')
+  const instance = await download(async () => {
+    // The CDN URL must stay a runtime import — Vite would try to resolve it.
+    const { loadPyodide } = (await import(
+      /* @vite-ignore */ `${PYODIDE_INDEX}pyodide.mjs`
+    )) as typeof import('pyodide')
 
-  const instance = await loadPyodide({ indexURL: PYODIDE_INDEX })
+    return loadPyodide({ indexURL: PYODIDE_INDEX })
+  })
 
   post({ type: 'status', message: 'Installing Litestar…' })
-  await instance.loadPackage('micropip', { messageCallback: () => {} })
-  const micropip = instance.pyimport('micropip')
-  await micropip.install('litestar')
+  await download(async () => {
+    await instance.loadPackage('micropip', { messageCallback: () => {} })
+    await instance.pyimport('micropip').install('litestar')
+  })
 
   instance.FS.writeFile(RUNNER_PATH, runnerSource)
   await instance.runPythonAsync(

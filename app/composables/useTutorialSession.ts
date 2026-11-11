@@ -19,8 +19,16 @@ export const useTutorialSession = (source: {
   solution: () => Record<string, string>
   requests: () => RunnerRequest[]
 }) => {
-  const { status, statusMessage, running, results, error, boot, run } =
-    useLitestarRunner()
+  const {
+    status,
+    statusMessage,
+    running,
+    results,
+    error,
+    boot,
+    retryBoot,
+    run,
+  } = useLitestarRunner()
 
   const sources = ref<Record<string, string>>({ ...source.files() })
   const activeFile = ref(defaultFile(source.files()))
@@ -73,6 +81,7 @@ export const useTutorialSession = (source: {
     reset,
     toggleSolution,
     execute,
+    retryBoot,
   }
 }
 
