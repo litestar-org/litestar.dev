@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 // import { link } from '#build/ui'
-import { LazyMDC } from '#components'
 import type { TabsItem } from '@nuxt/ui'
 import LitestarWorkflow from '~/components/vueFlow/LitestarWorkflow.vue'
 // import { defaultJavaScriptRegexConstructor } from 'shiki'
