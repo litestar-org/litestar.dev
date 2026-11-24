@@ -170,6 +170,23 @@ export default defineNuxtConfig({
       // discover it at runtime and trigger a dev page reload on first visit.
       include: ['@vue-flow/core', '@vue-flow/background'],
     },
+    plugins: [
+      {
+        // Nuxt 4.7 builds the Nitro v2 server bundle with rolldown's
+        // `polyfillRequire: false`. CJS deps bundled into it (`yaml`, which
+        // @nuxtjs/mdc transpiles) then keep a bare `require("process")` that
+        // throws in ESM, so every <MDC> parsing a string server-side renders
+        // nothing. Restore rolldown's default `createRequire` shim.
+        name: 'litestar:ssr-polyfill-require',
+        configEnvironment(name) {
+          if (name === 'ssr') {
+            return {
+              build: { rolldownOptions: { output: { polyfillRequire: true } } },
+            }
+          }
+        },
+      },
+    ],
   },
   experimental: {
     extractAsyncDataHandlers: true,
