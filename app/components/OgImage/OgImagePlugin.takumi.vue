@@ -1,25 +1,15 @@
 <script setup lang="ts">
 import type { Plugin } from '~/types'
+import { isDefaultPluginIcon, pluginImage } from '~/composables/usePlugins'
 
-function pluginImage(icon: string = '') {
-  if (!icon) return
+const props = defineProps<{
+  plugin: Plugin
+  title: string
+  description: string
+}>()
 
-  if (/^https?:\/\//.test(icon)) return icon
-  return 'https://fr.wikipedia.org/static/images/icons/wikipedia.png'
-
-  // return `https://raw.githubusercontent.com/litestar-org/plugin-registry/main/icons/${icon}`
-}
-
-const props = withDefaults(
-  defineProps<{
-    plugin: Plugin
-    title: string
-    description: string
-    type?: string
-  }>(),
-  {
-    type: 'Third-Party',
-  },
+const typeLabel = computed(() =>
+  props.plugin.type === 'official' ? 'Official' : 'Third-Party',
 )
 
 // takumi (the v6 OG renderer) rejects Tailwind's `line-clamp` utility because it
@@ -43,7 +33,7 @@ const clampedDescription = computed(() =>
     <div class="mx-34 mt-12 h-100 flex flex-col justify-center">
       <div class="flex justify-start">
         <NuxtImg
-          v-if="plugin.icon"
+          v-if="!isDefaultPluginIcon(plugin.icon)"
           :src="pluginImage(plugin.icon)"
           :alt="plugin.pypi"
           width="30"
@@ -75,7 +65,7 @@ const clampedDescription = computed(() =>
       <div
         class="h-full uppercase flex items-center border-gray-700 text-[#EAB308] text-[20px] font-semibold px-6"
       >
-        {{ type }}
+        {{ typeLabel }}
       </div>
     </div>
   </div>

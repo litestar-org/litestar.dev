@@ -100,7 +100,12 @@
       <h1
         class="text-5xl font-semibold mb-0 flex flex-col gap-1 leading-tight text-white"
       >
-        <span>The Modern <span class="text-[#eab308]">Python</span></span>
+        <!-- takumi trims whitespace at text/element boundaries, so the space
+             before "Python" is a flex gap rather than a trailing space -->
+        <span class="flex gap-[0.25em]">
+          <span>The Modern</span>
+          <span class="text-[#eab308]">Python</span>
+        </span>
         <span>ASGI Framework</span>
         <span class="text-[#eab308]">Built to scale</span>
       </h1>
