@@ -26,6 +26,13 @@ if (import.meta.server) {
         type: 'image/svg+xml',
         href: joinURL(baseURL, 'logo.svg'),
       },
+      // Raster fallbacks: link-preview crawlers and some browsers ignore SVG
+      // icons and read /favicon.ico or the apple-touch-icon instead.
+      { rel: 'icon', href: joinURL(baseURL, 'favicon.ico'), sizes: '48x48' },
+      {
+        rel: 'apple-touch-icon',
+        href: joinURL(baseURL, 'apple-touch-icon.png'),
+      },
     ],
   })
   useSeoMeta({
